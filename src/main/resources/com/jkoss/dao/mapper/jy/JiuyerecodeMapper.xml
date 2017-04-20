@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.jy.JiuyerecodeMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.jy.Jiuyerecode" >
+    <id column="jysuccid" property="jysuccid" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="ossstuid" property="ossstuid" jdbcType="INTEGER" />
+    <result column="ltdname" property="ltdname" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="emptime" property="emptime" jdbcType="TIMESTAMP" />
+    <result column="trialtime" property="trialtime" jdbcType="DATE" />
+    <result column="trialwages" property="trialwages" jdbcType="INTEGER" />
+    <result column="positivetime" property="positivetime" jdbcType="DATE" />
+    <result column="positivepay" property="positivepay" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    jysuccid, eid, ossstuid, ltdname, address, emptime, trialtime, trialwages, positivetime, 
+    positivepay
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.jy.JiuyerecodeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_jiuyerecode
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jiuyerecode
+    where jysuccid = #{jysuccid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jiuyerecode
+    where jysuccid = #{jysuccid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.jy.JiuyerecodeExample" >
+    delete from t_jiuyerecode
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.jy.Jiuyerecode" >
+    insert into t_jiuyerecode (jysuccid, eid, ossstuid, 
+      ltdname, address, emptime, 
+      trialtime, trialwages, positivetime, 
+      positivepay)
+    values (#{jysuccid,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{ossstuid,jdbcType=INTEGER}, 
+      #{ltdname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{emptime,jdbcType=TIMESTAMP}, 
+      #{trialtime,jdbcType=DATE}, #{trialwages,jdbcType=INTEGER}, #{positivetime,jdbcType=DATE}, 
+      #{positivepay,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.jy.Jiuyerecode" >
+    insert into t_jiuyerecode
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jysuccid != null" >
+        jysuccid,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="ossstuid != null" >
+        ossstuid,
+      </if>
+      <if test="ltdname != null" >
+        ltdname,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="emptime != null" >
+        emptime,
+      </if>
+      <if test="trialtime != null" >
+        trialtime,
+      </if>
+      <if test="trialwages != null" >
+        trialwages,
+      </if>
+      <if test="positivetime != null" >
+        positivetime,
+      </if>
+      <if test="positivepay != null" >
+        positivepay,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jysuccid != null" >
+        #{jysuccid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="ossstuid != null" >
+        #{ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="ltdname != null" >
+        #{ltdname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="emptime != null" >
+        #{emptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trialtime != null" >
+        #{trialtime,jdbcType=DATE},
+      </if>
+      <if test="trialwages != null" >
+        #{trialwages,jdbcType=INTEGER},
+      </if>
+      <if test="positivetime != null" >
+        #{positivetime,jdbcType=DATE},
+      </if>
+      <if test="positivepay != null" >
+        #{positivepay,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.jy.JiuyerecodeExample" resultType="java.lang.Integer" >
+    select count(*) from t_jiuyerecode
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_jiuyerecode
+    <set >
+      <if test="record.jysuccid != null" >
+        jysuccid = #{record.jysuccid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ossstuid != null" >
+        ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ltdname != null" >
+        ltdname = #{record.ltdname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emptime != null" >
+        emptime = #{record.emptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.trialtime != null" >
+        trialtime = #{record.trialtime,jdbcType=DATE},
+      </if>
+      <if test="record.trialwages != null" >
+        trialwages = #{record.trialwages,jdbcType=INTEGER},
+      </if>
+      <if test="record.positivetime != null" >
+        positivetime = #{record.positivetime,jdbcType=DATE},
+      </if>
+      <if test="record.positivepay != null" >
+        positivepay = #{record.positivepay,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_jiuyerecode
+    set jysuccid = #{record.jysuccid,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      ltdname = #{record.ltdname,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      emptime = #{record.emptime,jdbcType=TIMESTAMP},
+      trialtime = #{record.trialtime,jdbcType=DATE},
+      trialwages = #{record.trialwages,jdbcType=INTEGER},
+      positivetime = #{record.positivetime,jdbcType=DATE},
+      positivepay = #{record.positivepay,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.jy.Jiuyerecode" >
+    update t_jiuyerecode
+    <set >
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="ossstuid != null" >
+        ossstuid = #{ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="ltdname != null" >
+        ltdname = #{ltdname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="emptime != null" >
+        emptime = #{emptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trialtime != null" >
+        trialtime = #{trialtime,jdbcType=DATE},
+      </if>
+      <if test="trialwages != null" >
+        trialwages = #{trialwages,jdbcType=INTEGER},
+      </if>
+      <if test="positivetime != null" >
+        positivetime = #{positivetime,jdbcType=DATE},
+      </if>
+      <if test="positivepay != null" >
+        positivepay = #{positivepay,jdbcType=INTEGER},
+      </if>
+    </set>
+    where jysuccid = #{jysuccid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.jy.Jiuyerecode" >
+    update t_jiuyerecode
+    set eid = #{eid,jdbcType=INTEGER},
+      ossstuid = #{ossstuid,jdbcType=INTEGER},
+      ltdname = #{ltdname,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      emptime = #{emptime,jdbcType=TIMESTAMP},
+      trialtime = #{trialtime,jdbcType=DATE},
+      trialwages = #{trialwages,jdbcType=INTEGER},
+      positivetime = #{positivetime,jdbcType=DATE},
+      positivepay = #{positivepay,jdbcType=INTEGER}
+    where jysuccid = #{jysuccid,jdbcType=INTEGER}
+  </update>
+</mapper>

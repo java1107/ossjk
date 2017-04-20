@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.loan.LoancfgMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.loan.Loancfg" >
+    <id column="fanID" property="fanID" jdbcType="INTEGER" />
+    <result column="loancpid" property="loancpid" jdbcType="INTEGER" />
+    <result column="fanName" property="fanName" jdbcType="VARCHAR" />
+    <result column="fancost" property="fancost" jdbcType="REAL" />
+    <result column="gendate" property="gendate" jdbcType="DATE" />
+    <result column="gencount" property="gencount" jdbcType="VARCHAR" />
+    <result column="paymth" property="paymth" jdbcType="INTEGER" />
+    <result column="bhybegin" property="bhybegin" jdbcType="DATE" />
+    <result column="bhpay" property="bhpay" jdbcType="REAL" />
+    <result column="bhpaymth" property="bhpaymth" jdbcType="INTEGER" />
+    <result column="paybegin" property="paybegin" jdbcType="DATE" />
+    <result column="payxf" property="payxf" jdbcType="REAL" />
+    <result column="fandesc" property="fandesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fanID, loancpid, fanName, fancost, gendate, gencount, paymth, bhybegin, bhpay, bhpaymth, 
+    paybegin, payxf, fandesc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.loan.LoancfgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_loancfg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_loancfg
+    where fanID = #{fanID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_loancfg
+    where fanID = #{fanID,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.loan.LoancfgExample" >
+    delete from t_loancfg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.loan.Loancfg" >
+    insert into t_loancfg (fanID, loancpid, fanName, 
+      fancost, gendate, gencount, 
+      paymth, bhybegin, bhpay, 
+      bhpaymth, paybegin, payxf, 
+      fandesc)
+    values (#{fanID,jdbcType=INTEGER}, #{loancpid,jdbcType=INTEGER}, #{fanName,jdbcType=VARCHAR}, 
+      #{fancost,jdbcType=REAL}, #{gendate,jdbcType=DATE}, #{gencount,jdbcType=VARCHAR}, 
+      #{paymth,jdbcType=INTEGER}, #{bhybegin,jdbcType=DATE}, #{bhpay,jdbcType=REAL}, 
+      #{bhpaymth,jdbcType=INTEGER}, #{paybegin,jdbcType=DATE}, #{payxf,jdbcType=REAL}, 
+      #{fandesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.loan.Loancfg" >
+    insert into t_loancfg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fanID != null" >
+        fanID,
+      </if>
+      <if test="loancpid != null" >
+        loancpid,
+      </if>
+      <if test="fanName != null" >
+        fanName,
+      </if>
+      <if test="fancost != null" >
+        fancost,
+      </if>
+      <if test="gendate != null" >
+        gendate,
+      </if>
+      <if test="gencount != null" >
+        gencount,
+      </if>
+      <if test="paymth != null" >
+        paymth,
+      </if>
+      <if test="bhybegin != null" >
+        bhybegin,
+      </if>
+      <if test="bhpay != null" >
+        bhpay,
+      </if>
+      <if test="bhpaymth != null" >
+        bhpaymth,
+      </if>
+      <if test="paybegin != null" >
+        paybegin,
+      </if>
+      <if test="payxf != null" >
+        payxf,
+      </if>
+      <if test="fandesc != null" >
+        fandesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fanID != null" >
+        #{fanID,jdbcType=INTEGER},
+      </if>
+      <if test="loancpid != null" >
+        #{loancpid,jdbcType=INTEGER},
+      </if>
+      <if test="fanName != null" >
+        #{fanName,jdbcType=VARCHAR},
+      </if>
+      <if test="fancost != null" >
+        #{fancost,jdbcType=REAL},
+      </if>
+      <if test="gendate != null" >
+        #{gendate,jdbcType=DATE},
+      </if>
+      <if test="gencount != null" >
+        #{gencount,jdbcType=VARCHAR},
+      </if>
+      <if test="paymth != null" >
+        #{paymth,jdbcType=INTEGER},
+      </if>
+      <if test="bhybegin != null" >
+        #{bhybegin,jdbcType=DATE},
+      </if>
+      <if test="bhpay != null" >
+        #{bhpay,jdbcType=REAL},
+      </if>
+      <if test="bhpaymth != null" >
+        #{bhpaymth,jdbcType=INTEGER},
+      </if>
+      <if test="paybegin != null" >
+        #{paybegin,jdbcType=DATE},
+      </if>
+      <if test="payxf != null" >
+        #{payxf,jdbcType=REAL},
+      </if>
+      <if test="fandesc != null" >
+        #{fandesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.loan.LoancfgExample" resultType="java.lang.Integer" >
+    select count(*) from t_loancfg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_loancfg
+    <set >
+      <if test="record.fanID != null" >
+        fanID = #{record.fanID,jdbcType=INTEGER},
+      </if>
+      <if test="record.loancpid != null" >
+        loancpid = #{record.loancpid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fanName != null" >
+        fanName = #{record.fanName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fancost != null" >
+        fancost = #{record.fancost,jdbcType=REAL},
+      </if>
+      <if test="record.gendate != null" >
+        gendate = #{record.gendate,jdbcType=DATE},
+      </if>
+      <if test="record.gencount != null" >
+        gencount = #{record.gencount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymth != null" >
+        paymth = #{record.paymth,jdbcType=INTEGER},
+      </if>
+      <if test="record.bhybegin != null" >
+        bhybegin = #{record.bhybegin,jdbcType=DATE},
+      </if>
+      <if test="record.bhpay != null" >
+        bhpay = #{record.bhpay,jdbcType=REAL},
+      </if>
+      <if test="record.bhpaymth != null" >
+        bhpaymth = #{record.bhpaymth,jdbcType=INTEGER},
+      </if>
+      <if test="record.paybegin != null" >
+        paybegin = #{record.paybegin,jdbcType=DATE},
+      </if>
+      <if test="record.payxf != null" >
+        payxf = #{record.payxf,jdbcType=REAL},
+      </if>
+      <if test="record.fandesc != null" >
+        fandesc = #{record.fandesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_loancfg
+    set fanID = #{record.fanID,jdbcType=INTEGER},
+      loancpid = #{record.loancpid,jdbcType=INTEGER},
+      fanName = #{record.fanName,jdbcType=VARCHAR},
+      fancost = #{record.fancost,jdbcType=REAL},
+      gendate = #{record.gendate,jdbcType=DATE},
+      gencount = #{record.gencount,jdbcType=VARCHAR},
+      paymth = #{record.paymth,jdbcType=INTEGER},
+      bhybegin = #{record.bhybegin,jdbcType=DATE},
+      bhpay = #{record.bhpay,jdbcType=REAL},
+      bhpaymth = #{record.bhpaymth,jdbcType=INTEGER},
+      paybegin = #{record.paybegin,jdbcType=DATE},
+      payxf = #{record.payxf,jdbcType=REAL},
+      fandesc = #{record.fandesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.loan.Loancfg" >
+    update t_loancfg
+    <set >
+      <if test="loancpid != null" >
+        loancpid = #{loancpid,jdbcType=INTEGER},
+      </if>
+      <if test="fanName != null" >
+        fanName = #{fanName,jdbcType=VARCHAR},
+      </if>
+      <if test="fancost != null" >
+        fancost = #{fancost,jdbcType=REAL},
+      </if>
+      <if test="gendate != null" >
+        gendate = #{gendate,jdbcType=DATE},
+      </if>
+      <if test="gencount != null" >
+        gencount = #{gencount,jdbcType=VARCHAR},
+      </if>
+      <if test="paymth != null" >
+        paymth = #{paymth,jdbcType=INTEGER},
+      </if>
+      <if test="bhybegin != null" >
+        bhybegin = #{bhybegin,jdbcType=DATE},
+      </if>
+      <if test="bhpay != null" >
+        bhpay = #{bhpay,jdbcType=REAL},
+      </if>
+      <if test="bhpaymth != null" >
+        bhpaymth = #{bhpaymth,jdbcType=INTEGER},
+      </if>
+      <if test="paybegin != null" >
+        paybegin = #{paybegin,jdbcType=DATE},
+      </if>
+      <if test="payxf != null" >
+        payxf = #{payxf,jdbcType=REAL},
+      </if>
+      <if test="fandesc != null" >
+        fandesc = #{fandesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fanID = #{fanID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.loan.Loancfg" >
+    update t_loancfg
+    set loancpid = #{loancpid,jdbcType=INTEGER},
+      fanName = #{fanName,jdbcType=VARCHAR},
+      fancost = #{fancost,jdbcType=REAL},
+      gendate = #{gendate,jdbcType=DATE},
+      gencount = #{gencount,jdbcType=VARCHAR},
+      paymth = #{paymth,jdbcType=INTEGER},
+      bhybegin = #{bhybegin,jdbcType=DATE},
+      bhpay = #{bhpay,jdbcType=REAL},
+      bhpaymth = #{bhpaymth,jdbcType=INTEGER},
+      paybegin = #{paybegin,jdbcType=DATE},
+      payxf = #{payxf,jdbcType=REAL},
+      fandesc = #{fandesc,jdbcType=VARCHAR}
+    where fanID = #{fanID,jdbcType=INTEGER}
+  </update>
+</mapper>

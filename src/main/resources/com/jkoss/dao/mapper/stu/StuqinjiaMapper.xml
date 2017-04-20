@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.stu.StuqinjiaMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.stu.Stuqinjia" >
+    <id column="sqjid" property="sqjid" jdbcType="INTEGER" />
+    <result column="ossstuid" property="ossstuid" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="sqjdate" property="sqjdate" jdbcType="TIMESTAMP" />
+    <result column="sqjreson" property="sqjreson" jdbcType="VARCHAR" />
+    <result column="sqjqueren" property="sqjqueren" jdbcType="VARCHAR" />
+    <result column="sqjstate" property="sqjstate" jdbcType="INTEGER" />
+    <result column="sqjbegin" property="sqjbegin" jdbcType="DATE" />
+    <result column="sqjend" property="sqjend" jdbcType="DATE" />
+    <result column="sqjdesc" property="sqjdesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sqjid, ossstuid, eid, sqjdate, sqjreson, sqjqueren, sqjstate, sqjbegin, sqjend, sqjdesc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.stu.StuqinjiaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_stuqinjia
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_stuqinjia
+    where sqjid = #{sqjid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_stuqinjia
+    where sqjid = #{sqjid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.stu.StuqinjiaExample" >
+    delete from t_stuqinjia
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.stu.Stuqinjia" >
+    insert into t_stuqinjia (sqjid, ossstuid, eid, 
+      sqjdate, sqjreson, sqjqueren, 
+      sqjstate, sqjbegin, sqjend, 
+      sqjdesc)
+    values (#{sqjid,jdbcType=INTEGER}, #{ossstuid,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, 
+      #{sqjdate,jdbcType=TIMESTAMP}, #{sqjreson,jdbcType=VARCHAR}, #{sqjqueren,jdbcType=VARCHAR}, 
+      #{sqjstate,jdbcType=INTEGER}, #{sqjbegin,jdbcType=DATE}, #{sqjend,jdbcType=DATE}, 
+      #{sqjdesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.stu.Stuqinjia" >
+    insert into t_stuqinjia
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sqjid != null" >
+        sqjid,
+      </if>
+      <if test="ossstuid != null" >
+        ossstuid,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="sqjdate != null" >
+        sqjdate,
+      </if>
+      <if test="sqjreson != null" >
+        sqjreson,
+      </if>
+      <if test="sqjqueren != null" >
+        sqjqueren,
+      </if>
+      <if test="sqjstate != null" >
+        sqjstate,
+      </if>
+      <if test="sqjbegin != null" >
+        sqjbegin,
+      </if>
+      <if test="sqjend != null" >
+        sqjend,
+      </if>
+      <if test="sqjdesc != null" >
+        sqjdesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sqjid != null" >
+        #{sqjid,jdbcType=INTEGER},
+      </if>
+      <if test="ossstuid != null" >
+        #{ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="sqjdate != null" >
+        #{sqjdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqjreson != null" >
+        #{sqjreson,jdbcType=VARCHAR},
+      </if>
+      <if test="sqjqueren != null" >
+        #{sqjqueren,jdbcType=VARCHAR},
+      </if>
+      <if test="sqjstate != null" >
+        #{sqjstate,jdbcType=INTEGER},
+      </if>
+      <if test="sqjbegin != null" >
+        #{sqjbegin,jdbcType=DATE},
+      </if>
+      <if test="sqjend != null" >
+        #{sqjend,jdbcType=DATE},
+      </if>
+      <if test="sqjdesc != null" >
+        #{sqjdesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.stu.StuqinjiaExample" resultType="java.lang.Integer" >
+    select count(*) from t_stuqinjia
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_stuqinjia
+    <set >
+      <if test="record.sqjid != null" >
+        sqjid = #{record.sqjid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ossstuid != null" >
+        ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sqjdate != null" >
+        sqjdate = #{record.sqjdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sqjreson != null" >
+        sqjreson = #{record.sqjreson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqjqueren != null" >
+        sqjqueren = #{record.sqjqueren,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqjstate != null" >
+        sqjstate = #{record.sqjstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.sqjbegin != null" >
+        sqjbegin = #{record.sqjbegin,jdbcType=DATE},
+      </if>
+      <if test="record.sqjend != null" >
+        sqjend = #{record.sqjend,jdbcType=DATE},
+      </if>
+      <if test="record.sqjdesc != null" >
+        sqjdesc = #{record.sqjdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_stuqinjia
+    set sqjid = #{record.sqjid,jdbcType=INTEGER},
+      ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      sqjdate = #{record.sqjdate,jdbcType=TIMESTAMP},
+      sqjreson = #{record.sqjreson,jdbcType=VARCHAR},
+      sqjqueren = #{record.sqjqueren,jdbcType=VARCHAR},
+      sqjstate = #{record.sqjstate,jdbcType=INTEGER},
+      sqjbegin = #{record.sqjbegin,jdbcType=DATE},
+      sqjend = #{record.sqjend,jdbcType=DATE},
+      sqjdesc = #{record.sqjdesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.stu.Stuqinjia" >
+    update t_stuqinjia
+    <set >
+      <if test="ossstuid != null" >
+        ossstuid = #{ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="sqjdate != null" >
+        sqjdate = #{sqjdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqjreson != null" >
+        sqjreson = #{sqjreson,jdbcType=VARCHAR},
+      </if>
+      <if test="sqjqueren != null" >
+        sqjqueren = #{sqjqueren,jdbcType=VARCHAR},
+      </if>
+      <if test="sqjstate != null" >
+        sqjstate = #{sqjstate,jdbcType=INTEGER},
+      </if>
+      <if test="sqjbegin != null" >
+        sqjbegin = #{sqjbegin,jdbcType=DATE},
+      </if>
+      <if test="sqjend != null" >
+        sqjend = #{sqjend,jdbcType=DATE},
+      </if>
+      <if test="sqjdesc != null" >
+        sqjdesc = #{sqjdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sqjid = #{sqjid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.stu.Stuqinjia" >
+    update t_stuqinjia
+    set ossstuid = #{ossstuid,jdbcType=INTEGER},
+      eid = #{eid,jdbcType=INTEGER},
+      sqjdate = #{sqjdate,jdbcType=TIMESTAMP},
+      sqjreson = #{sqjreson,jdbcType=VARCHAR},
+      sqjqueren = #{sqjqueren,jdbcType=VARCHAR},
+      sqjstate = #{sqjstate,jdbcType=INTEGER},
+      sqjbegin = #{sqjbegin,jdbcType=DATE},
+      sqjend = #{sqjend,jdbcType=DATE},
+      sqjdesc = #{sqjdesc,jdbcType=VARCHAR}
+    where sqjid = #{sqjid,jdbcType=INTEGER}
+  </update>
+</mapper>

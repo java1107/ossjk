@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.jy.StucompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.jy.Stucompany" >
+    <id column="jygjID" property="jygjID" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="jyid" property="jyid" jdbcType="INTEGER" />
+    <result column="jygjDate" property="jygjDate" jdbcType="TIMESTAMP" />
+    <result column="jygjcontent" property="jygjcontent" jdbcType="VARCHAR" />
+    <result column="jygjresult" property="jygjresult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    jygjID, eid, jyid, jygjDate, jygjcontent, jygjresult
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.jy.StucompanyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_stu_company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_stu_company
+    where jygjID = #{jygjID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_stu_company
+    where jygjID = #{jygjID,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.jy.StucompanyExample" >
+    delete from t_stu_company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.jy.Stucompany" >
+    insert into t_stu_company (jygjID, eid, jyid, 
+      jygjDate, jygjcontent, jygjresult
+      )
+    values (#{jygjID,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{jyid,jdbcType=INTEGER}, 
+      #{jygjDate,jdbcType=TIMESTAMP}, #{jygjcontent,jdbcType=VARCHAR}, #{jygjresult,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.jy.Stucompany" >
+    insert into t_stu_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jygjID != null" >
+        jygjID,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="jyid != null" >
+        jyid,
+      </if>
+      <if test="jygjDate != null" >
+        jygjDate,
+      </if>
+      <if test="jygjcontent != null" >
+        jygjcontent,
+      </if>
+      <if test="jygjresult != null" >
+        jygjresult,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jygjID != null" >
+        #{jygjID,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="jyid != null" >
+        #{jyid,jdbcType=INTEGER},
+      </if>
+      <if test="jygjDate != null" >
+        #{jygjDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jygjcontent != null" >
+        #{jygjcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="jygjresult != null" >
+        #{jygjresult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.jy.StucompanyExample" resultType="java.lang.Integer" >
+    select count(*) from t_stu_company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_stu_company
+    <set >
+      <if test="record.jygjID != null" >
+        jygjID = #{record.jygjID,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.jyid != null" >
+        jyid = #{record.jyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.jygjDate != null" >
+        jygjDate = #{record.jygjDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jygjcontent != null" >
+        jygjcontent = #{record.jygjcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jygjresult != null" >
+        jygjresult = #{record.jygjresult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_stu_company
+    set jygjID = #{record.jygjID,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      jyid = #{record.jyid,jdbcType=INTEGER},
+      jygjDate = #{record.jygjDate,jdbcType=TIMESTAMP},
+      jygjcontent = #{record.jygjcontent,jdbcType=VARCHAR},
+      jygjresult = #{record.jygjresult,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.jy.Stucompany" >
+    update t_stu_company
+    <set >
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="jyid != null" >
+        jyid = #{jyid,jdbcType=INTEGER},
+      </if>
+      <if test="jygjDate != null" >
+        jygjDate = #{jygjDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jygjcontent != null" >
+        jygjcontent = #{jygjcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="jygjresult != null" >
+        jygjresult = #{jygjresult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where jygjID = #{jygjID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.jy.Stucompany" >
+    update t_stu_company
+    set eid = #{eid,jdbcType=INTEGER},
+      jyid = #{jyid,jdbcType=INTEGER},
+      jygjDate = #{jygjDate,jdbcType=TIMESTAMP},
+      jygjcontent = #{jygjcontent,jdbcType=VARCHAR},
+      jygjresult = #{jygjresult,jdbcType=VARCHAR}
+    where jygjID = #{jygjID,jdbcType=INTEGER}
+  </update>
+</mapper>

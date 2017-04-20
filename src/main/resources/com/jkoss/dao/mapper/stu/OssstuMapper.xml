@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.stu.OssstuMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.stu.Ossstu" >
+    <id column="ossstuid" property="ossstuid" jdbcType="INTEGER" />
+    <result column="clzid" property="clzid" jdbcType="INTEGER" />
+    <result column="ossstuage" property="ossstuage" jdbcType="INTEGER" />
+    <result column="joinDate" property="joinDate" jdbcType="TIMESTAMP" />
+    <result column="ossstuIDno" property="ossstuIDno" jdbcType="VARCHAR" />
+    <result column="ossstuctnt" property="ossstuctnt" jdbcType="VARCHAR" />
+    <result column="ossstuctnttel" property="ossstuctnttel" jdbcType="VARCHAR" />
+    <result column="ossstuctnt2" property="ossstuctnt2" jdbcType="VARCHAR" />
+    <result column="stukqno" property="stukqno" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ossstuid, clzid, ossstuage, joinDate, ossstuIDno, ossstuctnt, ossstuctnttel, ossstuctnt2, 
+    stukqno
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.stu.OssstuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_ossstu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ossstu
+    where ossstuid = #{ossstuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_ossstu
+    where ossstuid = #{ossstuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.stu.OssstuExample" >
+    delete from t_ossstu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.stu.Ossstu" >
+    insert into t_ossstu (ossstuid, clzid, ossstuage, 
+      joinDate, ossstuIDno, ossstuctnt, 
+      ossstuctnttel, ossstuctnt2, stukqno
+      )
+    values (#{ossstuid,jdbcType=INTEGER}, #{clzid,jdbcType=INTEGER}, #{ossstuage,jdbcType=INTEGER}, 
+      #{joinDate,jdbcType=TIMESTAMP}, #{ossstuIDno,jdbcType=VARCHAR}, #{ossstuctnt,jdbcType=VARCHAR}, 
+      #{ossstuctnttel,jdbcType=VARCHAR}, #{ossstuctnt2,jdbcType=VARCHAR}, #{stukqno,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.stu.Ossstu" >
+    insert into t_ossstu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ossstuid != null" >
+        ossstuid,
+      </if>
+      <if test="clzid != null" >
+        clzid,
+      </if>
+      <if test="ossstuage != null" >
+        ossstuage,
+      </if>
+      <if test="joinDate != null" >
+        joinDate,
+      </if>
+      <if test="ossstuIDno != null" >
+        ossstuIDno,
+      </if>
+      <if test="ossstuctnt != null" >
+        ossstuctnt,
+      </if>
+      <if test="ossstuctnttel != null" >
+        ossstuctnttel,
+      </if>
+      <if test="ossstuctnt2 != null" >
+        ossstuctnt2,
+      </if>
+      <if test="stukqno != null" >
+        stukqno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ossstuid != null" >
+        #{ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="clzid != null" >
+        #{clzid,jdbcType=INTEGER},
+      </if>
+      <if test="ossstuage != null" >
+        #{ossstuage,jdbcType=INTEGER},
+      </if>
+      <if test="joinDate != null" >
+        #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ossstuIDno != null" >
+        #{ossstuIDno,jdbcType=VARCHAR},
+      </if>
+      <if test="ossstuctnt != null" >
+        #{ossstuctnt,jdbcType=VARCHAR},
+      </if>
+      <if test="ossstuctnttel != null" >
+        #{ossstuctnttel,jdbcType=VARCHAR},
+      </if>
+      <if test="ossstuctnt2 != null" >
+        #{ossstuctnt2,jdbcType=VARCHAR},
+      </if>
+      <if test="stukqno != null" >
+        #{stukqno,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.stu.OssstuExample" resultType="java.lang.Integer" >
+    select count(*) from t_ossstu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_ossstu
+    <set >
+      <if test="record.ossstuid != null" >
+        ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.clzid != null" >
+        clzid = #{record.clzid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ossstuage != null" >
+        ossstuage = #{record.ossstuage,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinDate != null" >
+        joinDate = #{record.joinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ossstuIDno != null" >
+        ossstuIDno = #{record.ossstuIDno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossstuctnt != null" >
+        ossstuctnt = #{record.ossstuctnt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossstuctnttel != null" >
+        ossstuctnttel = #{record.ossstuctnttel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossstuctnt2 != null" >
+        ossstuctnt2 = #{record.ossstuctnt2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stukqno != null" >
+        stukqno = #{record.stukqno,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_ossstu
+    set ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      clzid = #{record.clzid,jdbcType=INTEGER},
+      ossstuage = #{record.ossstuage,jdbcType=INTEGER},
+      joinDate = #{record.joinDate,jdbcType=TIMESTAMP},
+      ossstuIDno = #{record.ossstuIDno,jdbcType=VARCHAR},
+      ossstuctnt = #{record.ossstuctnt,jdbcType=VARCHAR},
+      ossstuctnttel = #{record.ossstuctnttel,jdbcType=VARCHAR},
+      ossstuctnt2 = #{record.ossstuctnt2,jdbcType=VARCHAR},
+      stukqno = #{record.stukqno,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.stu.Ossstu" >
+    update t_ossstu
+    <set >
+      <if test="clzid != null" >
+        clzid = #{clzid,jdbcType=INTEGER},
+      </if>
+      <if test="ossstuage != null" >
+        ossstuage = #{ossstuage,jdbcType=INTEGER},
+      </if>
+      <if test="joinDate != null" >
+        joinDate = #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ossstuIDno != null" >
+        ossstuIDno = #{ossstuIDno,jdbcType=VARCHAR},
+      </if>
+      <if test="ossstuctnt != null" >
+        ossstuctnt = #{ossstuctnt,jdbcType=VARCHAR},
+      </if>
+      <if test="ossstuctnttel != null" >
+        ossstuctnttel = #{ossstuctnttel,jdbcType=VARCHAR},
+      </if>
+      <if test="ossstuctnt2 != null" >
+        ossstuctnt2 = #{ossstuctnt2,jdbcType=VARCHAR},
+      </if>
+      <if test="stukqno != null" >
+        stukqno = #{stukqno,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ossstuid = #{ossstuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.stu.Ossstu" >
+    update t_ossstu
+    set clzid = #{clzid,jdbcType=INTEGER},
+      ossstuage = #{ossstuage,jdbcType=INTEGER},
+      joinDate = #{joinDate,jdbcType=TIMESTAMP},
+      ossstuIDno = #{ossstuIDno,jdbcType=VARCHAR},
+      ossstuctnt = #{ossstuctnt,jdbcType=VARCHAR},
+      ossstuctnttel = #{ossstuctnttel,jdbcType=VARCHAR},
+      ossstuctnt2 = #{ossstuctnt2,jdbcType=VARCHAR},
+      stukqno = #{stukqno,jdbcType=INTEGER}
+    where ossstuid = #{ossstuid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.stu.ClassesMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.stu.Classes" >
+    <id column="clzid" property="clzid" jdbcType="INTEGER" />
+    <result column="kcid" property="kcid" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="t_e_eid" property="t_e_eid" jdbcType="INTEGER" />
+    <result column="clzname" property="clzname" jdbcType="VARCHAR" />
+    <result column="clzprcc" property="clzprcc" jdbcType="INTEGER" />
+    <result column="opentime" property="opentime" jdbcType="TIMESTAMP" />
+    <result column="grddate" property="grddate" jdbcType="TIMESTAMP" />
+    <result column="clzdesc" property="clzdesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    clzid, kcid, eid, t_e_eid, clzname, clzprcc, opentime, grddate, clzdesc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.stu.ClassesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_classes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_classes
+    where clzid = #{clzid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_classes
+    where clzid = #{clzid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.stu.ClassesExample" >
+    delete from t_classes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.stu.Classes" >
+    insert into t_classes (clzid, kcid, eid, 
+      t_e_eid, clzname, clzprcc, 
+      opentime, grddate, clzdesc
+      )
+    values (#{clzid,jdbcType=INTEGER}, #{kcid,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, 
+      #{t_e_eid,jdbcType=INTEGER}, #{clzname,jdbcType=VARCHAR}, #{clzprcc,jdbcType=INTEGER}, 
+      #{opentime,jdbcType=TIMESTAMP}, #{grddate,jdbcType=TIMESTAMP}, #{clzdesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.stu.Classes" >
+    insert into t_classes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="clzid != null" >
+        clzid,
+      </if>
+      <if test="kcid != null" >
+        kcid,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="t_e_eid != null" >
+        t_e_eid,
+      </if>
+      <if test="clzname != null" >
+        clzname,
+      </if>
+      <if test="clzprcc != null" >
+        clzprcc,
+      </if>
+      <if test="opentime != null" >
+        opentime,
+      </if>
+      <if test="grddate != null" >
+        grddate,
+      </if>
+      <if test="clzdesc != null" >
+        clzdesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="clzid != null" >
+        #{clzid,jdbcType=INTEGER},
+      </if>
+      <if test="kcid != null" >
+        #{kcid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="t_e_eid != null" >
+        #{t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="clzname != null" >
+        #{clzname,jdbcType=VARCHAR},
+      </if>
+      <if test="clzprcc != null" >
+        #{clzprcc,jdbcType=INTEGER},
+      </if>
+      <if test="opentime != null" >
+        #{opentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grddate != null" >
+        #{grddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clzdesc != null" >
+        #{clzdesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.stu.ClassesExample" resultType="java.lang.Integer" >
+    select count(*) from t_classes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_classes
+    <set >
+      <if test="record.clzid != null" >
+        clzid = #{record.clzid,jdbcType=INTEGER},
+      </if>
+      <if test="record.kcid != null" >
+        kcid = #{record.kcid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.t_e_eid != null" >
+        t_e_eid = #{record.t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.clzname != null" >
+        clzname = #{record.clzname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clzprcc != null" >
+        clzprcc = #{record.clzprcc,jdbcType=INTEGER},
+      </if>
+      <if test="record.opentime != null" >
+        opentime = #{record.opentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.grddate != null" >
+        grddate = #{record.grddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.clzdesc != null" >
+        clzdesc = #{record.clzdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_classes
+    set clzid = #{record.clzid,jdbcType=INTEGER},
+      kcid = #{record.kcid,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      t_e_eid = #{record.t_e_eid,jdbcType=INTEGER},
+      clzname = #{record.clzname,jdbcType=VARCHAR},
+      clzprcc = #{record.clzprcc,jdbcType=INTEGER},
+      opentime = #{record.opentime,jdbcType=TIMESTAMP},
+      grddate = #{record.grddate,jdbcType=TIMESTAMP},
+      clzdesc = #{record.clzdesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.stu.Classes" >
+    update t_classes
+    <set >
+      <if test="kcid != null" >
+        kcid = #{kcid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="t_e_eid != null" >
+        t_e_eid = #{t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="clzname != null" >
+        clzname = #{clzname,jdbcType=VARCHAR},
+      </if>
+      <if test="clzprcc != null" >
+        clzprcc = #{clzprcc,jdbcType=INTEGER},
+      </if>
+      <if test="opentime != null" >
+        opentime = #{opentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grddate != null" >
+        grddate = #{grddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clzdesc != null" >
+        clzdesc = #{clzdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where clzid = #{clzid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.stu.Classes" >
+    update t_classes
+    set kcid = #{kcid,jdbcType=INTEGER},
+      eid = #{eid,jdbcType=INTEGER},
+      t_e_eid = #{t_e_eid,jdbcType=INTEGER},
+      clzname = #{clzname,jdbcType=VARCHAR},
+      clzprcc = #{clzprcc,jdbcType=INTEGER},
+      opentime = #{opentime,jdbcType=TIMESTAMP},
+      grddate = #{grddate,jdbcType=TIMESTAMP},
+      clzdesc = #{clzdesc,jdbcType=VARCHAR}
+    where clzid = #{clzid,jdbcType=INTEGER}
+  </update>
+</mapper>

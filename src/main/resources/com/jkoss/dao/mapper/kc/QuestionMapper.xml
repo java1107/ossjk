@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.kc.QuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.kc.Question" >
+    <id column="qid" property="qid" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="kcmdelid" property="kcmdelid" jdbcType="INTEGER" />
+    <result column="questionName" property="questionName" jdbcType="VARCHAR" />
+    <result column="questiontype" property="questiontype" jdbcType="INTEGER" />
+    <result column="qselectA" property="qselectA" jdbcType="VARCHAR" />
+    <result column="qselectB" property="qselectB" jdbcType="VARCHAR" />
+    <result column="qselectC" property="qselectC" jdbcType="VARCHAR" />
+    <result column="qselectD" property="qselectD" jdbcType="VARCHAR" />
+    <result column="anws" property="anws" jdbcType="VARCHAR" />
+    <result column="hard" property="hard" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    qid, eid, kcmdelid, questionName, questiontype, qselectA, qselectB, qselectC, qselectD, 
+    anws, hard
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.kc.QuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_question
+    where qid = #{qid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_question
+    where qid = #{qid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.kc.QuestionExample" >
+    delete from t_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.kc.Question" >
+    insert into t_question (qid, eid, kcmdelid, 
+      questionName, questiontype, qselectA, 
+      qselectB, qselectC, qselectD, 
+      anws, hard)
+    values (#{qid,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{kcmdelid,jdbcType=INTEGER}, 
+      #{questionName,jdbcType=VARCHAR}, #{questiontype,jdbcType=INTEGER}, #{qselectA,jdbcType=VARCHAR}, 
+      #{qselectB,jdbcType=VARCHAR}, #{qselectC,jdbcType=VARCHAR}, #{qselectD,jdbcType=VARCHAR}, 
+      #{anws,jdbcType=VARCHAR}, #{hard,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.kc.Question" >
+    insert into t_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="qid != null" >
+        qid,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="kcmdelid != null" >
+        kcmdelid,
+      </if>
+      <if test="questionName != null" >
+        questionName,
+      </if>
+      <if test="questiontype != null" >
+        questiontype,
+      </if>
+      <if test="qselectA != null" >
+        qselectA,
+      </if>
+      <if test="qselectB != null" >
+        qselectB,
+      </if>
+      <if test="qselectC != null" >
+        qselectC,
+      </if>
+      <if test="qselectD != null" >
+        qselectD,
+      </if>
+      <if test="anws != null" >
+        anws,
+      </if>
+      <if test="hard != null" >
+        hard,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="qid != null" >
+        #{qid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="kcmdelid != null" >
+        #{kcmdelid,jdbcType=INTEGER},
+      </if>
+      <if test="questionName != null" >
+        #{questionName,jdbcType=VARCHAR},
+      </if>
+      <if test="questiontype != null" >
+        #{questiontype,jdbcType=INTEGER},
+      </if>
+      <if test="qselectA != null" >
+        #{qselectA,jdbcType=VARCHAR},
+      </if>
+      <if test="qselectB != null" >
+        #{qselectB,jdbcType=VARCHAR},
+      </if>
+      <if test="qselectC != null" >
+        #{qselectC,jdbcType=VARCHAR},
+      </if>
+      <if test="qselectD != null" >
+        #{qselectD,jdbcType=VARCHAR},
+      </if>
+      <if test="anws != null" >
+        #{anws,jdbcType=VARCHAR},
+      </if>
+      <if test="hard != null" >
+        #{hard,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.kc.QuestionExample" resultType="java.lang.Integer" >
+    select count(*) from t_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_question
+    <set >
+      <if test="record.qid != null" >
+        qid = #{record.qid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.kcmdelid != null" >
+        kcmdelid = #{record.kcmdelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionName != null" >
+        questionName = #{record.questionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questiontype != null" >
+        questiontype = #{record.questiontype,jdbcType=INTEGER},
+      </if>
+      <if test="record.qselectA != null" >
+        qselectA = #{record.qselectA,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qselectB != null" >
+        qselectB = #{record.qselectB,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qselectC != null" >
+        qselectC = #{record.qselectC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qselectD != null" >
+        qselectD = #{record.qselectD,jdbcType=VARCHAR},
+      </if>
+      <if test="record.anws != null" >
+        anws = #{record.anws,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hard != null" >
+        hard = #{record.hard,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_question
+    set qid = #{record.qid,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      kcmdelid = #{record.kcmdelid,jdbcType=INTEGER},
+      questionName = #{record.questionName,jdbcType=VARCHAR},
+      questiontype = #{record.questiontype,jdbcType=INTEGER},
+      qselectA = #{record.qselectA,jdbcType=VARCHAR},
+      qselectB = #{record.qselectB,jdbcType=VARCHAR},
+      qselectC = #{record.qselectC,jdbcType=VARCHAR},
+      qselectD = #{record.qselectD,jdbcType=VARCHAR},
+      anws = #{record.anws,jdbcType=VARCHAR},
+      hard = #{record.hard,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.kc.Question" >
+    update t_question
+    <set >
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="kcmdelid != null" >
+        kcmdelid = #{kcmdelid,jdbcType=INTEGER},
+      </if>
+      <if test="questionName != null" >
+        questionName = #{questionName,jdbcType=VARCHAR},
+      </if>
+      <if test="questiontype != null" >
+        questiontype = #{questiontype,jdbcType=INTEGER},
+      </if>
+      <if test="qselectA != null" >
+        qselectA = #{qselectA,jdbcType=VARCHAR},
+      </if>
+      <if test="qselectB != null" >
+        qselectB = #{qselectB,jdbcType=VARCHAR},
+      </if>
+      <if test="qselectC != null" >
+        qselectC = #{qselectC,jdbcType=VARCHAR},
+      </if>
+      <if test="qselectD != null" >
+        qselectD = #{qselectD,jdbcType=VARCHAR},
+      </if>
+      <if test="anws != null" >
+        anws = #{anws,jdbcType=VARCHAR},
+      </if>
+      <if test="hard != null" >
+        hard = #{hard,jdbcType=INTEGER},
+      </if>
+    </set>
+    where qid = #{qid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.kc.Question" >
+    update t_question
+    set eid = #{eid,jdbcType=INTEGER},
+      kcmdelid = #{kcmdelid,jdbcType=INTEGER},
+      questionName = #{questionName,jdbcType=VARCHAR},
+      questiontype = #{questiontype,jdbcType=INTEGER},
+      qselectA = #{qselectA,jdbcType=VARCHAR},
+      qselectB = #{qselectB,jdbcType=VARCHAR},
+      qselectC = #{qselectC,jdbcType=VARCHAR},
+      qselectD = #{qselectD,jdbcType=VARCHAR},
+      anws = #{anws,jdbcType=VARCHAR},
+      hard = #{hard,jdbcType=INTEGER}
+    where qid = #{qid,jdbcType=INTEGER}
+  </update>
+</mapper>

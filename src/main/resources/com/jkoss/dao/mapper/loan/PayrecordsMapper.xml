@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.loan.PayrecordsMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.loan.Payrecords" >
+    <id column="payRecordID" property="payRecordID" jdbcType="INTEGER" />
+    <result column="payID" property="payID" jdbcType="INTEGER" />
+    <result column="payRcunt" property="payRcunt" jdbcType="VARCHAR" />
+    <result column="payRDate" property="payRDate" jdbcType="TIMESTAMP" />
+    <result column="payRNum" property="payRNum" jdbcType="REAL" />
+    <result column="payRType" property="payRType" jdbcType="INTEGER" />
+    <result column="payRsj" property="payRsj" jdbcType="VARCHAR" />
+    <result column="payRdesc" property="payRdesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    payRecordID, payID, payRcunt, payRDate, payRNum, payRType, payRsj, payRdesc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.loan.PayrecordsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_payrecords
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_payrecords
+    where payRecordID = #{payRecordID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_payrecords
+    where payRecordID = #{payRecordID,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.loan.PayrecordsExample" >
+    delete from t_payrecords
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.loan.Payrecords" >
+    insert into t_payrecords (payRecordID, payID, payRcunt, 
+      payRDate, payRNum, payRType, 
+      payRsj, payRdesc)
+    values (#{payRecordID,jdbcType=INTEGER}, #{payID,jdbcType=INTEGER}, #{payRcunt,jdbcType=VARCHAR}, 
+      #{payRDate,jdbcType=TIMESTAMP}, #{payRNum,jdbcType=REAL}, #{payRType,jdbcType=INTEGER}, 
+      #{payRsj,jdbcType=VARCHAR}, #{payRdesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.loan.Payrecords" >
+    insert into t_payrecords
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payRecordID != null" >
+        payRecordID,
+      </if>
+      <if test="payID != null" >
+        payID,
+      </if>
+      <if test="payRcunt != null" >
+        payRcunt,
+      </if>
+      <if test="payRDate != null" >
+        payRDate,
+      </if>
+      <if test="payRNum != null" >
+        payRNum,
+      </if>
+      <if test="payRType != null" >
+        payRType,
+      </if>
+      <if test="payRsj != null" >
+        payRsj,
+      </if>
+      <if test="payRdesc != null" >
+        payRdesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payRecordID != null" >
+        #{payRecordID,jdbcType=INTEGER},
+      </if>
+      <if test="payID != null" >
+        #{payID,jdbcType=INTEGER},
+      </if>
+      <if test="payRcunt != null" >
+        #{payRcunt,jdbcType=VARCHAR},
+      </if>
+      <if test="payRDate != null" >
+        #{payRDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payRNum != null" >
+        #{payRNum,jdbcType=REAL},
+      </if>
+      <if test="payRType != null" >
+        #{payRType,jdbcType=INTEGER},
+      </if>
+      <if test="payRsj != null" >
+        #{payRsj,jdbcType=VARCHAR},
+      </if>
+      <if test="payRdesc != null" >
+        #{payRdesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.loan.PayrecordsExample" resultType="java.lang.Integer" >
+    select count(*) from t_payrecords
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_payrecords
+    <set >
+      <if test="record.payRecordID != null" >
+        payRecordID = #{record.payRecordID,jdbcType=INTEGER},
+      </if>
+      <if test="record.payID != null" >
+        payID = #{record.payID,jdbcType=INTEGER},
+      </if>
+      <if test="record.payRcunt != null" >
+        payRcunt = #{record.payRcunt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payRDate != null" >
+        payRDate = #{record.payRDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payRNum != null" >
+        payRNum = #{record.payRNum,jdbcType=REAL},
+      </if>
+      <if test="record.payRType != null" >
+        payRType = #{record.payRType,jdbcType=INTEGER},
+      </if>
+      <if test="record.payRsj != null" >
+        payRsj = #{record.payRsj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payRdesc != null" >
+        payRdesc = #{record.payRdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_payrecords
+    set payRecordID = #{record.payRecordID,jdbcType=INTEGER},
+      payID = #{record.payID,jdbcType=INTEGER},
+      payRcunt = #{record.payRcunt,jdbcType=VARCHAR},
+      payRDate = #{record.payRDate,jdbcType=TIMESTAMP},
+      payRNum = #{record.payRNum,jdbcType=REAL},
+      payRType = #{record.payRType,jdbcType=INTEGER},
+      payRsj = #{record.payRsj,jdbcType=VARCHAR},
+      payRdesc = #{record.payRdesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.loan.Payrecords" >
+    update t_payrecords
+    <set >
+      <if test="payID != null" >
+        payID = #{payID,jdbcType=INTEGER},
+      </if>
+      <if test="payRcunt != null" >
+        payRcunt = #{payRcunt,jdbcType=VARCHAR},
+      </if>
+      <if test="payRDate != null" >
+        payRDate = #{payRDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payRNum != null" >
+        payRNum = #{payRNum,jdbcType=REAL},
+      </if>
+      <if test="payRType != null" >
+        payRType = #{payRType,jdbcType=INTEGER},
+      </if>
+      <if test="payRsj != null" >
+        payRsj = #{payRsj,jdbcType=VARCHAR},
+      </if>
+      <if test="payRdesc != null" >
+        payRdesc = #{payRdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where payRecordID = #{payRecordID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.loan.Payrecords" >
+    update t_payrecords
+    set payID = #{payID,jdbcType=INTEGER},
+      payRcunt = #{payRcunt,jdbcType=VARCHAR},
+      payRDate = #{payRDate,jdbcType=TIMESTAMP},
+      payRNum = #{payRNum,jdbcType=REAL},
+      payRType = #{payRType,jdbcType=INTEGER},
+      payRsj = #{payRsj,jdbcType=VARCHAR},
+      payRdesc = #{payRdesc,jdbcType=VARCHAR}
+    where payRecordID = #{payRecordID,jdbcType=INTEGER}
+  </update>
+</mapper>

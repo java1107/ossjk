@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.loan.LoanorgMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.loan.Loanorg" >
+    <id column="loancpid" property="loancpid" jdbcType="INTEGER" />
+    <result column="loancp" property="loancp" jdbcType="VARCHAR" />
+    <result column="loanhzbegin" property="loanhzbegin" jdbcType="DATE" />
+    <result column="loanhzbegin_in" property="loanhzbegin_in" jdbcType="DATE" />
+    <result column="loanhzbegin_out" property="loanhzbegin_out" jdbcType="DATE" />
+    <result column="loanhzcontect" property="loanhzcontect" jdbcType="VARCHAR" />
+    <result column="loanhzcontecttel" property="loanhzcontecttel" jdbcType="VARCHAR" />
+    <result column="priority" property="priority" jdbcType="INTEGER" />
+    <result column="loandesc" property="loandesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    loancpid, loancp, loanhzbegin, loanhzbegin_in, loanhzbegin_out, loanhzcontect, loanhzcontecttel, 
+    priority, loandesc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.loan.LoanorgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_loanorg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_loanorg
+    where loancpid = #{loancpid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_loanorg
+    where loancpid = #{loancpid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.loan.LoanorgExample" >
+    delete from t_loanorg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.loan.Loanorg" >
+    insert into t_loanorg (loancpid, loancp, loanhzbegin, 
+      loanhzbegin_in, loanhzbegin_out, loanhzcontect, 
+      loanhzcontecttel, priority, loandesc
+      )
+    values (#{loancpid,jdbcType=INTEGER}, #{loancp,jdbcType=VARCHAR}, #{loanhzbegin,jdbcType=DATE}, 
+      #{loanhzbegin_in,jdbcType=DATE}, #{loanhzbegin_out,jdbcType=DATE}, #{loanhzcontect,jdbcType=VARCHAR}, 
+      #{loanhzcontecttel,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, #{loandesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.loan.Loanorg" >
+    insert into t_loanorg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="loancpid != null" >
+        loancpid,
+      </if>
+      <if test="loancp != null" >
+        loancp,
+      </if>
+      <if test="loanhzbegin != null" >
+        loanhzbegin,
+      </if>
+      <if test="loanhzbegin_in != null" >
+        loanhzbegin_in,
+      </if>
+      <if test="loanhzbegin_out != null" >
+        loanhzbegin_out,
+      </if>
+      <if test="loanhzcontect != null" >
+        loanhzcontect,
+      </if>
+      <if test="loanhzcontecttel != null" >
+        loanhzcontecttel,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="loandesc != null" >
+        loandesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="loancpid != null" >
+        #{loancpid,jdbcType=INTEGER},
+      </if>
+      <if test="loancp != null" >
+        #{loancp,jdbcType=VARCHAR},
+      </if>
+      <if test="loanhzbegin != null" >
+        #{loanhzbegin,jdbcType=DATE},
+      </if>
+      <if test="loanhzbegin_in != null" >
+        #{loanhzbegin_in,jdbcType=DATE},
+      </if>
+      <if test="loanhzbegin_out != null" >
+        #{loanhzbegin_out,jdbcType=DATE},
+      </if>
+      <if test="loanhzcontect != null" >
+        #{loanhzcontect,jdbcType=VARCHAR},
+      </if>
+      <if test="loanhzcontecttel != null" >
+        #{loanhzcontecttel,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="loandesc != null" >
+        #{loandesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.loan.LoanorgExample" resultType="java.lang.Integer" >
+    select count(*) from t_loanorg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_loanorg
+    <set >
+      <if test="record.loancpid != null" >
+        loancpid = #{record.loancpid,jdbcType=INTEGER},
+      </if>
+      <if test="record.loancp != null" >
+        loancp = #{record.loancp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanhzbegin != null" >
+        loanhzbegin = #{record.loanhzbegin,jdbcType=DATE},
+      </if>
+      <if test="record.loanhzbegin_in != null" >
+        loanhzbegin_in = #{record.loanhzbegin_in,jdbcType=DATE},
+      </if>
+      <if test="record.loanhzbegin_out != null" >
+        loanhzbegin_out = #{record.loanhzbegin_out,jdbcType=DATE},
+      </if>
+      <if test="record.loanhzcontect != null" >
+        loanhzcontect = #{record.loanhzcontect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanhzcontecttel != null" >
+        loanhzcontecttel = #{record.loanhzcontecttel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null" >
+        priority = #{record.priority,jdbcType=INTEGER},
+      </if>
+      <if test="record.loandesc != null" >
+        loandesc = #{record.loandesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_loanorg
+    set loancpid = #{record.loancpid,jdbcType=INTEGER},
+      loancp = #{record.loancp,jdbcType=VARCHAR},
+      loanhzbegin = #{record.loanhzbegin,jdbcType=DATE},
+      loanhzbegin_in = #{record.loanhzbegin_in,jdbcType=DATE},
+      loanhzbegin_out = #{record.loanhzbegin_out,jdbcType=DATE},
+      loanhzcontect = #{record.loanhzcontect,jdbcType=VARCHAR},
+      loanhzcontecttel = #{record.loanhzcontecttel,jdbcType=VARCHAR},
+      priority = #{record.priority,jdbcType=INTEGER},
+      loandesc = #{record.loandesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.loan.Loanorg" >
+    update t_loanorg
+    <set >
+      <if test="loancp != null" >
+        loancp = #{loancp,jdbcType=VARCHAR},
+      </if>
+      <if test="loanhzbegin != null" >
+        loanhzbegin = #{loanhzbegin,jdbcType=DATE},
+      </if>
+      <if test="loanhzbegin_in != null" >
+        loanhzbegin_in = #{loanhzbegin_in,jdbcType=DATE},
+      </if>
+      <if test="loanhzbegin_out != null" >
+        loanhzbegin_out = #{loanhzbegin_out,jdbcType=DATE},
+      </if>
+      <if test="loanhzcontect != null" >
+        loanhzcontect = #{loanhzcontect,jdbcType=VARCHAR},
+      </if>
+      <if test="loanhzcontecttel != null" >
+        loanhzcontecttel = #{loanhzcontecttel,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="loandesc != null" >
+        loandesc = #{loandesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where loancpid = #{loancpid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.loan.Loanorg" >
+    update t_loanorg
+    set loancp = #{loancp,jdbcType=VARCHAR},
+      loanhzbegin = #{loanhzbegin,jdbcType=DATE},
+      loanhzbegin_in = #{loanhzbegin_in,jdbcType=DATE},
+      loanhzbegin_out = #{loanhzbegin_out,jdbcType=DATE},
+      loanhzcontect = #{loanhzcontect,jdbcType=VARCHAR},
+      loanhzcontecttel = #{loanhzcontecttel,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      loandesc = #{loandesc,jdbcType=VARCHAR}
+    where loancpid = #{loancpid,jdbcType=INTEGER}
+  </update>
+</mapper>

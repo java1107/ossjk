@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.jy.InterviewMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.jy.Interview" >
+    <id column="stumsid" property="stumsid" jdbcType="INTEGER" />
+    <result column="jygwid" property="jygwid" jdbcType="INTEGER" />
+    <result column="ossstuid" property="ossstuid" jdbcType="INTEGER" />
+    <result column="stumstolddate" property="stumstolddate" jdbcType="TIMESTAMP" />
+    <result column="stumsdate" property="stumsdate" jdbcType="TIMESTAMP" />
+    <result column="stumsplace" property="stumsplace" jdbcType="VARCHAR" />
+    <result column="stumstel" property="stumstel" jdbcType="VARCHAR" />
+    <result column="stumsresult" property="stumsresult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    stumsid, jygwid, ossstuid, stumstolddate, stumsdate, stumsplace, stumstel, stumsresult
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.jy.InterviewExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_interview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_interview
+    where stumsid = #{stumsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_interview
+    where stumsid = #{stumsid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.jy.InterviewExample" >
+    delete from t_interview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.jy.Interview" >
+    insert into t_interview (stumsid, jygwid, ossstuid, 
+      stumstolddate, stumsdate, stumsplace, 
+      stumstel, stumsresult)
+    values (#{stumsid,jdbcType=INTEGER}, #{jygwid,jdbcType=INTEGER}, #{ossstuid,jdbcType=INTEGER}, 
+      #{stumstolddate,jdbcType=TIMESTAMP}, #{stumsdate,jdbcType=TIMESTAMP}, #{stumsplace,jdbcType=VARCHAR}, 
+      #{stumstel,jdbcType=VARCHAR}, #{stumsresult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.jy.Interview" >
+    insert into t_interview
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stumsid != null" >
+        stumsid,
+      </if>
+      <if test="jygwid != null" >
+        jygwid,
+      </if>
+      <if test="ossstuid != null" >
+        ossstuid,
+      </if>
+      <if test="stumstolddate != null" >
+        stumstolddate,
+      </if>
+      <if test="stumsdate != null" >
+        stumsdate,
+      </if>
+      <if test="stumsplace != null" >
+        stumsplace,
+      </if>
+      <if test="stumstel != null" >
+        stumstel,
+      </if>
+      <if test="stumsresult != null" >
+        stumsresult,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stumsid != null" >
+        #{stumsid,jdbcType=INTEGER},
+      </if>
+      <if test="jygwid != null" >
+        #{jygwid,jdbcType=INTEGER},
+      </if>
+      <if test="ossstuid != null" >
+        #{ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="stumstolddate != null" >
+        #{stumstolddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stumsdate != null" >
+        #{stumsdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stumsplace != null" >
+        #{stumsplace,jdbcType=VARCHAR},
+      </if>
+      <if test="stumstel != null" >
+        #{stumstel,jdbcType=VARCHAR},
+      </if>
+      <if test="stumsresult != null" >
+        #{stumsresult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.jy.InterviewExample" resultType="java.lang.Integer" >
+    select count(*) from t_interview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_interview
+    <set >
+      <if test="record.stumsid != null" >
+        stumsid = #{record.stumsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.jygwid != null" >
+        jygwid = #{record.jygwid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ossstuid != null" >
+        ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stumstolddate != null" >
+        stumstolddate = #{record.stumstolddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stumsdate != null" >
+        stumsdate = #{record.stumsdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stumsplace != null" >
+        stumsplace = #{record.stumsplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stumstel != null" >
+        stumstel = #{record.stumstel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stumsresult != null" >
+        stumsresult = #{record.stumsresult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_interview
+    set stumsid = #{record.stumsid,jdbcType=INTEGER},
+      jygwid = #{record.jygwid,jdbcType=INTEGER},
+      ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      stumstolddate = #{record.stumstolddate,jdbcType=TIMESTAMP},
+      stumsdate = #{record.stumsdate,jdbcType=TIMESTAMP},
+      stumsplace = #{record.stumsplace,jdbcType=VARCHAR},
+      stumstel = #{record.stumstel,jdbcType=VARCHAR},
+      stumsresult = #{record.stumsresult,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.jy.Interview" >
+    update t_interview
+    <set >
+      <if test="jygwid != null" >
+        jygwid = #{jygwid,jdbcType=INTEGER},
+      </if>
+      <if test="ossstuid != null" >
+        ossstuid = #{ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="stumstolddate != null" >
+        stumstolddate = #{stumstolddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stumsdate != null" >
+        stumsdate = #{stumsdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stumsplace != null" >
+        stumsplace = #{stumsplace,jdbcType=VARCHAR},
+      </if>
+      <if test="stumstel != null" >
+        stumstel = #{stumstel,jdbcType=VARCHAR},
+      </if>
+      <if test="stumsresult != null" >
+        stumsresult = #{stumsresult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stumsid = #{stumsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.jy.Interview" >
+    update t_interview
+    set jygwid = #{jygwid,jdbcType=INTEGER},
+      ossstuid = #{ossstuid,jdbcType=INTEGER},
+      stumstolddate = #{stumstolddate,jdbcType=TIMESTAMP},
+      stumsdate = #{stumsdate,jdbcType=TIMESTAMP},
+      stumsplace = #{stumsplace,jdbcType=VARCHAR},
+      stumstel = #{stumstel,jdbcType=VARCHAR},
+      stumsresult = #{stumsresult,jdbcType=VARCHAR}
+    where stumsid = #{stumsid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.zx.ConsultationMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.zx.Consultation" >
+    <id column="zstuid" property="zstuid" jdbcType="INTEGER" />
+    <result column="schoolID" property="schoolID" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="t_e_eid" property="t_e_eid" jdbcType="INTEGER" />
+    <result column="ossstuid" property="ossstuid" jdbcType="INTEGER" />
+    <result column="stuname" property="stuname" jdbcType="VARCHAR" />
+    <result column="ssex" property="ssex" jdbcType="INTEGER" />
+    <result column="magyer" property="magyer" jdbcType="VARCHAR" />
+    <result column="zxltype" property="zxltype" jdbcType="INTEGER" />
+    <result column="gaoxiaoClz" property="gaoxiaoClz" jdbcType="VARCHAR" />
+    <result column="stuphone" property="stuphone" jdbcType="VARCHAR" />
+    <result column="zstuqq" property="zstuqq" jdbcType="INTEGER" />
+    <result column="contime" property="contime" jdbcType="TIMESTAMP" />
+    <result column="entrance" property="entrance" jdbcType="INTEGER" />
+    <result column="entime" property="entime" jdbcType="TIMESTAMP" />
+    <result column="stuclassid" property="stuclassid" jdbcType="INTEGER" />
+    <result column="weixin" property="weixin" jdbcType="VARCHAR" />
+    <result column="zxstate" property="zxstate" jdbcType="INTEGER" />
+    <result column="zstudesc" property="zstudesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    zstuid, schoolID, eid, t_e_eid, ossstuid, stuname, ssex, magyer, zxltype, gaoxiaoClz, 
+    stuphone, zstuqq, contime, entrance, entime, stuclassid, weixin, zxstate, zstudesc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.zx.ConsultationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_consultation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_consultation
+    where zstuid = #{zstuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_consultation
+    where zstuid = #{zstuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.zx.ConsultationExample" >
+    delete from t_consultation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.zx.Consultation" >
+    insert into t_consultation (zstuid, schoolID, eid, 
+      t_e_eid, ossstuid, stuname, 
+      ssex, magyer, zxltype, 
+      gaoxiaoClz, stuphone, zstuqq, 
+      contime, entrance, entime, 
+      stuclassid, weixin, zxstate, 
+      zstudesc)
+    values (#{zstuid,jdbcType=INTEGER}, #{schoolID,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, 
+      #{t_e_eid,jdbcType=INTEGER}, #{ossstuid,jdbcType=INTEGER}, #{stuname,jdbcType=VARCHAR}, 
+      #{ssex,jdbcType=INTEGER}, #{magyer,jdbcType=VARCHAR}, #{zxltype,jdbcType=INTEGER}, 
+      #{gaoxiaoClz,jdbcType=VARCHAR}, #{stuphone,jdbcType=VARCHAR}, #{zstuqq,jdbcType=INTEGER}, 
+      #{contime,jdbcType=TIMESTAMP}, #{entrance,jdbcType=INTEGER}, #{entime,jdbcType=TIMESTAMP}, 
+      #{stuclassid,jdbcType=INTEGER}, #{weixin,jdbcType=VARCHAR}, #{zxstate,jdbcType=INTEGER}, 
+      #{zstudesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.zx.Consultation" >
+    insert into t_consultation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zstuid != null" >
+        zstuid,
+      </if>
+      <if test="schoolID != null" >
+        schoolID,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="t_e_eid != null" >
+        t_e_eid,
+      </if>
+      <if test="ossstuid != null" >
+        ossstuid,
+      </if>
+      <if test="stuname != null" >
+        stuname,
+      </if>
+      <if test="ssex != null" >
+        ssex,
+      </if>
+      <if test="magyer != null" >
+        magyer,
+      </if>
+      <if test="zxltype != null" >
+        zxltype,
+      </if>
+      <if test="gaoxiaoClz != null" >
+        gaoxiaoClz,
+      </if>
+      <if test="stuphone != null" >
+        stuphone,
+      </if>
+      <if test="zstuqq != null" >
+        zstuqq,
+      </if>
+      <if test="contime != null" >
+        contime,
+      </if>
+      <if test="entrance != null" >
+        entrance,
+      </if>
+      <if test="entime != null" >
+        entime,
+      </if>
+      <if test="stuclassid != null" >
+        stuclassid,
+      </if>
+      <if test="weixin != null" >
+        weixin,
+      </if>
+      <if test="zxstate != null" >
+        zxstate,
+      </if>
+      <if test="zstudesc != null" >
+        zstudesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zstuid != null" >
+        #{zstuid,jdbcType=INTEGER},
+      </if>
+      <if test="schoolID != null" >
+        #{schoolID,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="t_e_eid != null" >
+        #{t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="ossstuid != null" >
+        #{ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="stuname != null" >
+        #{stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null" >
+        #{ssex,jdbcType=INTEGER},
+      </if>
+      <if test="magyer != null" >
+        #{magyer,jdbcType=VARCHAR},
+      </if>
+      <if test="zxltype != null" >
+        #{zxltype,jdbcType=INTEGER},
+      </if>
+      <if test="gaoxiaoClz != null" >
+        #{gaoxiaoClz,jdbcType=VARCHAR},
+      </if>
+      <if test="stuphone != null" >
+        #{stuphone,jdbcType=VARCHAR},
+      </if>
+      <if test="zstuqq != null" >
+        #{zstuqq,jdbcType=INTEGER},
+      </if>
+      <if test="contime != null" >
+        #{contime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entrance != null" >
+        #{entrance,jdbcType=INTEGER},
+      </if>
+      <if test="entime != null" >
+        #{entime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stuclassid != null" >
+        #{stuclassid,jdbcType=INTEGER},
+      </if>
+      <if test="weixin != null" >
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="zxstate != null" >
+        #{zxstate,jdbcType=INTEGER},
+      </if>
+      <if test="zstudesc != null" >
+        #{zstudesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.zx.ConsultationExample" resultType="java.lang.Integer" >
+    select count(*) from t_consultation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_consultation
+    <set >
+      <if test="record.zstuid != null" >
+        zstuid = #{record.zstuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolID != null" >
+        schoolID = #{record.schoolID,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.t_e_eid != null" >
+        t_e_eid = #{record.t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ossstuid != null" >
+        ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuname != null" >
+        stuname = #{record.stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssex != null" >
+        ssex = #{record.ssex,jdbcType=INTEGER},
+      </if>
+      <if test="record.magyer != null" >
+        magyer = #{record.magyer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zxltype != null" >
+        zxltype = #{record.zxltype,jdbcType=INTEGER},
+      </if>
+      <if test="record.gaoxiaoClz != null" >
+        gaoxiaoClz = #{record.gaoxiaoClz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuphone != null" >
+        stuphone = #{record.stuphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zstuqq != null" >
+        zstuqq = #{record.zstuqq,jdbcType=INTEGER},
+      </if>
+      <if test="record.contime != null" >
+        contime = #{record.contime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.entrance != null" >
+        entrance = #{record.entrance,jdbcType=INTEGER},
+      </if>
+      <if test="record.entime != null" >
+        entime = #{record.entime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stuclassid != null" >
+        stuclassid = #{record.stuclassid,jdbcType=INTEGER},
+      </if>
+      <if test="record.weixin != null" >
+        weixin = #{record.weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zxstate != null" >
+        zxstate = #{record.zxstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.zstudesc != null" >
+        zstudesc = #{record.zstudesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_consultation
+    set zstuid = #{record.zstuid,jdbcType=INTEGER},
+      schoolID = #{record.schoolID,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      t_e_eid = #{record.t_e_eid,jdbcType=INTEGER},
+      ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      stuname = #{record.stuname,jdbcType=VARCHAR},
+      ssex = #{record.ssex,jdbcType=INTEGER},
+      magyer = #{record.magyer,jdbcType=VARCHAR},
+      zxltype = #{record.zxltype,jdbcType=INTEGER},
+      gaoxiaoClz = #{record.gaoxiaoClz,jdbcType=VARCHAR},
+      stuphone = #{record.stuphone,jdbcType=VARCHAR},
+      zstuqq = #{record.zstuqq,jdbcType=INTEGER},
+      contime = #{record.contime,jdbcType=TIMESTAMP},
+      entrance = #{record.entrance,jdbcType=INTEGER},
+      entime = #{record.entime,jdbcType=TIMESTAMP},
+      stuclassid = #{record.stuclassid,jdbcType=INTEGER},
+      weixin = #{record.weixin,jdbcType=VARCHAR},
+      zxstate = #{record.zxstate,jdbcType=INTEGER},
+      zstudesc = #{record.zstudesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.zx.Consultation" >
+    update t_consultation
+    <set >
+      <if test="schoolID != null" >
+        schoolID = #{schoolID,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="t_e_eid != null" >
+        t_e_eid = #{t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="ossstuid != null" >
+        ossstuid = #{ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="stuname != null" >
+        stuname = #{stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null" >
+        ssex = #{ssex,jdbcType=INTEGER},
+      </if>
+      <if test="magyer != null" >
+        magyer = #{magyer,jdbcType=VARCHAR},
+      </if>
+      <if test="zxltype != null" >
+        zxltype = #{zxltype,jdbcType=INTEGER},
+      </if>
+      <if test="gaoxiaoClz != null" >
+        gaoxiaoClz = #{gaoxiaoClz,jdbcType=VARCHAR},
+      </if>
+      <if test="stuphone != null" >
+        stuphone = #{stuphone,jdbcType=VARCHAR},
+      </if>
+      <if test="zstuqq != null" >
+        zstuqq = #{zstuqq,jdbcType=INTEGER},
+      </if>
+      <if test="contime != null" >
+        contime = #{contime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entrance != null" >
+        entrance = #{entrance,jdbcType=INTEGER},
+      </if>
+      <if test="entime != null" >
+        entime = #{entime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stuclassid != null" >
+        stuclassid = #{stuclassid,jdbcType=INTEGER},
+      </if>
+      <if test="weixin != null" >
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="zxstate != null" >
+        zxstate = #{zxstate,jdbcType=INTEGER},
+      </if>
+      <if test="zstudesc != null" >
+        zstudesc = #{zstudesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where zstuid = #{zstuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.zx.Consultation" >
+    update t_consultation
+    set schoolID = #{schoolID,jdbcType=INTEGER},
+      eid = #{eid,jdbcType=INTEGER},
+      t_e_eid = #{t_e_eid,jdbcType=INTEGER},
+      ossstuid = #{ossstuid,jdbcType=INTEGER},
+      stuname = #{stuname,jdbcType=VARCHAR},
+      ssex = #{ssex,jdbcType=INTEGER},
+      magyer = #{magyer,jdbcType=VARCHAR},
+      zxltype = #{zxltype,jdbcType=INTEGER},
+      gaoxiaoClz = #{gaoxiaoClz,jdbcType=VARCHAR},
+      stuphone = #{stuphone,jdbcType=VARCHAR},
+      zstuqq = #{zstuqq,jdbcType=INTEGER},
+      contime = #{contime,jdbcType=TIMESTAMP},
+      entrance = #{entrance,jdbcType=INTEGER},
+      entime = #{entime,jdbcType=TIMESTAMP},
+      stuclassid = #{stuclassid,jdbcType=INTEGER},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      zxstate = #{zxstate,jdbcType=INTEGER},
+      zstudesc = #{zstudesc,jdbcType=VARCHAR}
+    where zstuid = #{zstuid,jdbcType=INTEGER}
+  </update>
+</mapper>

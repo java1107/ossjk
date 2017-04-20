@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jkoss.dao.SubjectMapper">
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.kc.Subject">
+    <id column="sbid" jdbcType="INTEGER" property="sbid" />
+    <result column="kcmdelid" jdbcType="INTEGER" property="kcmdelid" />
+    <result column="sbname" jdbcType="VARCHAR" property="sbname" />
+    <result column="sbdays" jdbcType="INTEGER" property="sbdays" />
+    <result column="sbcontent" jdbcType="VARCHAR" property="sbcontent" />
+    <result column="sbno" jdbcType="INTEGER" property="sbno" />
+    <result column="sbdescb" jdbcType="VARCHAR" property="sbdescb" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sbid, kcmdelid, sbname, sbdays, sbcontent, sbno, sbdescb
+  </sql>
+  <select id="selectByExample" parameterType="com.jkoss.pojo.kc.SubjectExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_subject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_subject
+    where sbid = #{sbid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_subject
+    where sbid = #{sbid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.kc.SubjectExample">
+    delete from t_subject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.kc.Subject">
+    insert into t_subject (sbid, kcmdelid, sbname, 
+      sbdays, sbcontent, sbno, 
+      sbdescb)
+    values (#{sbid,jdbcType=INTEGER}, #{kcmdelid,jdbcType=INTEGER}, #{sbname,jdbcType=VARCHAR}, 
+      #{sbdays,jdbcType=INTEGER}, #{sbcontent,jdbcType=VARCHAR}, #{sbno,jdbcType=INTEGER}, 
+      #{sbdescb,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.kc.Subject">
+    insert into t_subject
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sbid != null">
+        sbid,
+      </if>
+      <if test="kcmdelid != null">
+        kcmdelid,
+      </if>
+      <if test="sbname != null">
+        sbname,
+      </if>
+      <if test="sbdays != null">
+        sbdays,
+      </if>
+      <if test="sbcontent != null">
+        sbcontent,
+      </if>
+      <if test="sbno != null">
+        sbno,
+      </if>
+      <if test="sbdescb != null">
+        sbdescb,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sbid != null">
+        #{sbid,jdbcType=INTEGER},
+      </if>
+      <if test="kcmdelid != null">
+        #{kcmdelid,jdbcType=INTEGER},
+      </if>
+      <if test="sbname != null">
+        #{sbname,jdbcType=VARCHAR},
+      </if>
+      <if test="sbdays != null">
+        #{sbdays,jdbcType=INTEGER},
+      </if>
+      <if test="sbcontent != null">
+        #{sbcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="sbno != null">
+        #{sbno,jdbcType=INTEGER},
+      </if>
+      <if test="sbdescb != null">
+        #{sbdescb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.kc.SubjectExample" resultType="java.lang.Integer">
+    select count(*) from t_subject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_subject
+    <set>
+      <if test="record.sbid != null">
+        sbid = #{record.sbid,jdbcType=INTEGER},
+      </if>
+      <if test="record.kcmdelid != null">
+        kcmdelid = #{record.kcmdelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sbname != null">
+        sbname = #{record.sbname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sbdays != null">
+        sbdays = #{record.sbdays,jdbcType=INTEGER},
+      </if>
+      <if test="record.sbcontent != null">
+        sbcontent = #{record.sbcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sbno != null">
+        sbno = #{record.sbno,jdbcType=INTEGER},
+      </if>
+      <if test="record.sbdescb != null">
+        sbdescb = #{record.sbdescb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_subject
+    set sbid = #{record.sbid,jdbcType=INTEGER},
+      kcmdelid = #{record.kcmdelid,jdbcType=INTEGER},
+      sbname = #{record.sbname,jdbcType=VARCHAR},
+      sbdays = #{record.sbdays,jdbcType=INTEGER},
+      sbcontent = #{record.sbcontent,jdbcType=VARCHAR},
+      sbno = #{record.sbno,jdbcType=INTEGER},
+      sbdescb = #{record.sbdescb,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.kc.Subject">
+    update t_subject
+    <set>
+      <if test="kcmdelid != null">
+        kcmdelid = #{kcmdelid,jdbcType=INTEGER},
+      </if>
+      <if test="sbname != null">
+        sbname = #{sbname,jdbcType=VARCHAR},
+      </if>
+      <if test="sbdays != null">
+        sbdays = #{sbdays,jdbcType=INTEGER},
+      </if>
+      <if test="sbcontent != null">
+        sbcontent = #{sbcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="sbno != null">
+        sbno = #{sbno,jdbcType=INTEGER},
+      </if>
+      <if test="sbdescb != null">
+        sbdescb = #{sbdescb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sbid = #{sbid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.kc.Subject">
+    update t_subject
+    set kcmdelid = #{kcmdelid,jdbcType=INTEGER},
+      sbname = #{sbname,jdbcType=VARCHAR},
+      sbdays = #{sbdays,jdbcType=INTEGER},
+      sbcontent = #{sbcontent,jdbcType=VARCHAR},
+      sbno = #{sbno,jdbcType=INTEGER},
+      sbdescb = #{sbdescb,jdbcType=VARCHAR}
+    where sbid = #{sbid,jdbcType=INTEGER}
+  </update>
+   
+</mapper>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.zx.ConsfollowMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.zx.Consfollow" >
+    <id column="flwid" property="flwid" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="zstuid" property="zstuid" jdbcType="INTEGER" />
+    <result column="flwdate" property="flwdate" jdbcType="TIMESTAMP" />
+    <result column="flwcontent" property="flwcontent" jdbcType="VARCHAR" />
+    <result column="flwans" property="flwans" jdbcType="VARCHAR" />
+    <result column="flwdesc" property="flwdesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    flwid, eid, zstuid, flwdate, flwcontent, flwans, flwdesc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.zx.ConsfollowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_consultation_follow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_consultation_follow
+    where flwid = #{flwid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_consultation_follow
+    where flwid = #{flwid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.zx.ConsfollowExample" >
+    delete from t_consultation_follow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.zx.Consfollow" >
+    insert into t_consultation_follow (flwid, eid, zstuid, 
+      flwdate, flwcontent, flwans, 
+      flwdesc)
+    values (#{flwid,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{zstuid,jdbcType=INTEGER}, 
+      #{flwdate,jdbcType=TIMESTAMP}, #{flwcontent,jdbcType=VARCHAR}, #{flwans,jdbcType=VARCHAR}, 
+      #{flwdesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.zx.Consfollow" >
+    insert into t_consultation_follow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flwid != null" >
+        flwid,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="zstuid != null" >
+        zstuid,
+      </if>
+      <if test="flwdate != null" >
+        flwdate,
+      </if>
+      <if test="flwcontent != null" >
+        flwcontent,
+      </if>
+      <if test="flwans != null" >
+        flwans,
+      </if>
+      <if test="flwdesc != null" >
+        flwdesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flwid != null" >
+        #{flwid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="zstuid != null" >
+        #{zstuid,jdbcType=INTEGER},
+      </if>
+      <if test="flwdate != null" >
+        #{flwdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flwcontent != null" >
+        #{flwcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="flwans != null" >
+        #{flwans,jdbcType=VARCHAR},
+      </if>
+      <if test="flwdesc != null" >
+        #{flwdesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.zx.ConsfollowExample" resultType="java.lang.Integer" >
+    select count(*) from t_consultation_follow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_consultation_follow
+    <set >
+      <if test="record.flwid != null" >
+        flwid = #{record.flwid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.zstuid != null" >
+        zstuid = #{record.zstuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.flwdate != null" >
+        flwdate = #{record.flwdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flwcontent != null" >
+        flwcontent = #{record.flwcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flwans != null" >
+        flwans = #{record.flwans,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flwdesc != null" >
+        flwdesc = #{record.flwdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_consultation_follow
+    set flwid = #{record.flwid,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      zstuid = #{record.zstuid,jdbcType=INTEGER},
+      flwdate = #{record.flwdate,jdbcType=TIMESTAMP},
+      flwcontent = #{record.flwcontent,jdbcType=VARCHAR},
+      flwans = #{record.flwans,jdbcType=VARCHAR},
+      flwdesc = #{record.flwdesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.zx.Consfollow" >
+    update t_consultation_follow
+    <set >
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="zstuid != null" >
+        zstuid = #{zstuid,jdbcType=INTEGER},
+      </if>
+      <if test="flwdate != null" >
+        flwdate = #{flwdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flwcontent != null" >
+        flwcontent = #{flwcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="flwans != null" >
+        flwans = #{flwans,jdbcType=VARCHAR},
+      </if>
+      <if test="flwdesc != null" >
+        flwdesc = #{flwdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where flwid = #{flwid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.zx.Consfollow" >
+    update t_consultation_follow
+    set eid = #{eid,jdbcType=INTEGER},
+      zstuid = #{zstuid,jdbcType=INTEGER},
+      flwdate = #{flwdate,jdbcType=TIMESTAMP},
+      flwcontent = #{flwcontent,jdbcType=VARCHAR},
+      flwans = #{flwans,jdbcType=VARCHAR},
+      flwdesc = #{flwdesc,jdbcType=VARCHAR}
+    where flwid = #{flwid,jdbcType=INTEGER}
+  </update>
+</mapper>

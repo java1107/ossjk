@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.stu.StupinxueMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.stu.Stupinxue" >
+    <id column="pinjiaID" property="pinjiaID" jdbcType="INTEGER" />
+    <result column="ossstuid" property="ossstuid" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="pjDate" property="pjDate" jdbcType="TIMESTAMP" />
+    <result column="stulisten" property="stulisten" jdbcType="INTEGER" />
+    <result column="studo" property="studo" jdbcType="INTEGER" />
+    <result column="jxcontent" property="jxcontent" jdbcType="VARCHAR" />
+    <result column="explang" property="explang" jdbcType="VARCHAR" />
+    <result column="othadv" property="othadv" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pinjiaID, ossstuid, eid, pjDate, stulisten, studo, jxcontent, explang, othadv
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.stu.StupinxueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_stupinxue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_stupinxue
+    where pinjiaID = #{pinjiaID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_stupinxue
+    where pinjiaID = #{pinjiaID,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.stu.StupinxueExample" >
+    delete from t_stupinxue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.stu.Stupinxue" >
+    insert into t_stupinxue (pinjiaID, ossstuid, eid, 
+      pjDate, stulisten, studo, 
+      jxcontent, explang, othadv
+      )
+    values (#{pinjiaID,jdbcType=INTEGER}, #{ossstuid,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, 
+      #{pjDate,jdbcType=TIMESTAMP}, #{stulisten,jdbcType=INTEGER}, #{studo,jdbcType=INTEGER}, 
+      #{jxcontent,jdbcType=VARCHAR}, #{explang,jdbcType=VARCHAR}, #{othadv,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.stu.Stupinxue" >
+    insert into t_stupinxue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pinjiaID != null" >
+        pinjiaID,
+      </if>
+      <if test="ossstuid != null" >
+        ossstuid,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="pjDate != null" >
+        pjDate,
+      </if>
+      <if test="stulisten != null" >
+        stulisten,
+      </if>
+      <if test="studo != null" >
+        studo,
+      </if>
+      <if test="jxcontent != null" >
+        jxcontent,
+      </if>
+      <if test="explang != null" >
+        explang,
+      </if>
+      <if test="othadv != null" >
+        othadv,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pinjiaID != null" >
+        #{pinjiaID,jdbcType=INTEGER},
+      </if>
+      <if test="ossstuid != null" >
+        #{ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="pjDate != null" >
+        #{pjDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stulisten != null" >
+        #{stulisten,jdbcType=INTEGER},
+      </if>
+      <if test="studo != null" >
+        #{studo,jdbcType=INTEGER},
+      </if>
+      <if test="jxcontent != null" >
+        #{jxcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="explang != null" >
+        #{explang,jdbcType=VARCHAR},
+      </if>
+      <if test="othadv != null" >
+        #{othadv,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.stu.StupinxueExample" resultType="java.lang.Integer" >
+    select count(*) from t_stupinxue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_stupinxue
+    <set >
+      <if test="record.pinjiaID != null" >
+        pinjiaID = #{record.pinjiaID,jdbcType=INTEGER},
+      </if>
+      <if test="record.ossstuid != null" >
+        ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pjDate != null" >
+        pjDate = #{record.pjDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stulisten != null" >
+        stulisten = #{record.stulisten,jdbcType=INTEGER},
+      </if>
+      <if test="record.studo != null" >
+        studo = #{record.studo,jdbcType=INTEGER},
+      </if>
+      <if test="record.jxcontent != null" >
+        jxcontent = #{record.jxcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.explang != null" >
+        explang = #{record.explang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.othadv != null" >
+        othadv = #{record.othadv,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_stupinxue
+    set pinjiaID = #{record.pinjiaID,jdbcType=INTEGER},
+      ossstuid = #{record.ossstuid,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      pjDate = #{record.pjDate,jdbcType=TIMESTAMP},
+      stulisten = #{record.stulisten,jdbcType=INTEGER},
+      studo = #{record.studo,jdbcType=INTEGER},
+      jxcontent = #{record.jxcontent,jdbcType=VARCHAR},
+      explang = #{record.explang,jdbcType=VARCHAR},
+      othadv = #{record.othadv,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.stu.Stupinxue" >
+    update t_stupinxue
+    <set >
+      <if test="ossstuid != null" >
+        ossstuid = #{ossstuid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="pjDate != null" >
+        pjDate = #{pjDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stulisten != null" >
+        stulisten = #{stulisten,jdbcType=INTEGER},
+      </if>
+      <if test="studo != null" >
+        studo = #{studo,jdbcType=INTEGER},
+      </if>
+      <if test="jxcontent != null" >
+        jxcontent = #{jxcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="explang != null" >
+        explang = #{explang,jdbcType=VARCHAR},
+      </if>
+      <if test="othadv != null" >
+        othadv = #{othadv,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pinjiaID = #{pinjiaID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.stu.Stupinxue" >
+    update t_stupinxue
+    set ossstuid = #{ossstuid,jdbcType=INTEGER},
+      eid = #{eid,jdbcType=INTEGER},
+      pjDate = #{pjDate,jdbcType=TIMESTAMP},
+      stulisten = #{stulisten,jdbcType=INTEGER},
+      studo = #{studo,jdbcType=INTEGER},
+      jxcontent = #{jxcontent,jdbcType=VARCHAR},
+      explang = #{explang,jdbcType=VARCHAR},
+      othadv = #{othadv,jdbcType=VARCHAR}
+    where pinjiaID = #{pinjiaID,jdbcType=INTEGER}
+  </update>
+</mapper>

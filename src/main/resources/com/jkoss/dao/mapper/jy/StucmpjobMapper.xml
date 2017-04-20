@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.jy.StucmpjobMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.jy.Stucmpjob" >
+    <id column="jygwid" property="jygwid" jdbcType="INTEGER" />
+    <result column="jyid" property="jyid" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="jygwName" property="jygwName" jdbcType="VARCHAR" />
+    <result column="jygwdescb" property="jygwdescb" jdbcType="VARCHAR" />
+    <result column="jygwmin" property="jygwmin" jdbcType="INTEGER" />
+    <result column="jygwmax" property="jygwmax" jdbcType="INTEGER" />
+    <result column="jygwnum" property="jygwnum" jdbcType="INTEGER" />
+    <result column="jygwbegindate" property="jygwbegindate" jdbcType="DATE" />
+    <result column="jygwenddate" property="jygwenddate" jdbcType="DATE" />
+    <result column="jygwbeizhu" property="jygwbeizhu" jdbcType="VARCHAR" />
+    <result column="jygwbeizhu2" property="jygwbeizhu2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    jygwid, jyid, eid, jygwName, jygwdescb, jygwmin, jygwmax, jygwnum, jygwbegindate, 
+    jygwenddate, jygwbeizhu, jygwbeizhu2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.jy.StucmpjobExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_stu_cmpjob
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_stu_cmpjob
+    where jygwid = #{jygwid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_stu_cmpjob
+    where jygwid = #{jygwid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.jy.StucmpjobExample" >
+    delete from t_stu_cmpjob
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.jy.Stucmpjob" >
+    insert into t_stu_cmpjob (jygwid, jyid, eid, 
+      jygwName, jygwdescb, jygwmin, 
+      jygwmax, jygwnum, jygwbegindate, 
+      jygwenddate, jygwbeizhu, jygwbeizhu2
+      )
+    values (#{jygwid,jdbcType=INTEGER}, #{jyid,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, 
+      #{jygwName,jdbcType=VARCHAR}, #{jygwdescb,jdbcType=VARCHAR}, #{jygwmin,jdbcType=INTEGER}, 
+      #{jygwmax,jdbcType=INTEGER}, #{jygwnum,jdbcType=INTEGER}, #{jygwbegindate,jdbcType=DATE}, 
+      #{jygwenddate,jdbcType=DATE}, #{jygwbeizhu,jdbcType=VARCHAR}, #{jygwbeizhu2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.jy.Stucmpjob" >
+    insert into t_stu_cmpjob
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jygwid != null" >
+        jygwid,
+      </if>
+      <if test="jyid != null" >
+        jyid,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="jygwName != null" >
+        jygwName,
+      </if>
+      <if test="jygwdescb != null" >
+        jygwdescb,
+      </if>
+      <if test="jygwmin != null" >
+        jygwmin,
+      </if>
+      <if test="jygwmax != null" >
+        jygwmax,
+      </if>
+      <if test="jygwnum != null" >
+        jygwnum,
+      </if>
+      <if test="jygwbegindate != null" >
+        jygwbegindate,
+      </if>
+      <if test="jygwenddate != null" >
+        jygwenddate,
+      </if>
+      <if test="jygwbeizhu != null" >
+        jygwbeizhu,
+      </if>
+      <if test="jygwbeizhu2 != null" >
+        jygwbeizhu2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jygwid != null" >
+        #{jygwid,jdbcType=INTEGER},
+      </if>
+      <if test="jyid != null" >
+        #{jyid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="jygwName != null" >
+        #{jygwName,jdbcType=VARCHAR},
+      </if>
+      <if test="jygwdescb != null" >
+        #{jygwdescb,jdbcType=VARCHAR},
+      </if>
+      <if test="jygwmin != null" >
+        #{jygwmin,jdbcType=INTEGER},
+      </if>
+      <if test="jygwmax != null" >
+        #{jygwmax,jdbcType=INTEGER},
+      </if>
+      <if test="jygwnum != null" >
+        #{jygwnum,jdbcType=INTEGER},
+      </if>
+      <if test="jygwbegindate != null" >
+        #{jygwbegindate,jdbcType=DATE},
+      </if>
+      <if test="jygwenddate != null" >
+        #{jygwenddate,jdbcType=DATE},
+      </if>
+      <if test="jygwbeizhu != null" >
+        #{jygwbeizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="jygwbeizhu2 != null" >
+        #{jygwbeizhu2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.jy.StucmpjobExample" resultType="java.lang.Integer" >
+    select count(*) from t_stu_cmpjob
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_stu_cmpjob
+    <set >
+      <if test="record.jygwid != null" >
+        jygwid = #{record.jygwid,jdbcType=INTEGER},
+      </if>
+      <if test="record.jyid != null" >
+        jyid = #{record.jyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.jygwName != null" >
+        jygwName = #{record.jygwName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jygwdescb != null" >
+        jygwdescb = #{record.jygwdescb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jygwmin != null" >
+        jygwmin = #{record.jygwmin,jdbcType=INTEGER},
+      </if>
+      <if test="record.jygwmax != null" >
+        jygwmax = #{record.jygwmax,jdbcType=INTEGER},
+      </if>
+      <if test="record.jygwnum != null" >
+        jygwnum = #{record.jygwnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.jygwbegindate != null" >
+        jygwbegindate = #{record.jygwbegindate,jdbcType=DATE},
+      </if>
+      <if test="record.jygwenddate != null" >
+        jygwenddate = #{record.jygwenddate,jdbcType=DATE},
+      </if>
+      <if test="record.jygwbeizhu != null" >
+        jygwbeizhu = #{record.jygwbeizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jygwbeizhu2 != null" >
+        jygwbeizhu2 = #{record.jygwbeizhu2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_stu_cmpjob
+    set jygwid = #{record.jygwid,jdbcType=INTEGER},
+      jyid = #{record.jyid,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      jygwName = #{record.jygwName,jdbcType=VARCHAR},
+      jygwdescb = #{record.jygwdescb,jdbcType=VARCHAR},
+      jygwmin = #{record.jygwmin,jdbcType=INTEGER},
+      jygwmax = #{record.jygwmax,jdbcType=INTEGER},
+      jygwnum = #{record.jygwnum,jdbcType=INTEGER},
+      jygwbegindate = #{record.jygwbegindate,jdbcType=DATE},
+      jygwenddate = #{record.jygwenddate,jdbcType=DATE},
+      jygwbeizhu = #{record.jygwbeizhu,jdbcType=VARCHAR},
+      jygwbeizhu2 = #{record.jygwbeizhu2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.jy.Stucmpjob" >
+    update t_stu_cmpjob
+    <set >
+      <if test="jyid != null" >
+        jyid = #{jyid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="jygwName != null" >
+        jygwName = #{jygwName,jdbcType=VARCHAR},
+      </if>
+      <if test="jygwdescb != null" >
+        jygwdescb = #{jygwdescb,jdbcType=VARCHAR},
+      </if>
+      <if test="jygwmin != null" >
+        jygwmin = #{jygwmin,jdbcType=INTEGER},
+      </if>
+      <if test="jygwmax != null" >
+        jygwmax = #{jygwmax,jdbcType=INTEGER},
+      </if>
+      <if test="jygwnum != null" >
+        jygwnum = #{jygwnum,jdbcType=INTEGER},
+      </if>
+      <if test="jygwbegindate != null" >
+        jygwbegindate = #{jygwbegindate,jdbcType=DATE},
+      </if>
+      <if test="jygwenddate != null" >
+        jygwenddate = #{jygwenddate,jdbcType=DATE},
+      </if>
+      <if test="jygwbeizhu != null" >
+        jygwbeizhu = #{jygwbeizhu,jdbcType=VARCHAR},
+      </if>
+      <if test="jygwbeizhu2 != null" >
+        jygwbeizhu2 = #{jygwbeizhu2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where jygwid = #{jygwid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.jy.Stucmpjob" >
+    update t_stu_cmpjob
+    set jyid = #{jyid,jdbcType=INTEGER},
+      eid = #{eid,jdbcType=INTEGER},
+      jygwName = #{jygwName,jdbcType=VARCHAR},
+      jygwdescb = #{jygwdescb,jdbcType=VARCHAR},
+      jygwmin = #{jygwmin,jdbcType=INTEGER},
+      jygwmax = #{jygwmax,jdbcType=INTEGER},
+      jygwnum = #{jygwnum,jdbcType=INTEGER},
+      jygwbegindate = #{jygwbegindate,jdbcType=DATE},
+      jygwenddate = #{jygwenddate,jdbcType=DATE},
+      jygwbeizhu = #{jygwbeizhu,jdbcType=VARCHAR},
+      jygwbeizhu2 = #{jygwbeizhu2,jdbcType=VARCHAR}
+    where jygwid = #{jygwid,jdbcType=INTEGER}
+  </update>
+</mapper>

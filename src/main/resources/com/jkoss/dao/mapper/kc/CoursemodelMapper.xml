@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jkoss.dao.CoursemodelMapper">
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.kc.Coursemodel">
+    <id column="kcmdelid" jdbcType="INTEGER" property="kcmdelid" />
+    <result column="kcmdelName" jdbcType="VARCHAR" property="kcmdelName" />
+    <result column="kcmdelDesc" jdbcType="VARCHAR" property="kcmdelDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    kcmdelid, kcmdelName, kcmdelDesc
+  </sql>
+  <select id="selectByExample" parameterType="com.jkoss.pojo.kc.CoursemodelExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_coursemodel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_coursemodel
+    where kcmdelid = #{kcmdelid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_coursemodel
+    where kcmdelid = #{kcmdelid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.kc.CoursemodelExample">
+    delete from t_coursemodel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.kc.Coursemodel">
+    insert into t_coursemodel (kcmdelid, kcmdelName, kcmdelDesc
+      )
+    values (#{kcmdelid,jdbcType=INTEGER}, #{kcmdelName,jdbcType=VARCHAR}, #{kcmdelDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.kc.Coursemodel">
+    insert into t_coursemodel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="kcmdelid != null">
+        kcmdelid,
+      </if>
+      <if test="kcmdelName != null">
+        kcmdelName,
+      </if>
+      <if test="kcmdelDesc != null">
+        kcmdelDesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="kcmdelid != null">
+        #{kcmdelid,jdbcType=INTEGER},
+      </if>
+      <if test="kcmdelName != null">
+        #{kcmdelName,jdbcType=VARCHAR},
+      </if>
+      <if test="kcmdelDesc != null">
+        #{kcmdelDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.kc.CoursemodelExample" resultType="java.lang.Integer">
+    select count(*) from t_coursemodel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_coursemodel
+    <set>
+      <if test="record.kcmdelid != null">
+        kcmdelid = #{record.kcmdelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.kcmdelName != null">
+        kcmdelName = #{record.kcmdelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kcmdelDesc != null">
+        kcmdelDesc = #{record.kcmdelDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_coursemodel
+    set kcmdelid = #{record.kcmdelid,jdbcType=INTEGER},
+      kcmdelName = #{record.kcmdelName,jdbcType=VARCHAR},
+      kcmdelDesc = #{record.kcmdelDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.kc.Coursemodel">
+    update t_coursemodel
+    <set>
+      <if test="kcmdelName != null">
+        kcmdelName = #{kcmdelName,jdbcType=VARCHAR},
+      </if>
+      <if test="kcmdelDesc != null">
+        kcmdelDesc = #{kcmdelDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where kcmdelid = #{kcmdelid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.kc.Coursemodel">
+    update t_coursemodel
+    set kcmdelName = #{kcmdelName,jdbcType=VARCHAR},
+      kcmdelDesc = #{kcmdelDesc,jdbcType=VARCHAR}
+    where kcmdelid = #{kcmdelid,jdbcType=INTEGER}
+  </update>
+   
+</mapper>

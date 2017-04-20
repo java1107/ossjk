@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.jy.JiuyeGSMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.jy.JiuyeGS" >
+    <id column="jyid" property="jyid" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="jyname" property="jyname" jdbcType="VARCHAR" />
+    <result column="jyaddrss" property="jyaddrss" jdbcType="VARCHAR" />
+    <result column="jytel" property="jytel" jdbcType="VARCHAR" />
+    <result column="jyempname" property="jyempname" jdbcType="VARCHAR" />
+    <result column="jyeqq" property="jyeqq" jdbcType="VARCHAR" />
+    <result column="jyetel" property="jyetel" jdbcType="VARCHAR" />
+    <result column="jyaddtime" property="jyaddtime" jdbcType="TIMESTAMP" />
+    <result column="jydgr" property="jydgr" jdbcType="INTEGER" />
+    <result column="jydescb" property="jydescb" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    jyid, eid, jyname, jyaddrss, jytel, jyempname, jyeqq, jyetel, jyaddtime, jydgr, jydescb
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.jy.JiuyeGSExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_jiuyecomps
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jiuyecomps
+    where jyid = #{jyid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jiuyecomps
+    where jyid = #{jyid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.jy.JiuyeGSExample" >
+    delete from t_jiuyecomps
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.jy.JiuyeGS" >
+    insert into t_jiuyecomps (jyid, eid, jyname, 
+      jyaddrss, jytel, jyempname, 
+      jyeqq, jyetel, jyaddtime, 
+      jydgr, jydescb)
+    values (#{jyid,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{jyname,jdbcType=VARCHAR}, 
+      #{jyaddrss,jdbcType=VARCHAR}, #{jytel,jdbcType=VARCHAR}, #{jyempname,jdbcType=VARCHAR}, 
+      #{jyeqq,jdbcType=VARCHAR}, #{jyetel,jdbcType=VARCHAR}, #{jyaddtime,jdbcType=TIMESTAMP}, 
+      #{jydgr,jdbcType=INTEGER}, #{jydescb,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.jy.JiuyeGS" >
+    insert into t_jiuyecomps
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jyid != null" >
+        jyid,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="jyname != null" >
+        jyname,
+      </if>
+      <if test="jyaddrss != null" >
+        jyaddrss,
+      </if>
+      <if test="jytel != null" >
+        jytel,
+      </if>
+      <if test="jyempname != null" >
+        jyempname,
+      </if>
+      <if test="jyeqq != null" >
+        jyeqq,
+      </if>
+      <if test="jyetel != null" >
+        jyetel,
+      </if>
+      <if test="jyaddtime != null" >
+        jyaddtime,
+      </if>
+      <if test="jydgr != null" >
+        jydgr,
+      </if>
+      <if test="jydescb != null" >
+        jydescb,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jyid != null" >
+        #{jyid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="jyname != null" >
+        #{jyname,jdbcType=VARCHAR},
+      </if>
+      <if test="jyaddrss != null" >
+        #{jyaddrss,jdbcType=VARCHAR},
+      </if>
+      <if test="jytel != null" >
+        #{jytel,jdbcType=VARCHAR},
+      </if>
+      <if test="jyempname != null" >
+        #{jyempname,jdbcType=VARCHAR},
+      </if>
+      <if test="jyeqq != null" >
+        #{jyeqq,jdbcType=VARCHAR},
+      </if>
+      <if test="jyetel != null" >
+        #{jyetel,jdbcType=VARCHAR},
+      </if>
+      <if test="jyaddtime != null" >
+        #{jyaddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jydgr != null" >
+        #{jydgr,jdbcType=INTEGER},
+      </if>
+      <if test="jydescb != null" >
+        #{jydescb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.jy.JiuyeGSExample" resultType="java.lang.Integer" >
+    select count(*) from t_jiuyecomps
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_jiuyecomps
+    <set >
+      <if test="record.jyid != null" >
+        jyid = #{record.jyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.jyname != null" >
+        jyname = #{record.jyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jyaddrss != null" >
+        jyaddrss = #{record.jyaddrss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jytel != null" >
+        jytel = #{record.jytel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jyempname != null" >
+        jyempname = #{record.jyempname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jyeqq != null" >
+        jyeqq = #{record.jyeqq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jyetel != null" >
+        jyetel = #{record.jyetel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jyaddtime != null" >
+        jyaddtime = #{record.jyaddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jydgr != null" >
+        jydgr = #{record.jydgr,jdbcType=INTEGER},
+      </if>
+      <if test="record.jydescb != null" >
+        jydescb = #{record.jydescb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_jiuyecomps
+    set jyid = #{record.jyid,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      jyname = #{record.jyname,jdbcType=VARCHAR},
+      jyaddrss = #{record.jyaddrss,jdbcType=VARCHAR},
+      jytel = #{record.jytel,jdbcType=VARCHAR},
+      jyempname = #{record.jyempname,jdbcType=VARCHAR},
+      jyeqq = #{record.jyeqq,jdbcType=VARCHAR},
+      jyetel = #{record.jyetel,jdbcType=VARCHAR},
+      jyaddtime = #{record.jyaddtime,jdbcType=TIMESTAMP},
+      jydgr = #{record.jydgr,jdbcType=INTEGER},
+      jydescb = #{record.jydescb,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.jy.JiuyeGS" >
+    update t_jiuyecomps
+    <set >
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="jyname != null" >
+        jyname = #{jyname,jdbcType=VARCHAR},
+      </if>
+      <if test="jyaddrss != null" >
+        jyaddrss = #{jyaddrss,jdbcType=VARCHAR},
+      </if>
+      <if test="jytel != null" >
+        jytel = #{jytel,jdbcType=VARCHAR},
+      </if>
+      <if test="jyempname != null" >
+        jyempname = #{jyempname,jdbcType=VARCHAR},
+      </if>
+      <if test="jyeqq != null" >
+        jyeqq = #{jyeqq,jdbcType=VARCHAR},
+      </if>
+      <if test="jyetel != null" >
+        jyetel = #{jyetel,jdbcType=VARCHAR},
+      </if>
+      <if test="jyaddtime != null" >
+        jyaddtime = #{jyaddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jydgr != null" >
+        jydgr = #{jydgr,jdbcType=INTEGER},
+      </if>
+      <if test="jydescb != null" >
+        jydescb = #{jydescb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where jyid = #{jyid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.jy.JiuyeGS" >
+    update t_jiuyecomps
+    set eid = #{eid,jdbcType=INTEGER},
+      jyname = #{jyname,jdbcType=VARCHAR},
+      jyaddrss = #{jyaddrss,jdbcType=VARCHAR},
+      jytel = #{jytel,jdbcType=VARCHAR},
+      jyempname = #{jyempname,jdbcType=VARCHAR},
+      jyeqq = #{jyeqq,jdbcType=VARCHAR},
+      jyetel = #{jyetel,jdbcType=VARCHAR},
+      jyaddtime = #{jyaddtime,jdbcType=TIMESTAMP},
+      jydgr = #{jydgr,jdbcType=INTEGER},
+      jydescb = #{jydescb,jdbcType=VARCHAR}
+    where jyid = #{jyid,jdbcType=INTEGER}
+  </update>
+</mapper>
