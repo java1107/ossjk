@@ -15,6 +15,7 @@ import com.jkoss.pojo.sys.Sysright;
 @RequestMapping("/emp")
 public class EmpsAction implements Serializable {
 
+	
 	 @Autowired
      private IEmpsBiz  ebiz;
 	 
