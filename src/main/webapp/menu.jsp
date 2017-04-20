@@ -65,20 +65,24 @@ body {
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
 						<tr>
 							<td><script type="text/javascript">
-								var role = '${sessionScope.user.role}';
+								var role = '${sessionScope.lgnUsr.ename}';
 								d = new dTree('d');
 								d.config.target = "main";
-								d.add(0, -1, '菜单');
-								d.add(1, 0, '团队管理', '');
-								d.add(11, 1, '团队列表', 'team/getAllTeam.do');
-								if (role >= 2) {
-									d.add(12, 1, '新增团队', 'team/toAddTeam.do');
-								}
+								d.add( 0,-1, '靖凯开源');
+								d.add( 1, 0, '办公管理', '');
+								d.add(11, 1, '部门', 'emp/lsD.do');
+								d.add(12, 1, '岗位', 'team/getAllTeam.do');
+								d.add(13, 1, '员工', 'team/getAllTeam.do');
+								d.add(14, 1, '薪酬', 'team/getAllTeam.do');
+								d.add(15, 1, '考勤', 'team/getAllTeam.do');
+								d.add(16, 1, '报销', 'team/getAllTeam.do');
+ 
 								d.add(2, 0, '人员管理', '');
 								d.add(21, 2, '人员列表', 'user/getAllUser.do');
 								if (role >= 1) {
 									d.add(22, 2, '新增人员', 'user/toAddUser.do');
 								}
+								
 								d.add(3, 0, '学校专业管理', '');
 								d.add(31, 3, '学校专业列表', 'school/getAllSchool.do');
 								d.add(32, 3, '新增学校专业', 'school/toAddSchool.do');
@@ -87,6 +91,7 @@ body {
 								d.add(42, 4, '新增学员', 'student/toAddStudent.do');
 								d.add(43, 4, '批量添加', 'student/tobatchStudent.do');
 								document.write(d);
+								
 							</script>
 							</td>
 						</tr>

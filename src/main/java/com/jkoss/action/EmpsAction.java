@@ -15,15 +15,12 @@ import com.jkoss.pojo.sys.Sysright;
 @RequestMapping("/emp")
 public class EmpsAction implements Serializable {
 
-	
 	 @Autowired
      private IEmpsBiz  ebiz;
 	 
 	 @RequestMapping("/lgn")
 	 public String login(Emps ems,Model modl,HttpServletRequest req){
 		 
-		
-		   
 		   Emps u =  ebiz.login(ems);
 		   
 		   if(u.getRights()!=null && u.getRights().size()>0){
@@ -31,7 +28,6 @@ public class EmpsAction implements Serializable {
 				 System.out.println("   "+rt.getRtname());
 			   }
 		   }
-		   
 		   
 		   System.out.println(u.getDetail().getEaddress());
 		   if(u!=null){
@@ -44,5 +40,21 @@ public class EmpsAction implements Serializable {
 		 return "/main.jsp";
 	 }
 	
+	 @RequestMapping("/lgout")
+	 public String logout(HttpServletRequest req){
+		 req.getSession().invalidate();
+		 return "/index.jsp";
+	 }
+	 
+	 @RequestMapping("/lsD")
+	 public String listDept(HttpServletRequest req){
+	      
+		 req.setAttribute("allDepts", ebiz.listAllDepts());
+		 
+		 return "/oa/listdept.jsp";
+	 }
+	 
+	 
+	 
 	
 }

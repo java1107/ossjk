@@ -95,7 +95,7 @@ body {
 																<tr>
 																	<td align=right height=30>密&nbsp;&nbsp;码：</td>
 																	<td height=30><input id="pwdword" type="password"
-																		name="pwdword"></td>
+																		name="pwdword" value="123456"></td>
 																</tr>
 																<tr align="center">
 																	<td colSpan=2 height=40><input class="btn"
@@ -105,7 +105,7 @@ body {
 																</tr>
 
 																<tr align="center">
-																	<td colSpan=2 height=40>${requestScope.msg }</td>
+																	<td colSpan=2 height=40>${requestScope.msg}</td>
 																</tr>
 															</tbody>
 														</table>

@@ -14,7 +14,7 @@ public interface EmpsMapper {
    /*	@Select("select  a.*,b.*,c.* from t_emps a,t_empdetail b,t_sysright c,t_emp2right d "
 			+ "where a.empdid=b.empdid and a.eid=d.eid and c.rtid=d.rtid and lgnName = #{lgnName}")*/
 	@Select("select  * from t_emps  where lgnName = #{lgnName}")
-	@ResultMap("com.jkoss.dao.EmpsMapper.BaseResultMap")
+	@ResultMap("com.jkoss.dao.oa.EmpsMapper.BaseResultMap")
     Emps selectByLgnName(String lgnName);
  
     int countByExample(EmpsExample example);

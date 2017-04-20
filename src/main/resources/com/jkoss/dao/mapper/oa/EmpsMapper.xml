@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jkoss.dao.EmpsMapper" >
+<mapper namespace="com.jkoss.dao.oa.EmpsMapper" >
   <resultMap id="BaseResultMap" type="com.jkoss.pojo.oa.Emps" >
     <!--
       WARNING - @mbggenerated
@@ -23,7 +23,7 @@
     <result column="qqe" property="qqe" jdbcType="VARCHAR" />
     <!-- 延迟加载 -->
     <association  property="detail" javaType="com.jkoss.pojo.oa.Empdetail"   
-                  select="com.jkoss.dao.EmpdetailMapper.selectByPrimaryKey" column="empdid" />  
+                  select="com.jkoss.dao.oa.EmpdetailMapper.selectByPrimaryKey" column="empdid" />  
                    
     <collection property="rights" ofType="com.jkoss.pojo.sys.Sysright" select="com.jkoss.dao.sys.SysrightMapper.selectByEid" column="eid">
     
