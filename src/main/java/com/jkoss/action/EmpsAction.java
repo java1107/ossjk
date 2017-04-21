@@ -18,6 +18,7 @@ public class EmpsAction implements Serializable {
 	 @Autowired
      private IEmpsBiz  ebiz;
 	 
+	 
 	 @RequestMapping("/lgn")
 	 public String login(Emps ems,Model modl,HttpServletRequest req){
 		 
