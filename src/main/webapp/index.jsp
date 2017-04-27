@@ -90,7 +90,7 @@ body {
 																<tr>
 																	<td align=right width=60 height=30>用户名：</td>
 																	<td height=30><input id="lgnName"
-																		name="lgnName"></td>
+																		name="lgnName" value="rick"></td>
 																</tr>
 																<tr>
 																	<td align=right height=30>密&nbsp;&nbsp;码：</td>
