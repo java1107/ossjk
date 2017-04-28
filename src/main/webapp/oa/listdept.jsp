@@ -13,13 +13,51 @@
 	<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 
     <script type="text/javascript">
+
         $(function(){
-        	 $("#addDpt").click(function(){
-        		 $('#w').window('open').onClose(function(){
-        			 alert("sss");
-        		 });
-        	 });
+        	//初始化对话框
+        	 $('#dw,#dwEdit').window({
+        		   onBeforeClose:function(){ 
+        			   //取消时关闭等待框
+        			   setTimeout(function(){ 
+        				   sending.style.visibility = "hidden";
+					   }, 250);
+        	   }});
         	
+       
+           $(".btnAll").each(function(i,v){
+        	   //变手型
+        	     $(v).mouseover(function() {
+    				$(this).css("cursor", "hand");
+    			 }).mouseout(function() {
+    				$(this).css("cursor", "pointer");
+    			 }).css("color","blue");
+        	   
+        	   
+        	   if($(v).html()=='【新增】'){
+        		   $(v).click(function(){
+        			   $('#dw').window("open");
+        		   });
+        	   }else if($(v).html()=='【编辑】'){
+        		   $(v).click(function(){
+        			   //ajax
+        			   $.get("ajOneDpt.do?dptID="+ $(v).prop("lang"),function(jsonTxt){
+        				   var jsonObj = eval("("+jsonTxt+")");
+        				   $("#upd_depID").val(jsonObj.depID);
+        				   $("#upd_depname").val(jsonObj.depname);
+        				   $("#upd_dnote").html(jsonObj.dnote);
+        				   $('#dwEdit').window("open");
+        			   });
+        		   });
+        	   }else if($(v).html()=='【删除】'){
+        		   $(v).click(function(){
+        			  if(confirm("确认删除'"+$(v).prop("title")+"'?")){
+        				  location.href="delD.do?dptID="+$(v).prop("lang"); 
+        			  }
+        		   });
+        	   };
+           });
+           
         });
     </script>
 </head>
@@ -36,17 +74,17 @@
 						<td align="center" bgcolor="#ebf0f7">部门编号</td>
 						<td align="center" bgcolor="#ebf0f7">部门名称</td>
 						<td align="center" bgcolor="#ebf0f7">备注</td>
-						<td align="center" bgcolor="#ebf0f7">操作 【<span id="addDpt">新增</span>】 </td>
+						<td align="center" bgcolor="#ebf0f7">操作 <span class="btnAll">【新增】</span> </td>
 					</tr>
-					<c:forEach items="${page.results}" var="userTmp">
+					<c:forEach items="${page.results}" var="dpt">
 						<tr align="center" bgcolor="#FFFFFF">
-						    <td align="center" bgcolor="#ebf0f7">部门编号</td>
-							<td align="center">${userTmp.uname}</td>
-							<td align="center">${userTmp.upwd}</td>
+						    <td align="center" bgcolor="#ebf0f7">${dpt.depID}</td>
+							<td align="center">${dpt.depname}</td>
+							<td align="center">${dpt.dnote}</td>
 							<td align="center">
-							【<a href="toUpdateUser.do?id=${userTmp.uid}">查看</a>】<c:if test="${sessionScope.usr.utpye eq 1}">
-									|【<a href="updtUsr1.do?uid=${userTmp.uid}">编辑</a>】
-								    |【<a href="deleteUser.do?id=${userTmp.uid}" class="delete" >删除</a>】
+							【<a href="oneDpt.do?dptID=${dpt.depID}">查看</a>】<c:if test="${lgnUsr.eid > 0}">
+									| <span class="btnAll" lang="${dpt.depID}">【编辑】</span>
+								    | <span class="btnAll" lang="${dpt.depID}" title="${dpt.depname}">【删除】</span>
 				                   </c:if>
 							</td>
 						</tr>
@@ -54,20 +92,28 @@
 					<tr align="right" bgcolor="#ebf0f7">
 							<td colspan="5">
 							<jk:page totalPage="${page.totalPage}" pageNo="${page.pageNo}" totalRecord="${page.totalRecord}"
-                                url="/j1107cars/mgr/listUsr.do" />
-                        
+                                url="lsD.do" />
 							</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 	</table>
-
-	<div id="w" class="easyui-window" title="创建新部门" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:300px;height:200px;padding:10px;">
-		<form>
-		     部门名称：<input name="s"/><br><br>
-		     备注 ：<textarea name="s2" rows="3" cols="30"></textarea><br><br>
-		     <input type="button" value="保存"/><br>
+  
+	<div id="dw" class="easyui-window" title="创建新部门" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:300px;height:200px;padding:10px;display: none;">
+		<form action="addD.do" method="post">
+		     部门名称：<input name="depname"/><br><br>
+		     备注 ：<textarea name="dnote" rows="3" cols="30"></textarea><br><br>
+		      <input type="submit" value="保存"/><br>
+		</form>
+	</div>
+	
+	 <div id="dwEdit" class="easyui-window" title="修改部门信息" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:300px;height:200px;padding:10px;display: none;">
+		<form action="updD.do" method="post">
+		<input name="depID" id="upd_depID" type="hidden"   />
+		     部门名称：<input name="depname" id="upd_depname"   /><br><br>
+		     备注 ：<textarea name="dnote" rows="3" cols="30" id="upd_dnote"></textarea><br><br>
+		      <input type="submit" value="修改"/><br>
 		</form>
 	</div>
 	
