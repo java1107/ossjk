@@ -27,4 +27,5 @@ public interface IEmpsBiz {
 	  
 	  String addJob(EmpJobs jb);
 	  
+	  EmpJobs findJobByID(int jbid);
 }

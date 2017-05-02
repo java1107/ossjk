@@ -76,12 +76,17 @@ public class EmpsBiz implements IEmpsBiz {
 	}
 
 	@Override
+    @Transactional
 	public String addJob(EmpJobs jb) {
 		// TODO Auto-generated method stub
 		return jbdao.insert(jb)>0?"添加成功":"添加失败";
 	}
 	
-	
+	@Override
+	public EmpJobs findJobByID(int jbid) {
+		// TODO Auto-generated method stub
+		return jbdao.selectByPrimaryKey(jbid);
+	}
 	
 	
 	

@@ -77,7 +77,7 @@
 							<td align="center">${job.jobsal}</td>
 							<td align="center">${job.jobdesc}</td>
 							<td align="center">
-							【<a href="oneDpt.do?dptID=${dpt.depID}">查看</a>】<c:if test="${lgnUsr.eid > 0}">
+							【<a href="oneJobs.do?jobid=${job.jobid}">查看</a>】<c:if test="${lgnUsr.eid > 0}">
 									| <span class="btnAll" lang="${dpt.depID}">【编辑】</span>
 								    | <span class="btnAll" lang="${dpt.depID}" title="${dpt.depname}">【删除】</span>
 				                   </c:if>

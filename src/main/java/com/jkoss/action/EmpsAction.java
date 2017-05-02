@@ -134,7 +134,11 @@ public class EmpsAction implements Serializable {
 		 return listJobs(req,null,null);
 	 }
 	 
-	 
+	 @RequestMapping(value="/oneJobs")
+	 public String oneJobs(int  jobid,  HttpServletRequest req){	 
+		 req.setAttribute("job",  ebiz.findJobByID(jobid));
+		 return "/oa/shJob.jsp";
+	 }
 	 
 	 
 	 
