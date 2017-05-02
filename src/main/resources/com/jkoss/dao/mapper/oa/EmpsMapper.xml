@@ -22,8 +22,11 @@
     <result column="qqp" property="qqp" jdbcType="VARCHAR" />
     <result column="qqe" property="qqe" jdbcType="VARCHAR" />
     <!-- 延迟加载 -->
-    <association  property="detail" javaType="com.jkoss.pojo.oa.Empdetail"   
+    <association  property="detail" javaType="com.jkoss.pojo.oa.Empdetail"   fetchType="eager"
                   select="com.jkoss.dao.oa.EmpdetailMapper.selectByPrimaryKey" column="empdid" />  
+ 
+    <association  property="ejob" javaType="com.jkoss.pojo.oa.EmpJobs"    fetchType="eager"
+                  select="com.jkoss.dao.oa.EmpJobsMapper.selectByPrimaryKey" column="jobid" />  
                    
     <collection property="rights" ofType="com.jkoss.pojo.sys.Sysright" select="com.jkoss.dao.sys.SysrightMapper.selectByEid" column="eid">
     

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.jkoss.biz.IEmpsBiz;
 import com.jkoss.pojo.oa.Department;
+import com.jkoss.pojo.oa.EmpJobs;
 import com.jkoss.pojo.oa.Emps;
 import com.jkoss.pojo.sys.Sysright;
 import com.jkoss.tool.Page;
@@ -68,6 +69,8 @@ public class EmpsAction implements Serializable {
 		 return "/oa/listdept.jsp";
 	 }
 	 
+	 
+	 /////////////-------------部门-》
 	 @RequestMapping("/addD")
 	 public String addDept(Department  dpt,  HttpServletRequest req){
 		 req.setAttribute("msg",  ebiz.addDept(dpt));
@@ -98,4 +101,52 @@ public class EmpsAction implements Serializable {
 		 return listDept(req,null);
 	 }
 	
+	 /////////////-------------    部门   《--  
+	 
+	 ////////////////////    岗位部门-》
+	 @RequestMapping("/lsJb")
+	 public String listJobs(HttpServletRequest req,Page<EmpJobs> page,Integer depID){
+		 
+		 if(page==null){
+			 page = new Page<EmpJobs>();
+		 }
+		 
+		 //检查application中部门信息
+		 if(req.getServletContext().getAttribute("dpts")==null){
+			 req.getServletContext().setAttribute("dpts",ebiz.listDepts());
+		 }
+		 
+		if(depID==null){
+			Emps emp =(Emps) req.getSession().getAttribute("lgnUsr");
+			depID = emp.getEjob().getDepID();
+		}
+		
+		page.setResults(ebiz.findJobsByDid(depID));
+		 
+	    req.setAttribute("page", page);
+			
+		 return "/oa/listjobs.jsp";
+	 }
+	 
+	 @RequestMapping("/addJB")
+	 public String addJob(EmpJobs  jobs,  HttpServletRequest req){
+		 req.setAttribute("msg",  ebiz.addJob(jobs) );
+		 return listJobs(req,null,null);
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 }

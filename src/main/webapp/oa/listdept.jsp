@@ -25,13 +25,13 @@
         	   }});
         	
        
-           $(".btnAll").each(function(i,v){
+              $(".btnAll").each(function(i,v){
         	   //变手型
         	     $(v).mouseover(function() {
     				$(this).css("cursor", "hand");
     			 }).mouseout(function() {
     				$(this).css("cursor", "pointer");
-    			 }).css("color","blue");
+    			 });
         	   
         	   
         	   if($(v).html()=='【新增】'){

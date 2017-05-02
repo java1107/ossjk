@@ -54,7 +54,7 @@
 		<!-- 配置表信息 -->
 	  
 	  
-	   <table schema="ossdb" tableName="t_jiuyecomps" domainObjectName="JiuyeGS"
+	   <table schema="ossdb" tableName="t_jobs" domainObjectName="EmpJobs"
 			enableCountByExample="true" enableUpdateByExample="true"
 			enableDeleteByExample="true" enableSelectByExample="true"
 			selectByExampleQueryId="true">

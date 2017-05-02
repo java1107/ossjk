@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
 import com.jkoss.biz.IEmpsBiz;
 import com.jkoss.pojo.oa.Department;
+import com.jkoss.pojo.oa.EmpJobs;
+import com.jkoss.pojo.oa.EmpJobsExample;
 import com.jkoss.pojo.oa.Emps;
 import com.jkoss.tool.Page;
 
@@ -20,6 +20,9 @@ public class EmpsBiz implements IEmpsBiz {
 	private com.jkoss.dao.oa.EmpsMapper edao; 
 	@Autowired
 	private com.jkoss.dao.oa.DepartmentMapper ddao; 
+	@Autowired
+	private com.jkoss.dao.oa.EmpJobsMapper jbdao; 
+	
 	//登录
 	public Emps login(Emps e){
 		Emps tmp = edao.selectByLgnName(e.getLgnName());
@@ -57,4 +60,31 @@ public class EmpsBiz implements IEmpsBiz {
 	public String deleteDept(int depID) {
 		return ddao.deleteByPrimaryKey(depID)>0?"删除成功":"删除失败";
 	}
+
+	@Override
+	public List<Department> listDepts() {
+		// TODO Auto-generated method stub
+		return ddao.selectByExample(null);
+	}
+
+	@Override
+	public List<EmpJobs> findJobsByDid(int did) {
+		// TODO Auto-generated method stub
+		EmpJobsExample ejb = 	new EmpJobsExample();
+		ejb.createCriteria().andDepIDEqualTo(did);
+		return jbdao.selectByExample(ejb);
+	}
+
+	@Override
+	public String addJob(EmpJobs jb) {
+		// TODO Auto-generated method stub
+		return jbdao.insert(jb)>0?"添加成功":"添加失败";
+	}
+	
+	
+	
+	
+	
+	
+	
 }

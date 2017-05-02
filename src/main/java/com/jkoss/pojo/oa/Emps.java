@@ -25,6 +25,7 @@ public class Emps {
     private String qqe;
     
     private Empdetail  detail;
+    private EmpJobs    ejob;
     private List<Sysright>  rights ;
     
     public Integer getEid() {
@@ -386,6 +387,14 @@ public class Emps {
 
 	public void setRights(List<Sysright> rights) {
 		this.rights = rights;
+	}
+
+	public EmpJobs getEjob() {
+		return ejob;
+	}
+
+	public void setEjob(EmpJobs ejob) {
+		this.ejob = ejob;
 	}
     
        
