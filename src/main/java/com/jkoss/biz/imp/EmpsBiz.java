@@ -87,6 +87,19 @@ public class EmpsBiz implements IEmpsBiz {
 		// TODO Auto-generated method stub
 		return jbdao.selectByPrimaryKey(jbid);
 	}
+
+	@Override
+    @Transactional
+	public String updtJobs(EmpJobs job) {
+		// TODO Auto-generated method stub
+		return jbdao.updateByPrimaryKey(job)>0?"更新成功":"更新失败";
+	}
+
+	@Override
+	public String deleteJobs(int jbid) {
+		// TODO Auto-generated method stub
+		return jbdao.deleteByPrimaryKey(jbid)>0?"删除成功":"删除失败";
+	}
 	
 	
 	

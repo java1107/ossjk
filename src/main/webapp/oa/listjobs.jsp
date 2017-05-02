@@ -13,6 +13,12 @@
 	<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 
     <script type="text/javascript">
+    
+ /*       var msg="${msg}";
+       if(msg!=""){
+    	   alert(msg);
+       }
+     */
 
         $(function(){
           
@@ -25,7 +31,6 @@
 					   }, 250);
        	    }});
        	
-        	
             $(".btnAll").each(function(i,v){
          	   //变手型
          	     $(v).mouseover(function() {
@@ -34,12 +39,21 @@
      				$(this).css("cursor", "pointer");
      			 });
          	   
-         	    
           	   if($(v).html()=='【新增】'){
           		   $(v).click(function(){
           			   $('#dw').window("open");
           		   });
-          	   }
+          	   }else if($(v).html()=='【编辑】'){
+        		   $(v).click(function(){
+        			   location.href="upJob1.do?jobid="+$(v).prop("lang");  
+        		   });
+        	   }else if($(v).html()=='【删除】'){
+        		   $(v).click(function(){
+         			  if(confirm("确认删除'"+$(v).prop("title")+"'?")){
+         				  location.href="delJb.do?jobid="+$(v).prop("lang"); 
+         			  }
+         		   });
+         	   }
          	   
             });
         	
@@ -78,8 +92,8 @@
 							<td align="center">${job.jobdesc}</td>
 							<td align="center">
 							【<a href="oneJobs.do?jobid=${job.jobid}">查看</a>】<c:if test="${lgnUsr.eid > 0}">
-									| <span class="btnAll" lang="${dpt.depID}">【编辑】</span>
-								    | <span class="btnAll" lang="${dpt.depID}" title="${dpt.depname}">【删除】</span>
+									| <span class="btnAll" lang="${job.jobid}">【编辑】</span>
+								    | <span class="btnAll" lang="${job.jobid}" title="${job.jobname}">【删除】</span>
 				                   </c:if>
 							</td>
 						</tr>
@@ -93,6 +107,9 @@
 				</table>
 			</td>
 		</tr>
+		<tr>
+		  <td align="center" style="color: red">${msg}</td>
+		</tr>
 	</table>
   
 	<div id="dw" class="easyui-window" title="创建新新岗位" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:300px;height:350px;padding:10px;display: none;">
@@ -102,7 +119,7 @@
 						         <option   ${dpt.depID==lgnUsr.ejob.depID?"select='select'":""} value="${dpt.depID}">${dpt.depname}</option>
 						    </c:forEach>
 						 </select><br> <br> 
-		        岗位名称：<input name="jobname"/><br> <br> 
+		       岗位名称：<input name="jobname"/><br> <br> 
 		       岗位底薪：<input name="jobsal"/><br> <br> 
 		        绩效说明：<textarea name="jxsal" rows="2" cols="30"></textarea><br> 
 		       工资备注：<textarea name="thrsal" rows="2"  cols="30"></textarea><br> 

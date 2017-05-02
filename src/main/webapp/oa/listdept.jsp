@@ -55,7 +55,7 @@
         				  location.href="delD.do?dptID="+$(v).prop("lang"); 
         			  }
         		   });
-        	   };
+        	   } 
            });
            
         });
@@ -97,6 +97,9 @@
 					</tr>
 				</table>
 			</td>
+		</tr>
+		<tr>
+		  <td align="center" style="color: red">${msg}</td>
 		</tr>
 	</table>
   

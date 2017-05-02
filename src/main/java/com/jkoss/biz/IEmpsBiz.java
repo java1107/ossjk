@@ -28,4 +28,9 @@ public interface IEmpsBiz {
 	  String addJob(EmpJobs jb);
 	  
 	  EmpJobs findJobByID(int jbid);
+	  
+	  String updtJobs(EmpJobs job);
+	  
+	  String deleteJobs(int jbid);
+	  
 }

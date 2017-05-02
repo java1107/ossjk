@@ -135,16 +135,42 @@ public class EmpsAction implements Serializable {
 	 }
 	 
 	 @RequestMapping(value="/oneJobs")
-	 public String oneJobs(int  jobid,  HttpServletRequest req){	 
-		 req.setAttribute("job",  ebiz.findJobByID(jobid));
+	 public String oneJobs(int  jobid,  HttpServletRequest req){	
+		 EmpJobs j = ebiz.findJobByID(jobid);
+         j.setDpt(ebiz.findDeptByID(j.getDepID()));
+		 req.setAttribute("job", j );
 		 return "/oa/shJob.jsp";
 	 }
 	 
+	 @RequestMapping(value="/upJob1")
+	 public String upJobs1(int  jobid,  HttpServletRequest req){	
+		 oneJobs(jobid, req);
+		 return "/oa/upJob.jsp";
+	 }
+	 
+	 @RequestMapping(value="/uptJob")
+	 public String upJobs1(EmpJobs  job,  HttpServletRequest req){	
+		 EmpJobs j = ebiz.findJobByID(job.getJobid());
+		// j.setDepID(depID);
+		 j.setJobdesc(job.getJobdesc());
+		 j.setJobname(job.getJobname());
+		 j.setJobsal(job.getJobsal());
+		 j.setThrsal(job.getThrsal());
+		 j.setJxsal(job.getJxsal());
+		 
+		 req.setAttribute("msg", ebiz.updtJobs(j) );
+		  
+		 return listJobs(  req,null,j.getDepID());
+	 }
 	 
 	 
-	 
-	 
-	 
+	 @RequestMapping("/delJb")
+	 public String deletejobs(int  jobid,  HttpServletRequest req){
+		 EmpJobs j = ebiz.findJobByID(jobid);
+		 req.setAttribute("msg",  ebiz.deleteJobs(jobid));
+		 return listJobs(req,null,j.getDepID());
+	 }
+	
 	 
 	 
 	 

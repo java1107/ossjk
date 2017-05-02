@@ -17,6 +17,8 @@ public class EmpJobs {
     private String thrsal;
 
     private Integer upjobid;
+    
+    private Department dpt;
 
     public Integer getJobid() {
         return jobid;
@@ -81,4 +83,14 @@ public class EmpJobs {
     public void setUpjobid(Integer upjobid) {
         this.upjobid = upjobid;
     }
+
+	public Department getDpt() {
+		return dpt;
+	}
+
+	public void setDpt(Department dpt) {
+		this.dpt = dpt;
+	}
+    
+    
 }
