@@ -10,7 +10,7 @@ public class Emps {
  
     private Integer eid;
     private Integer jobid;
-    private Integer empdid;
+    private Integer empdid;   //详细信息
     private String lgnName;
     private String ename;
     private String pwdword;
@@ -23,6 +23,7 @@ public class Emps {
     private String ephone;
     private String qqp;
     private String qqe;
+ 
     
     private Empdetail  detail;
     private EmpJobs    ejob;
@@ -396,6 +397,7 @@ public class Emps {
 	public void setEjob(EmpJobs ejob) {
 		this.ejob = ejob;
 	}
-    
+
+ 
        
 }

@@ -33,7 +33,7 @@
      				$(this).css("cursor", "pointer");
      			 });
          	   
-          	   if($(v).html()=='【新增】'){
+          	   if($(v).html()=='【新员工入职】'){
           		   $(v).click(function(){
           			   $('#dw').window("open");
           		   });
@@ -43,9 +43,10 @@
         		   });
         	   }else if($(v).html()=='【删除】'){
         		   $(v).click(function(){
-         			  if(confirm("确认删除'"+$(v).prop("title")+"'?")){
-         				  location.href="delJb.do?jobid="+$(v).prop("lang"); 
-         			  }
+        			 //  alert($("select[name='slkt_dps']").val());
+         			  if(confirm("确认删除员工'"+$(v).prop("title")+"'?")){
+         				   location.href="delEmp.do?eid="+$(v).prop("lang")+"&dpid="+$("select[name='slkt_dps']").val(); 
+         			  }  
          		   });
          	   }
          	   
@@ -61,11 +62,11 @@
 		<tr valign="top">
 			<td bgcolor="#FFFFFF"><table width="96%" border="0" align="center" cellpadding="4" cellspacing="1" bgcolor="#aec3de">
 					<tr align="left" bgcolor="#F2FDFF">
-						<td colspan="6" class="optiontitle">
+						<td colspan="7" class="optiontitle">
 						 <select name="slkt_dps">
 						       <option    value="0">全部</option>
 						    <c:forEach items="${dpts}" var="dpt">
-						       <option   ${dpt.depID==lgnUsr.ejob.depID?"select='selected'":""} value="${dpt.depID}">${dpt.depname}</option>
+						       <option ${dpt.depID==lgnUsr.ejob.depID?"selected='selected'":""} value="${dpt.depID}">${dpt.depname}</option>
 						    </c:forEach>
 						 </select>
 						   岗位列表</td>
@@ -73,6 +74,7 @@
 				  	<tr align="center">
 					    <td align="center" bgcolor="#ebf0f7">员工ID</td>
 						<td align="center" bgcolor="#ebf0f7">员工姓名</td>
+						<td align="center" bgcolor="#ebf0f7">员工邮箱</td>
 						<td align="center" bgcolor="#ebf0f7">担任岗位</td>
 						<td align="center" bgcolor="#ebf0f7">入职时间</td>
 						<td align="center" bgcolor="#ebf0f7">电话号码</td>
@@ -82,20 +84,22 @@
 						<tr align="center" bgcolor="#FFFFFF">
 						    <td align="center" bgcolor="#ebf0f7">${emp.eid}</td>
 							<td align="center">${emp.ename}</td>
+							<td align="center">${emp.lgnName}</td>
 							<td align="center">${emp.ejob.jobname}</td>
-							<td align="center">${emp.hireDate}</td>
+							<td align="center"><fmt:formatDate value="${emp.hireDate}" pattern="yyyy-MM-dd HH点" /></td>
 							<td align="center">${emp.ephone}</td>
 							<td align="center">
-							【<a href="oneJobs.do?jobid=${emp.eid}">查看</a>】<c:if test="${lgnUsr.eid > 0}">
+							【<a href="oneEmps.do?eid=${emp.eid}">查看</a>】<c:if test="${lgnUsr.eid > 0}">
 									| <span class="btnAll" lang="${emp.eid}">【编辑】</span>
-								    | <span class="btnAll" lang="${emp.eid}" title="${job.jobname}">【离职】</span>
-								    | <span class="btnAll" lang="${emp.eid}" title="${job.jobname}">【删除】</span>
+								    | <span class="btnAll" lang="${emp.eid}" title="${emp.ename}">【离职】</span>
+								    | <span class="btnAll" lang="${emp.eid}" title="${emp.ename}">【删除】</span>
+								    <c:if test="${emp.esex==null}"><span class="btnAll" lang="${emp.eid}" title="${emp.ename}">【重发邮件】</span></c:if>
 				                   </c:if>
 							</td>
 						</tr>
 					</c:forEach>
 					<tr align="right" bgcolor="#ebf0f7">
-							<td colspan="6">
+							<td colspan="7">
 							<jk:page totalPage="${page.totalPage}" pageNo="${page.pageNo}" totalRecord="${page.totalRecord}"
                                 url="lsD.do" />
 							</td>
@@ -108,19 +112,20 @@
 		</tr>
 	</table>
   
-	<div id="dw" class="easyui-window" title="创建新新岗位" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:300px;height:350px;padding:10px;display: none;">
-		<form action="addJB.do" method="post">
-		        所属 部门： <select name="depID">
-						    <c:forEach items="${dpts}" var="dpt">
-						         <option   ${dpt.depID==lgnUsr.ejob.depID?"select='select'":""} value="${dpt.depID}">${dpt.depname}</option>
+	<div id="dw" class="easyui-window" title="新员工入职" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:280px;height:150px;padding:10px;display: none;">
+		<form action="addEmp.do" method="post">
+		   <table border="0" width="100%" >
+		     <tr><td>员工姓名:</td><td><input name="ename"/></td></tr>
+		     <tr><td>登录邮箱:</td><td><input name="lgnName"/></td></tr>
+		     <tr><td>任职岗位:</td><td>
+		   	       <select name="jobid">
+						    <c:forEach items="${jobs}" var="jb">
+						       <option value="${jb.jobid}">${jb.jobname}</option>
 						    </c:forEach>
-						 </select><br> <br> 
-		       岗位名称：<input name="jobname"/><br> <br> 
-		       岗位底薪：<input name="jobsal"/><br> <br> 
-		        绩效说明：<textarea name="jxsal" rows="2" cols="30"></textarea><br> 
-		       工资备注：<textarea name="thrsal" rows="2"  cols="30"></textarea><br> 
-		       岗位描述：<textarea name="jobdesc" rows="3" cols="30"></textarea><br> <br> 
-		      <input  type="submit" value="保存"/><br>
+						 </select>
+		       </td></tr>
+		     <tr><td></td><td><input type="submit" value="入职"/></td></tr>
+		   </table>
 		</form>
 	</div>
 	

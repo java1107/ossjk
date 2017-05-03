@@ -71,7 +71,7 @@
 						 <select name="slkt_dps">
 						    <option  value="0">全部</option>
 						    <c:forEach items="${dpts}" var="dpt">
-						       <option   ${dpt.depID==lgnUsr.ejob.depID?"select='select'":""} value="${dpt.depID}">${dpt.depname}</option>
+						       <option   ${dpt.depID==lgnUsr.ejob.depID?"selected='selected'":""} value="${dpt.depID}">${dpt.depname}</option>
 						    </c:forEach>
 						 </select>
 						   岗位列表</td>
@@ -117,7 +117,7 @@
 		<form action="addJB.do" method="post">
 		        所属 部门： <select name="depID">
 						    <c:forEach items="${dpts}" var="dpt">
-						         <option   ${dpt.depID==lgnUsr.ejob.depID?"select='select'":""} value="${dpt.depID}">${dpt.depname}</option>
+						         <option  ${dpt.depID==lgnUsr.ejob.depID?"selected='selected'":""} value="${dpt.depID}">${dpt.depname}</option>
 						    </c:forEach>
 						 </select><br> <br> 
 		       岗位名称：<input name="jobname"/><br> <br> 

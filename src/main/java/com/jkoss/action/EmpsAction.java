@@ -170,33 +170,7 @@ public class EmpsAction implements Serializable {
 		 return listJobs(req,null,j.getDepID());
 	 }
 	
-	 ////////////////员工
-	 @RequestMapping("/lsEmp")
-	 public String listEmps(HttpServletRequest req,Page<Emps> page,Integer depID){
-		 
-		 if(page==null){
-			 page = new Page<Emps>();
-		 }
-		 
-		 //检查application中部门信息
-		 if(req.getServletContext().getAttribute("dpts")==null){
-			 req.getServletContext().setAttribute("dpts",ebiz.listDepts());
-		 }
-		 
-		if(depID==null){
-			Emps emp =(Emps) req.getSession().getAttribute("lgnUsr");
-			depID = emp.getEjob().getDepID();
-		}
-		
-		page.getParams().put("empdid", depID);
-		
-		page.setResults(ebiz.listPageEmps(page));
-		 
-	    req.setAttribute("page", page);
-			
-		 return "/oa/listEmps.jsp";
-	 }
-	 
+
 	 
 	 
 	 
