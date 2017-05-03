@@ -170,10 +170,7 @@
     </trim>
   </insert>
   
-    <!-- 分页列出  -->
-  <select id="selectAtPage" resultMap="BaseResultMap" parameterType="com.jkoss.tool.Page" >
-       select * from t_department
-  </select>
+ 
   
   <select id="countByExample" parameterType="com.jkoss.pojo.oa.DepartmentExample" resultType="java.lang.Integer" >
     <!--

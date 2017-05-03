@@ -15,7 +15,6 @@ import com.jkoss.biz.IEmpsBiz;
 import com.jkoss.pojo.oa.Department;
 import com.jkoss.pojo.oa.EmpJobs;
 import com.jkoss.pojo.oa.Emps;
-import com.jkoss.pojo.sys.Sysright;
 import com.jkoss.tool.Page;
 
  
@@ -33,9 +32,9 @@ public class EmpsAction implements Serializable {
 		   Emps u =  ebiz.login(ems);
 		   
 		   if(u.getRights()!=null && u.getRights().size()>0){
-			   for (Sysright rt : u.getRights()) {
+			 /*  for (Sysright rt : u.getRights()) {
 				 System.out.println("   "+rt.getRtname());
-			   }
+			   }*/
 		   }
 		   
 		   System.out.println(u.getDetail().getEaddress());
@@ -171,8 +170,32 @@ public class EmpsAction implements Serializable {
 		 return listJobs(req,null,j.getDepID());
 	 }
 	
-	 
-	 
+	 ////////////////员工
+	 @RequestMapping("/lsEmp")
+	 public String listEmps(HttpServletRequest req,Page<Emps> page,Integer depID){
+		 
+		 if(page==null){
+			 page = new Page<Emps>();
+		 }
+		 
+		 //检查application中部门信息
+		 if(req.getServletContext().getAttribute("dpts")==null){
+			 req.getServletContext().setAttribute("dpts",ebiz.listDepts());
+		 }
+		 
+		if(depID==null){
+			Emps emp =(Emps) req.getSession().getAttribute("lgnUsr");
+			depID = emp.getEjob().getDepID();
+		}
+		
+		page.getParams().put("empdid", depID);
+		
+		page.setResults(ebiz.listPageEmps(page));
+		 
+	    req.setAttribute("page", page);
+			
+		 return "/oa/listEmps.jsp";
+	 }
 	 
 	 
 	 

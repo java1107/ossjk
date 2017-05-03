@@ -13,13 +13,7 @@
 	<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 
     <script type="text/javascript">
-    
- /*       var msg="${msg}";
-       if(msg!=""){
-    	   alert(msg);
-       }
-     */
-
+ 
         $(function(){
           
          	//初始化对话框
@@ -69,32 +63,33 @@
 					<tr align="left" bgcolor="#F2FDFF">
 						<td colspan="6" class="optiontitle">
 						 <select name="slkt_dps">
-						    <option  value="0">全部</option>
+						       <option    value="0">全部</option>
 						    <c:forEach items="${dpts}" var="dpt">
-						       <option   ${dpt.depID==lgnUsr.ejob.depID?"select='select'":""} value="${dpt.depID}">${dpt.depname}</option>
+						       <option   ${dpt.depID==lgnUsr.ejob.depID?"select='selected'":""} value="${dpt.depID}">${dpt.depname}</option>
 						    </c:forEach>
 						 </select>
 						   岗位列表</td>
 					</tr>
 				  	<tr align="center">
-					    <td align="center" bgcolor="#ebf0f7">岗位ID</td>
-						<td align="center" bgcolor="#ebf0f7">岗位名称</td>
-						<td align="center" bgcolor="#ebf0f7">岗位底薪</td>
-						<td align="center" bgcolor="#ebf0f7">上级岗位</td>
-						<td align="center" bgcolor="#ebf0f7">岗位描述</td>
-						<td align="center" bgcolor="#ebf0f7">操作 <span class="btnAll">【新增】</span> </td>
+					    <td align="center" bgcolor="#ebf0f7">员工ID</td>
+						<td align="center" bgcolor="#ebf0f7">员工姓名</td>
+						<td align="center" bgcolor="#ebf0f7">担任岗位</td>
+						<td align="center" bgcolor="#ebf0f7">入职时间</td>
+						<td align="center" bgcolor="#ebf0f7">电话号码</td>
+						<td align="center" bgcolor="#ebf0f7">操作 <span class="btnAll">【新员工入职】</span> </td>
 					</tr>
-					<c:forEach items="${page.results}" var="job">
+					<c:forEach items="${page.results}" var="emp">
 						<tr align="center" bgcolor="#FFFFFF">
-						    <td align="center" bgcolor="#ebf0f7">${job.jobid}</td>
-							<td align="center">${job.jobname}</td>
-							<td align="center">${job.jobsal}</td>
-							<td align="center">${job.jobsal}</td>
-							<td align="center">${job.jobdesc}</td>
+						    <td align="center" bgcolor="#ebf0f7">${emp.eid}</td>
+							<td align="center">${emp.ename}</td>
+							<td align="center">${emp.ejob.jobname}</td>
+							<td align="center">${emp.hireDate}</td>
+							<td align="center">${emp.ephone}</td>
 							<td align="center">
-							【<a href="oneJobs.do?jobid=${job.jobid}">查看</a>】<c:if test="${lgnUsr.eid > 0}">
-									| <span class="btnAll" lang="${job.jobid}">【编辑】</span>
-								    | <span class="btnAll" lang="${job.jobid}" title="${job.jobname}">【删除】</span>
+							【<a href="oneJobs.do?jobid=${emp.eid}">查看</a>】<c:if test="${lgnUsr.eid > 0}">
+									| <span class="btnAll" lang="${emp.eid}">【编辑】</span>
+								    | <span class="btnAll" lang="${emp.eid}" title="${job.jobname}">【离职】</span>
+								    | <span class="btnAll" lang="${emp.eid}" title="${job.jobname}">【删除】</span>
 				                   </c:if>
 							</td>
 						</tr>

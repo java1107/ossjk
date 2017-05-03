@@ -6,10 +6,16 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 
+import com.jkoss.pojo.oa.Department;
 import com.jkoss.pojo.oa.Emps;
 import com.jkoss.pojo.oa.EmpsExample;
+import com.jkoss.tool.Page;
 
 public interface EmpsMapper {
+	
+	@Select("select * from t_emps")
+	@ResultMap("com.jkoss.dao.oa.EmpsMapper.BaseResultMap")
+	List<Emps> selectAtPage(Page page);
 	
    /*	@Select("select  a.*,b.*,c.* from t_emps a,t_empdetail b,t_sysright c,t_emp2right d "
 			+ "where a.empdid=b.empdid and a.eid=d.eid and c.rtid=d.rtid and lgnName = #{lgnName}")*/
