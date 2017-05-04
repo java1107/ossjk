@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jkoss.biz.IEmpsBiz;
 import com.jkoss.pojo.oa.EmpJobs;
@@ -72,36 +73,22 @@ public class OASendMailAction implements Serializable{
 		emp.setPwdword("oss"+new Random().nextInt(1000));
 		String msg = ebiz.addEmp(emp);
         if("添加成功".equals(msg)){
-        	MimeMessage message = mailSender.createMimeMessage();
-
-			// 交给代理助手类 //true:支持多媒体 编码
-			try {
-				MimeMessageHelper helper = new MimeMessageHelper(message, true, "GBK");
-				helper.setFrom("rick9k@sohu.com");
-				helper.setTo(emp.getLgnName());
-				helper.setCc("952063095@qq.com");
-				helper.setSubject("靖凯开源软件大家庭热烈欢迎您的加入");
-				
-				//封装数据
-				Map<String,Object>  data = new HashMap();
-				data.put("emp", emp);
-				
-				//合并数据到模板-------->
-				helper.setText(VelocityEngineUtils.mergeTemplateIntoString(ve, "mails/mail.vm","GBK", data),true);
-				
-				mailSender.send(message);
-				msg+=",入职邮件发送成功！";
-				System.out.println(msg);
-			} catch (MessagingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-       }
+        	msg = sendRzMail(emp, msg);
+         }
 		req.setAttribute("msg", msg);
        
 		return listEmps(  req,null, ebiz.findJobByID(emp.getJobid()).getDepID());
 	}
+
+ 
+	@RequestMapping(value="/sendRzMail",produces="text/html;charset=UTF-8")
+    @ResponseBody
+	public String sendRzMail(int eid){
+		Emps emp = ebiz.findEmpByID(eid);
+		return sendRzMail(emp,emp.getEname()); 
+	}
+	
+
 	
 	 @RequestMapping("/delEmp")
 	 public String deletejobs(int  eid,int  dpid,  HttpServletRequest req){
@@ -139,4 +126,41 @@ public class OASendMailAction implements Serializable{
 	 
 		 return listEmps(req,null,ebiz.findJobByID(e.getJobid()).getDepID());
 	 }
+	 
+	 
+		private String sendRzMail(Emps emp, String msg) {
+			MimeMessage message = mailSender.createMimeMessage();
+
+			// 交给代理助手类 //true:支持多媒体 编码
+			try {
+				MimeMessageHelper helper = new MimeMessageHelper(message, true, "GBK");
+				helper.setFrom("rick9k@sohu.com");
+				helper.setTo(emp.getLgnName());
+				helper.setCc("952063095@qq.com");
+				helper.setSubject("靖凯开源软件大家庭热烈欢迎您的加入");
+				
+				//封装数据
+				Map<String,Object>  data = new HashMap();
+				data.put("emp", emp);
+				
+				//合并数据到模板-------->
+				helper.setText(VelocityEngineUtils.mergeTemplateIntoString(ve, "mails/mail.vm","GBK", data),true);
+				
+				mailSender.send(message);
+				msg+=",入职邮件发送成功！";
+				System.out.println(msg);
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return msg;
+		}
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 }

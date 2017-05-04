@@ -47,7 +47,18 @@
          				   location.href="delEmp.do?eid="+$(v).prop("lang")+"&dpid="+$("select[name='slkt_dps']").val(); 
          			  }  
          		   });
-         	   }
+         	   }else if($(v).html()=='【补发入职邮件】'){
+        		   $(v).click(function(){
+          			 //  alert($("select[name='slkt_dps']").val());
+           			  if(confirm("需要补发'"+$(v).prop("title")+"入职邮件'?")){
+           				  //ajax
+           			   $.get("sendRzMail.do?eid="+ $(v).prop("lang"),function(jsonTxt){
+           			      $("#msg").html(jsonTxt);
+           			   });  
+           			  }  
+           		   });
+           	   }
+          	 
             });
         });
     </script>
@@ -90,7 +101,7 @@
 									| <span class="btnAll" lang="${emp.eid}">【编辑】</span>
 								    | <span class="btnAll" lang="${emp.eid}" title="${emp.ename}">【离职】</span>
 								    | <span class="btnAll" lang="${emp.eid}" title="${emp.ename}">【删除】</span>
-								    <c:if test="${emp.esex==null}"><span class="btnAll" lang="${emp.eid}" title="${emp.ename}">【重发邮件】</span></c:if>
+								    <c:if test="${emp.esex==null}"><span class="btnAll" lang="${emp.eid}" title="${emp.ename}">【补发入职邮件】</span></c:if>
 				                   </c:if>
 							</td>
 						</tr>
@@ -105,7 +116,7 @@
 			</td>
 		</tr>
 		<tr>
-		  <td align="center" style="color: red">${msg}</td>
+		  <td align="center"><span id="msg" style="color: red">${msg}</span></td>
 		</tr>
 	</table>
   
