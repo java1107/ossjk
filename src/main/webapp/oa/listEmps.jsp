@@ -15,7 +15,6 @@
     <script type="text/javascript">
  
         $(function(){
-          
          	//初始化对话框
         	 $('#dw,#dwEdit').window({
        		   onBeforeClose:function(){ 
@@ -39,7 +38,7 @@
           		   });
           	   }else if($(v).html()=='【编辑】'){
         		   $(v).click(function(){
-        			   location.href="upJob1.do?jobid="+$(v).prop("lang");  
+        			   location.href="toBUEmp.do?eid="+$(v).prop("lang")+"&dpid="+$("select[name='slkt_dps']").val();  
         		   });
         	   }else if($(v).html()=='【删除】'){
         		   $(v).click(function(){
@@ -49,9 +48,7 @@
          			  }  
          		   });
          	   }
-         	   
             });
-        	
         });
     </script>
 </head>
@@ -69,7 +66,7 @@
 						       <option ${dpt.depID==lgnUsr.ejob.depID?"selected='selected'":""} value="${dpt.depID}">${dpt.depname}</option>
 						    </c:forEach>
 						 </select>
-						   岗位列表</td>
+						</td>
 					</tr>
 				  	<tr align="center">
 					    <td align="center" bgcolor="#ebf0f7">员工ID</td>
@@ -88,7 +85,7 @@
 							<td align="center">${emp.ejob.jobname}</td>
 							<td align="center"><fmt:formatDate value="${emp.hireDate}" pattern="yyyy-MM-dd HH点" /></td>
 							<td align="center">${emp.ephone}</td>
-							<td align="center">
+							<td align="left">
 							【<a href="oneEmps.do?eid=${emp.eid}">查看</a>】<c:if test="${lgnUsr.eid > 0}">
 									| <span class="btnAll" lang="${emp.eid}">【编辑】</span>
 								    | <span class="btnAll" lang="${emp.eid}" title="${emp.ename}">【离职】</span>
@@ -128,7 +125,6 @@
 		   </table>
 		</form>
 	</div>
-	
 	 <div id="dwEdit" class="easyui-window" title="修改部门信息" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:300px;height:200px;padding:10px;display: none;">
 		<form action="updD.do" method="post">
 		<input name="depID" id="upd_depID" type="hidden"   />

@@ -116,5 +116,27 @@ public class OASendMailAction implements Serializable{
 		 return "/oa/shEmp.jsp";
 	 }
 	
-	
+	 @RequestMapping(value="/toBUEmp")
+	 public String oneEmp(int  eid,int  dpid,   HttpServletRequest req){	 
+		 Emps e = ebiz.findEmpByID(eid);
+		 req.setAttribute("emp", e );
+		 
+		 req.setAttribute("jobs",  ebiz.findJobsByDid(dpid));
+	 
+		 return "/oa/edtEmp.jsp";
+	 }
+	 
+	 @RequestMapping(value="/upEmp")
+	 public String updEmp(Emps  e,   HttpServletRequest req){	 
+		 Emps etmp = ebiz.findEmpByID(e.getEid());
+		 etmp.setEphone(e.getEphone());
+		 etmp.setLgnName(e.getLgnName());
+		 etmp.setJobid(e.getJobid());
+		 //etmp.setHireDate(e.getHireDate());
+		 etmp.setQqe(e.getQqe());
+		
+		 req.setAttribute("msg",  ebiz.updtEmp(etmp));
+	 
+		 return listEmps(req,null,ebiz.findJobByID(e.getJobid()).getDepID());
+	 }
 }

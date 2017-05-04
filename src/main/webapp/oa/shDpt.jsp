@@ -22,7 +22,6 @@
 						<td align="center" bgcolor="#ebf0f7">部门说明</td>
 						<td align="left" bgcolor="#FFFFFF">${dpt.dnote}</td> 
 					</tr>
-				 
 				</table>
 			</td>
 		</tr>

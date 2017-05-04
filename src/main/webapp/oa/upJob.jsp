@@ -10,8 +10,6 @@
 					<tr align="left" bgcolor="#F2FDFF">
 						<td colspan="2" class="optiontitle">所属部门:${job.dpt.depname}  <input name="jobid" type="hidden" value="${job.jobid}"> </td>
 					</tr>
-					
- 
 					<tr align="center">
 						<td align="center" bgcolor="#ebf0f7">岗位名称</td>
 						<td align="left" bgcolor="#FFFFFF"><input name="jobname" value="${job.jobname}"></td> 
@@ -36,8 +34,6 @@
 						<td align="center" bgcolor="#ebf0f7">上级岗位</td>
 						<td align="left" bgcolor="#FFFFFF"><input name="jobdesc" value="${job.upjobid}"> </td> 
 					</tr>
-		 
-				 
 				</table>
 			</td>
 		</tr>
