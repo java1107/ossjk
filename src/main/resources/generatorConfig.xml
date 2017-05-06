@@ -54,13 +54,18 @@
 		<!-- 配置表信息 -->
 	  
 	  
-	   <table schema="ossdb" tableName="t_jobs" domainObjectName="EmpJobs"
+	   <table schema="ossdb" tableName="t_qyqq" domainObjectName="Ossqq"
 			enableCountByExample="true" enableUpdateByExample="true"
 			enableDeleteByExample="true" enableSelectByExample="true"
 			selectByExampleQueryId="true">
 			<property name="useActualColumnNames" value="true" />
 		</table>
-	 
+	 	   <table schema="ossdb" tableName="t_empimgs" domainObjectName="Empfiles"
+			enableCountByExample="true" enableUpdateByExample="true"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true">
+			<property name="useActualColumnNames" value="true" />
+		</table>
 		 
 	 
 	</context>

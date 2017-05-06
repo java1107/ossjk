@@ -52,7 +52,7 @@
           			 //  alert($("select[name='slkt_dps']").val());
            			  if(confirm("需要补发'"+$(v).prop("title")+"入职邮件'?")){
            				  //ajax
-           			   $.get("sendRzMail.do?eid="+ $(v).prop("lang"),function(jsonTxt){
+           			   $.get("sendRzMail.do?eid="+ $(v).prop("lang")+"&x="+Math.random(),function(jsonTxt){
            			      $("#msg").html(jsonTxt);
            			   });  
            			  }  

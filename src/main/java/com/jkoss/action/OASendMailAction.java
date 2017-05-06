@@ -26,7 +26,7 @@ import com.jkoss.pojo.oa.Emps;
 import com.jkoss.tool.Page;
 
 @Controller
-@RequestMapping("/emp")
+@RequestMapping("/oa")
 public class OASendMailAction implements Serializable{
 
 	@Autowired
@@ -107,7 +107,7 @@ public class OASendMailAction implements Serializable{
 	 public String oneEmp(int  eid,int  dpid,   HttpServletRequest req){	 
 		 Emps e = ebiz.findEmpByID(eid);
 		 req.setAttribute("emp", e );
-		 
+		 req.setAttribute("attas",  ebiz.listEmpfilesByEmp(eid,null));
 		 req.setAttribute("jobs",  ebiz.findJobsByDid(dpid));
 	 
 		 return "/oa/edtEmp.jsp";

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.oa.EmpfilesMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.oa.Empfiles" >
+    <id column="fjid" property="fjid" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="t_e_eid" property="t_e_eid" jdbcType="INTEGER" />
+    <result column="fjname" property="fjname" jdbcType="VARCHAR" />
+    <result column="fjadds" property="fjadds" jdbcType="VARCHAR" />
+    <result column="fjuploaddate" property="fjuploaddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fjid, eid, t_e_eid, fjname, fjadds, fjuploaddate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.oa.EmpfilesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_empimgs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_empimgs
+    where fjid = #{fjid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_empimgs
+    where fjid = #{fjid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.oa.EmpfilesExample" >
+    delete from t_empimgs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.oa.Empfiles" >
+    insert into t_empimgs (fjid, eid, t_e_eid, 
+      fjname, fjadds, fjuploaddate
+      )
+    values (#{fjid,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{t_e_eid,jdbcType=INTEGER}, 
+      #{fjname,jdbcType=VARCHAR}, #{fjadds,jdbcType=VARCHAR}, #{fjuploaddate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.oa.Empfiles" >
+    insert into t_empimgs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fjid != null" >
+        fjid,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="t_e_eid != null" >
+        t_e_eid,
+      </if>
+      <if test="fjname != null" >
+        fjname,
+      </if>
+      <if test="fjadds != null" >
+        fjadds,
+      </if>
+      <if test="fjuploaddate != null" >
+        fjuploaddate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fjid != null" >
+        #{fjid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="t_e_eid != null" >
+        #{t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="fjname != null" >
+        #{fjname,jdbcType=VARCHAR},
+      </if>
+      <if test="fjadds != null" >
+        #{fjadds,jdbcType=VARCHAR},
+      </if>
+      <if test="fjuploaddate != null" >
+        #{fjuploaddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.oa.EmpfilesExample" resultType="java.lang.Integer" >
+    select count(*) from t_empimgs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_empimgs
+    <set >
+      <if test="record.fjid != null" >
+        fjid = #{record.fjid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.t_e_eid != null" >
+        t_e_eid = #{record.t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fjname != null" >
+        fjname = #{record.fjname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fjadds != null" >
+        fjadds = #{record.fjadds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fjuploaddate != null" >
+        fjuploaddate = #{record.fjuploaddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_empimgs
+    set fjid = #{record.fjid,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      t_e_eid = #{record.t_e_eid,jdbcType=INTEGER},
+      fjname = #{record.fjname,jdbcType=VARCHAR},
+      fjadds = #{record.fjadds,jdbcType=VARCHAR},
+      fjuploaddate = #{record.fjuploaddate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.oa.Empfiles" >
+    update t_empimgs
+    <set >
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="t_e_eid != null" >
+        t_e_eid = #{t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="fjname != null" >
+        fjname = #{fjname,jdbcType=VARCHAR},
+      </if>
+      <if test="fjadds != null" >
+        fjadds = #{fjadds,jdbcType=VARCHAR},
+      </if>
+      <if test="fjuploaddate != null" >
+        fjuploaddate = #{fjuploaddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fjid = #{fjid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.oa.Empfiles" >
+    update t_empimgs
+    set eid = #{eid,jdbcType=INTEGER},
+      t_e_eid = #{t_e_eid,jdbcType=INTEGER},
+      fjname = #{fjname,jdbcType=VARCHAR},
+      fjadds = #{fjadds,jdbcType=VARCHAR},
+      fjuploaddate = #{fjuploaddate,jdbcType=TIMESTAMP}
+    where fjid = #{fjid,jdbcType=INTEGER}
+  </update>
+</mapper>

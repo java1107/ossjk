@@ -41,7 +41,7 @@
         	   }else if($(v).html()=='【编辑】'){
         		   $(v).click(function(){
         			   //ajax
-        			   $.get("ajOneDpt.do?dptID="+ $(v).prop("lang"),function(jsonTxt){
+        			   $.get("ajOneDpt.do?dptID="+ $(v).prop("lang")+"&x="+Math.random(),function(jsonTxt){
         				   var jsonObj = eval("("+jsonTxt+")");
         				   $("#upd_depID").val(jsonObj.depID);
         				   $("#upd_depname").val(jsonObj.depname);

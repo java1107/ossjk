@@ -14,7 +14,7 @@
 					<td align="center" bgcolor="#ebf0f7">登录名</td>
 					<td align="left" bgcolor="#FFFFFF">${emp.lgnName}</td>
 					<td align="center" bgcolor="#ebf0f7">性别</td>
-					<td align="left" bgcolor="#FFFFFF">${emp.esex}</td>
+					<td align="left" bgcolor="#FFFFFF">${emp.esex==0?"女":"男"}</td>
 				</tr>
 				<tr align="center">
 					<td align="center" bgcolor="#ebf0f7">电话</td>
@@ -82,8 +82,7 @@
 	</tr>
 	<tr>
 		<td>
-			<table width="96%" border="0" align="center" cellpadding="4"
-				cellspacing="1" bgcolor="#aec3de">
+			<table width="96%" border="0" align="center" cellpadding="4" cellspacing="1" bgcolor="#aec3de">
 				<tr align="center">
 				    <td align="center" bgcolor="#ebf0f7">住址</td>
 					<td  align="left" bgcolor="#FFFFFF"  >${emp.ejob.thrsal}</td>
@@ -101,8 +100,8 @@
 			</table>
 		</td>
 	</tr>
-	<tr>
-		<td align="center"><a href="javascript:history.go(-1)">返回...</a>
+	<tr>   
+		<td align="center">  <a href="toBUEmp.do?eid=${emp.eid}&dpid=${emp.ejob.depID}">查看${emp.ename}资料附件</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:history.go(-1)">返回...</a>
 		</td>
 	</tr>
 </table>

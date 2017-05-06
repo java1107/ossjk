@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jkoss.dao.oa.OssqqMapper" >
+  <resultMap id="BaseResultMap" type="com.jkoss.pojo.oa.Ossqq" >
+    <id column="qqeid" property="qqeid" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="t_e_eid" property="t_e_eid" jdbcType="INTEGER" />
+    <result column="qqename" property="qqename" jdbcType="VARCHAR" />
+    <result column="qqesex" property="qqesex" jdbcType="INTEGER" />
+    <result column="qqeuse" property="qqeuse" jdbcType="VARCHAR" />
+    <result column="qqepwd" property="qqepwd" jdbcType="VARCHAR" />
+    <result column="qqelastupp" property="qqelastupp" jdbcType="TIMESTAMP" />
+    <result column="lastfp" property="lastfp" jdbcType="TIMESTAMP" />
+    <result column="qqenote" property="qqenote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    qqeid, eid, t_e_eid, qqename, qqesex, qqeuse, qqepwd, qqelastupp, lastfp, qqenote
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jkoss.pojo.oa.OssqqExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_qyqq
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_qyqq
+    where qqeid = #{qqeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_qyqq
+    where qqeid = #{qqeid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jkoss.pojo.oa.OssqqExample" >
+    delete from t_qyqq
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jkoss.pojo.oa.Ossqq" >
+    insert into t_qyqq (qqeid, eid, t_e_eid, 
+      qqename, qqesex, qqeuse, 
+      qqepwd, qqelastupp, lastfp, 
+      qqenote)
+    values (#{qqeid,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{t_e_eid,jdbcType=INTEGER}, 
+      #{qqename,jdbcType=VARCHAR}, #{qqesex,jdbcType=INTEGER}, #{qqeuse,jdbcType=VARCHAR}, 
+      #{qqepwd,jdbcType=VARCHAR}, #{qqelastupp,jdbcType=TIMESTAMP}, #{lastfp,jdbcType=TIMESTAMP}, 
+      #{qqenote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jkoss.pojo.oa.Ossqq" >
+    insert into t_qyqq
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="qqeid != null" >
+        qqeid,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="t_e_eid != null" >
+        t_e_eid,
+      </if>
+      <if test="qqename != null" >
+        qqename,
+      </if>
+      <if test="qqesex != null" >
+        qqesex,
+      </if>
+      <if test="qqeuse != null" >
+        qqeuse,
+      </if>
+      <if test="qqepwd != null" >
+        qqepwd,
+      </if>
+      <if test="qqelastupp != null" >
+        qqelastupp,
+      </if>
+      <if test="lastfp != null" >
+        lastfp,
+      </if>
+      <if test="qqenote != null" >
+        qqenote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="qqeid != null" >
+        #{qqeid,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="t_e_eid != null" >
+        #{t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="qqename != null" >
+        #{qqename,jdbcType=VARCHAR},
+      </if>
+      <if test="qqesex != null" >
+        #{qqesex,jdbcType=INTEGER},
+      </if>
+      <if test="qqeuse != null" >
+        #{qqeuse,jdbcType=VARCHAR},
+      </if>
+      <if test="qqepwd != null" >
+        #{qqepwd,jdbcType=VARCHAR},
+      </if>
+      <if test="qqelastupp != null" >
+        #{qqelastupp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastfp != null" >
+        #{lastfp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qqenote != null" >
+        #{qqenote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jkoss.pojo.oa.OssqqExample" resultType="java.lang.Integer" >
+    select count(*) from t_qyqq
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_qyqq
+    <set >
+      <if test="record.qqeid != null" >
+        qqeid = #{record.qqeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.t_e_eid != null" >
+        t_e_eid = #{record.t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.qqename != null" >
+        qqename = #{record.qqename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qqesex != null" >
+        qqesex = #{record.qqesex,jdbcType=INTEGER},
+      </if>
+      <if test="record.qqeuse != null" >
+        qqeuse = #{record.qqeuse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qqepwd != null" >
+        qqepwd = #{record.qqepwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qqelastupp != null" >
+        qqelastupp = #{record.qqelastupp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastfp != null" >
+        lastfp = #{record.lastfp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.qqenote != null" >
+        qqenote = #{record.qqenote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_qyqq
+    set qqeid = #{record.qqeid,jdbcType=INTEGER},
+      eid = #{record.eid,jdbcType=INTEGER},
+      t_e_eid = #{record.t_e_eid,jdbcType=INTEGER},
+      qqename = #{record.qqename,jdbcType=VARCHAR},
+      qqesex = #{record.qqesex,jdbcType=INTEGER},
+      qqeuse = #{record.qqeuse,jdbcType=VARCHAR},
+      qqepwd = #{record.qqepwd,jdbcType=VARCHAR},
+      qqelastupp = #{record.qqelastupp,jdbcType=TIMESTAMP},
+      lastfp = #{record.lastfp,jdbcType=TIMESTAMP},
+      qqenote = #{record.qqenote,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jkoss.pojo.oa.Ossqq" >
+    update t_qyqq
+    <set >
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="t_e_eid != null" >
+        t_e_eid = #{t_e_eid,jdbcType=INTEGER},
+      </if>
+      <if test="qqename != null" >
+        qqename = #{qqename,jdbcType=VARCHAR},
+      </if>
+      <if test="qqesex != null" >
+        qqesex = #{qqesex,jdbcType=INTEGER},
+      </if>
+      <if test="qqeuse != null" >
+        qqeuse = #{qqeuse,jdbcType=VARCHAR},
+      </if>
+      <if test="qqepwd != null" >
+        qqepwd = #{qqepwd,jdbcType=VARCHAR},
+      </if>
+      <if test="qqelastupp != null" >
+        qqelastupp = #{qqelastupp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastfp != null" >
+        lastfp = #{lastfp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qqenote != null" >
+        qqenote = #{qqenote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where qqeid = #{qqeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jkoss.pojo.oa.Ossqq" >
+    update t_qyqq
+    set eid = #{eid,jdbcType=INTEGER},
+      t_e_eid = #{t_e_eid,jdbcType=INTEGER},
+      qqename = #{qqename,jdbcType=VARCHAR},
+      qqesex = #{qqesex,jdbcType=INTEGER},
+      qqeuse = #{qqeuse,jdbcType=VARCHAR},
+      qqepwd = #{qqepwd,jdbcType=VARCHAR},
+      qqelastupp = #{qqelastupp,jdbcType=TIMESTAMP},
+      lastfp = #{lastfp,jdbcType=TIMESTAMP},
+      qqenote = #{qqenote,jdbcType=VARCHAR}
+    where qqeid = #{qqeid,jdbcType=INTEGER}
+  </update>
+</mapper>

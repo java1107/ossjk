@@ -28,7 +28,7 @@ td {
 		align=center>
 		<tr style="background-image:url(images/top_back.gif);">
 			<td width="22%" valign="middle" style="font-size:30px;height:60px">
-				 靖凯开源经营管理系统</td>
+				 靖凯开源管理系统</td>
 			<td width="78%" valign="bottom" align="right">当前时间： <span
 				id="time"> <script>
 					document.getElementById('time').innerHTML = new Date()

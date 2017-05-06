@@ -62,7 +62,7 @@ body {
 </script>
 </head>
 <body>
-	<form action="<%=basePath%>emp/lgn.do" name="myform" method="post"
+	<form action="<%=basePath%>oa/lgn.do" name="myform" method="post"
 		onSubmit="return checkLogin()">
 		<table cellSpacing=1 cellPadding=5 width=460 align=center
 			bgColor=#b9b0a9 border=0>

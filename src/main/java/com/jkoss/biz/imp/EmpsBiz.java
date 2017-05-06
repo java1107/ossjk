@@ -7,9 +7,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jkoss.biz.IEmpsBiz;
+import com.jkoss.dao.oa.EmpfilesMapper;
 import com.jkoss.pojo.oa.Department;
 import com.jkoss.pojo.oa.EmpJobs;
 import com.jkoss.pojo.oa.EmpJobsExample;
+import com.jkoss.pojo.oa.Empfiles;
+import com.jkoss.pojo.oa.EmpfilesExample;
 import com.jkoss.pojo.oa.Emps;
 import com.jkoss.tool.Page;
 
@@ -22,6 +25,8 @@ public class EmpsBiz implements IEmpsBiz {
 	private com.jkoss.dao.oa.DepartmentMapper ddao; 
 	@Autowired
 	private com.jkoss.dao.oa.EmpJobsMapper jbdao; 
+	@Autowired
+	private  EmpfilesMapper   efdao;
 	
 	//登录
 	public Emps login(Emps e){
@@ -137,6 +142,41 @@ public class EmpsBiz implements IEmpsBiz {
 	@Transactional
 	public String deleteEmps(int eid) {
 		return edao.deleteByPrimaryKey(eid)>0?"删除成功":"删除失败";
+	}
+
+	@Override
+	@Transactional
+	public String addEmpfiles(Empfiles file) {
+		// TODO Auto-generated method stub
+		return efdao.insert(file)>0?"添加成功":"添加失败";
+	}
+
+	@Override
+	public Empfiles findEmpfilesByID(int efid) {
+		// TODO Auto-generated method stub
+		return efdao.selectByPrimaryKey(efid);
+	}
+
+ 
+	
+	@Override
+	public List<Empfiles> listEmpfilesByEmp(int eid,String fn) {
+		// TODO Auto-generated method stub
+		EmpfilesExample e = new EmpfilesExample();
+		
+		if(fn!=null){
+			e.createCriteria().andT_e_eidEqualTo(eid).andFjnameLike(fn);
+		}else{
+			e.createCriteria().andT_e_eidEqualTo(eid);
+		}
+		return efdao.selectByExample(e);
+	}
+
+	@Override
+	@Transactional
+	public String deleteEmpfiles(int fjid) {
+		// TODO Auto-generated method stub
+		return efdao.deleteByPrimaryKey(fjid)>0?"删除成功":"删除失败";
 	}
 
 

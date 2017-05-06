@@ -70,12 +70,13 @@ body {
 								d.config.target = "main";
 								d.add( 0,-1, '靖凯开源');
 								d.add( 1, 0, '办公管理', '');
-								d.add(11, 1, '部门', 'emp/lsD.do');
-								d.add(12, 1, '岗位', 'emp/lsJb.do');
-								d.add(13, 1, '员工', 'emp/lsEmp.do');
-								d.add(14, 1, '薪酬', 'team/getAllTeam.do');
-								d.add(15, 1, '考勤', 'team/getAllTeam.do');
-								d.add(16, 1, '报销', 'team/getAllTeam.do');
+								d.add(11, 1, '部门', 'oa/lsD.do');
+								d.add(12, 1, '岗位', 'oa/lsJb.do');
+								d.add(13, 1, '员工', 'oa/lsEmp.do');
+								d.add(14, 1, '工作QQ', 'oa/lsEmp.do');
+								d.add(15, 1, '薪酬', 'team/getAllTeam.do');
+								d.add(16, 1, '考勤', 'team/getAllTeam.do');
+								d.add(17, 1, '报销', 'team/getAllTeam.do');
  
 								d.add(2, 0, '人员管理', '');
 								d.add(21, 2, '人员列表', 'user/getAllUser.do');

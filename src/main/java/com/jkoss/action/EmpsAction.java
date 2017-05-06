@@ -1,6 +1,9 @@
 package com.jkoss.action;
 
+import java.io.File;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,17 +12,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jkoss.biz.IEmpsBiz;
 import com.jkoss.pojo.oa.Department;
 import com.jkoss.pojo.oa.EmpJobs;
+import com.jkoss.pojo.oa.Empfiles;
 import com.jkoss.pojo.oa.Emps;
 import com.jkoss.tool.Page;
 
  
 @Controller
-@RequestMapping("/emp")
+@RequestMapping("/oa")
 public class EmpsAction implements Serializable {
 
 	 @Autowired
@@ -37,7 +42,7 @@ public class EmpsAction implements Serializable {
 			   }*/
 		   }
 		   
-		   System.out.println(u.getDetail().getEaddress());
+		 //  System.out.println(u.getDetail().getEaddress());
 		   if(u!=null){
 			   req.getSession().setAttribute("lgnUsr", u);
 		   }else{
@@ -171,9 +176,54 @@ public class EmpsAction implements Serializable {
 	 }
 	
 
+	 @RequestMapping("/addFj")
+	 public String addAttachment(Empfiles  atta,int dpid, MultipartFile actPic1, HttpServletRequest req){
+		 
+		 //文件名称 
+		 Emps emp = this.ebiz.findEmpByID(atta.getEid());
+		 
+		 atta.setFjname(atta.getFjname()+actPic1.getOriginalFilename().substring(actPic1.getOriginalFilename().lastIndexOf(".")));
+		 atta.setFjuploaddate(new Date());
+		 File f =  new File("E:/oss附件/",emp.getEname());
+		 if(!f.exists()){
+			 f.mkdir();
+		 }
+		 try {
+			 actPic1.transferTo(new File(f,emp.getEname()+"_"+atta.getFjname()));
+			 req.setAttribute("msg",  ebiz.addEmpfiles(atta));
+		} catch (Exception e) {
+			 req.setAttribute("msg",  "添加失败");
+			e.printStackTrace();
+		
+		}
+	
+		 return "toBUEmp.do?eid="+emp.getEid()+"&dpid="+dpid;
+	 }
 	 
 	 
+	 @RequestMapping(value="/valFjname",produces="text/html;charset=UTF-8")
+     @ResponseBody
+	 public String  valFjname(int  eid,String fn){
+		 List list = ebiz.listEmpfilesByEmp(eid, fn+"%");
+		 if(list==null || list.size()>0){
+			 return "err";
+		 } 
+		 return "ok";
+	 }
 	 
-	 
+	 @RequestMapping(value="/delAtta",produces="text/html;charset=UTF-8")
+     @ResponseBody
+	 public String  delAttachment(int  fjid){
+		 Empfiles f = ebiz.findEmpfilesByID(fjid);
+		 Emps e = ebiz.findEmpByID(f.getEid());
+		 if( "删除成功".equals( ebiz.deleteEmpfiles(fjid))){
+			 
+			 File froot =   new File(new File("E:/oss附件/",e.getEname()),e.getEname()+"_"+f.getFjname());
+			 froot.delete();
+			 
+			 return "ok";
+		 } 
+		 return "err";
+	 }
 	 
 }

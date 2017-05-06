@@ -9,7 +9,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <base href="<%=basePath%>" />
-<title>欢迎使用靖凯开源咨询量管理系统
+<title>欢迎使用靖凯开源管理系统
 </title>
 </head>
 <frameset rows="108,*,30" cols="*" frameborder="no" border="0" framespacing="0">

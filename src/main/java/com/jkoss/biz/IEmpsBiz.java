@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jkoss.pojo.oa.Department;
 import com.jkoss.pojo.oa.EmpJobs;
+import com.jkoss.pojo.oa.Empfiles;
 import com.jkoss.pojo.oa.Emps;
 import com.jkoss.tool.Page;
 
@@ -31,5 +32,11 @@ public interface IEmpsBiz {
 	  List<Emps> listPageEmps(Page<Emps> page);
 	  String updtEmp(Emps emp);
 	  String deleteEmps(int eid);
+	  
+	  //员工附件word、excel和图片
+	  String addEmpfiles(Empfiles file);
+	  Empfiles findEmpfilesByID(int efid);
+	  List<Empfiles> listEmpfilesByEmp(int eid,String fn);
+	  String deleteEmpfiles(int fjid);
 	  
 }
