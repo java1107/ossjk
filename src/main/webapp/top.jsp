@@ -42,7 +42,7 @@ td {
 		<tr style="background-image:url(images/top_bg.gif); height:16px">
 			<td width="40%" style="color:#000000;">欢迎您 <b>${sessionScope.lgnUsr.ename}</b></td>
 			<td width="60%" align="right" style="color:#000000;"><a
-				href="emp/lgout.do" target="_parent">退出系统</a>
+				href="oa/lgout.do" target="_parent">退出系统</a>
 			</td>
 		</tr>
 	</table>

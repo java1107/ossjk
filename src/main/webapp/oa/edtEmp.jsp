@@ -106,7 +106,7 @@
 						       <option ${jb.jobid==emp.ejob.jobid?"selected='selected'":""} value="${jb.jobid}">${jb.jobname}</option>
 						    </c:forEach>
 						 </select>
-			      </td>
+			         </td>
 				</tr>
 			</table>
 		</td>
@@ -126,10 +126,10 @@
 				<tr align="center">
 				  <c:forEach items="${attas}" var="atta" varStatus="vsts">
 				     <c:if test="${vsts.count mod 2 eq 0}">
-				          <td align="left" bgcolor="#ebf0f7"> <a href="#" title="${atta.fjadds}">${atta.fjname}</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="btnAll" title="${atta.fjname}" lang="${atta.fjid}">【删除】</span></td>
+				          <td align="left" bgcolor="#ebf0f7"> <a href="shEmpsImg.jsp?fjid=${atta.fjid}&fn=${emp.ename}的${atta.fjname}" title="${atta.fjadds}">${atta.fjname}</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="btnAll" title="${atta.fjname}" lang="${atta.fjid}">【删除】</span></td>
 				     </c:if>
 				     <c:if test="${vsts.count mod 2 eq 1}">
-				          <td  align="left" bgcolor="#FFFFFF"  ><a href="#" title="${atta.fjadds}">${atta.fjname}</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="btnAll" title="${atta.fjname}" lang="${atta.fjid}">【删除】</span></td>
+				          <td  align="left" bgcolor="#FFFFFF"><a href="shEmpsImg.jsp?fjid=${atta.fjid}&fn=${emp.ename}的${atta.fjname}" title="${atta.fjadds}">${atta.fjname}</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="btnAll" title="${atta.fjname}" lang="${atta.fjid}">【删除】</span></td>
 				     </c:if>
 				       <c:if test="${vsts.count mod 4 eq 0}">
 				         </tr><tr align="left">
@@ -139,7 +139,6 @@
 			</table>
 		</td>
 	</tr>
-
 </table>
 </form>
 	<div id="dw" class="easyui-window" title="新增附件信息" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:310px;height:200px;padding:10px;display: none;">
@@ -153,3 +152,8 @@
 		      <input type="submit" value="上传"/> <span id="msg2" style="color: red"></span>  <br>
 		</form>
 	</div>
+	
+	
+	
+	
+	
