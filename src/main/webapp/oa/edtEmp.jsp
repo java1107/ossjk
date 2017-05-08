@@ -45,7 +45,7 @@
     							     $(v).parent().html("");
     						   } 
     					   });
-    			  }
+    		    	  }
     		   });
     	   } 
           });
@@ -57,7 +57,6 @@
 				    	 $("input[type='submit']").prop("disabled","disabled");	 
 				    }  
 			   });
-
          }).keydown(function(){
         	 $("#msg2").html("");
         	 $("input[type='submit']").removeProp("disabled");
@@ -65,8 +64,6 @@
           
         });
     </script>
-
-
 
 <form action="upEmp.do" method="post">
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -141,13 +138,13 @@
 	</tr>
 </table>
 </form>
-	<div id="dw" class="easyui-window" title="新增附件信息" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:310px;height:200px;padding:10px;display: none;">
+	<div id="dw" class="easyui-window" title="新增附件信息" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:310px;height:220px;padding:10px;display: none;">
 		<form action="addFj.do" method="post" enctype="multipart/form-data">
 		  <input type="hidden" name="dpid" value="${param.dpid}"/>
 		  <input type="hidden" name="eid" value="${emp.eid}"/>
 			<input type="hidden" name="t_e_eid" value="${sessionScope.lgnUsr.eid}"/>
 		     个人附件名称：<input name="fjname" id="fjname" lang="${emp.eid}"/><br><br>
-		     文件 ：<input type="file" name="actPic1"><br><br>
+		     文件 ：<input type="file" name="actPic1"><br>[仅限各种图片格式]<br><br>
 		          备注 ：<textarea name=fjadds rows="2" cols="30" id="upd_dnote"></textarea><br><br>
 		      <input type="submit" value="上传"/> <span id="msg2" style="color: red"></span>  <br>
 		</form>

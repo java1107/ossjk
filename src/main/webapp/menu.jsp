@@ -73,7 +73,7 @@ body {
 								d.add(11, 1, '部门', 'oa/lsD.do');
 								d.add(12, 1, '岗位', 'oa/lsJb.do');
 								d.add(13, 1, '员工', 'oa/lsEmp.do');
-								d.add(14, 1, '工作QQ', 'oa/lsEmp.do');
+								d.add(14, 1, '工作QQ', 'oa/lsEqq.do');
 								d.add(15, 1, '薪酬', 'team/getAllTeam.do');
 								d.add(16, 1, '考勤', 'team/getAllTeam.do');
 								d.add(17, 1, '报销', 'team/getAllTeam.do');

@@ -6,8 +6,12 @@ public class Ossqq {
     private Integer qqeid;
 
     private Integer eid;
-
+    private Emps    owner;  //拥有人
+    
     private Integer t_e_eid;
+    private Emps    useEmp;   //使用人
+    
+    
 
     private String qqename;
 
@@ -102,4 +106,24 @@ public class Ossqq {
     public void setQqenote(String qqenote) {
         this.qqenote = qqenote == null ? null : qqenote.trim();
     }
+
+	public Emps getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Emps owner) {
+		this.owner = owner;
+	}
+
+	public Emps getUseEmp() {
+		return useEmp;
+	}
+
+	public void setUseEmp(Emps useEmp) {
+		this.useEmp = useEmp;
+	}
+    
+    
+    
+    
 }

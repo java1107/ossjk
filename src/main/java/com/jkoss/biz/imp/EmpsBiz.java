@@ -8,12 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jkoss.biz.IEmpsBiz;
 import com.jkoss.dao.oa.EmpfilesMapper;
+import com.jkoss.dao.oa.OssqqMapper;
 import com.jkoss.pojo.oa.Department;
 import com.jkoss.pojo.oa.EmpJobs;
 import com.jkoss.pojo.oa.EmpJobsExample;
 import com.jkoss.pojo.oa.Empfiles;
 import com.jkoss.pojo.oa.EmpfilesExample;
 import com.jkoss.pojo.oa.Emps;
+import com.jkoss.pojo.oa.Ossqq;
 import com.jkoss.tool.Page;
 
 @Component
@@ -27,6 +29,8 @@ public class EmpsBiz implements IEmpsBiz {
 	private com.jkoss.dao.oa.EmpJobsMapper jbdao; 
 	@Autowired
 	private  EmpfilesMapper   efdao;
+	@Autowired
+	private OssqqMapper      eqqDao;
 	
 	//登录
 	public Emps login(Emps e){
@@ -179,7 +183,41 @@ public class EmpsBiz implements IEmpsBiz {
 		return efdao.deleteByPrimaryKey(fjid)>0?"删除成功":"删除失败";
 	}
 
+//////////////////////// 企业qq管理
+	@Override
+	public List<Ossqq> listPageOssqqs(Page<Ossqq> page) {
+		// TODO Auto-generated method stub
+		return eqqDao.selectAtPage(page);
+	}
 
+	@Override
+	@Transactional
+	public String addOssqq(Ossqq jb) {
+		// TODO Auto-generated method stub
+		return eqqDao.insert(jb)>0?"添加成功":"添加失败";
+	}
+
+	@Override
+	public Ossqq findOssqqByID(int qqeid) {
+		// TODO Auto-generated method stub
+		return eqqDao.selectByPrimaryKey(qqeid);
+	}
+
+	@Override
+	@Transactional
+	public String deleteOssqq(int qqeid) {
+		// TODO Auto-generated method stub
+		return eqqDao.deleteByPrimaryKey(qqeid)>0?"删除成功":"删除失败";
+	}
+
+	@Override
+	@Transactional
+	public String updtOssqq(Ossqq eqq) {
+		// TODO Auto-generated method stub
+		return eqqDao.updateByPrimaryKey(eqq)>0?"更新成功":"更新失败";
+	}
+
+////////////////////////企业qq管理 end
  
 	
 	

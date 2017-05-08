@@ -20,6 +20,7 @@ import com.jkoss.pojo.oa.Department;
 import com.jkoss.pojo.oa.EmpJobs;
 import com.jkoss.pojo.oa.Empfiles;
 import com.jkoss.pojo.oa.Emps;
+import com.jkoss.pojo.oa.Ossqq;
 import com.jkoss.tool.Page;
 
  
@@ -225,5 +226,52 @@ public class EmpsAction implements Serializable {
 		 } 
 		 return "err";
 	 }
+	 
+	 //////////////////////////////////////////企业qq管理
+	 @RequestMapping("/lsEqq")
+	 public String listOssqq(HttpServletRequest req,Page<Ossqq> page,Integer depID){
+		 
+		 if(page==null){
+			 page = new Page<Ossqq>();
+		 }
+		 
+		 //加载数据
+		List<Ossqq>  list =  ebiz.listPageOssqqs(page);  
+		for (Ossqq ossqq : list) {
+			System.out.println(ossqq.getEid() +"   "+ossqq.getOwner());    //关联失败
+		} 
+		page.setResults(list);
+		 
+	    req.setAttribute("page", page);
+			
+		 return "/oa/listEqq.jsp";
+	 }
+	 
+	 
+	 ///
+	 @RequestMapping("/addEqq")
+	 public String addEmpQQ(Ossqq  eqq,  HttpServletRequest req){
+		 req.setAttribute("msg",  ebiz.addOssqq(eqq) );
+		 return listOssqq(req,null,null);
+	 }
+	 
+	 @RequestMapping("/deleQQ")
+	 public String deleteOssqq(int  eqid,  HttpServletRequest req){
+		 req.setAttribute("msg",  ebiz.deleteOssqq(eqid));
+		 return listOssqq(req,null,null);
+	 }
+	
+	 //updEqq.do
+	 @RequestMapping(value="/oneEqq",produces="text/html;charset=UTF-8")
+     @ResponseBody
+	 public String oneOssqq(int  qqeid,  HttpServletRequest req){	
+		 Ossqq j = ebiz.findOssqqByID(qqeid);
+         j.setQqelastupp(new Date());
+		// req.setAttribute("eqq", j );
+		 return JSONObject.toJSONString(j);
+	 }
+	 
+	 
+	 
 	 
 }

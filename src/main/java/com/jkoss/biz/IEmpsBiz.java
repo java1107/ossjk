@@ -6,6 +6,7 @@ import com.jkoss.pojo.oa.Department;
 import com.jkoss.pojo.oa.EmpJobs;
 import com.jkoss.pojo.oa.Empfiles;
 import com.jkoss.pojo.oa.Emps;
+import com.jkoss.pojo.oa.Ossqq;
 import com.jkoss.tool.Page;
 
 public interface IEmpsBiz {
@@ -38,5 +39,12 @@ public interface IEmpsBiz {
 	  Empfiles findEmpfilesByID(int efid);
 	  List<Empfiles> listEmpfilesByEmp(int eid,String fn);
 	  String deleteEmpfiles(int fjid);
+	  
+	  //企业QQ
+	  List<Ossqq> listPageOssqqs(Page<Ossqq> page);
+	  String addOssqq(Ossqq jb); 
+	  Ossqq findOssqqByID(int qqeid);
+	  String deleteOssqq(int qqeid);
+	  String updtOssqq(Ossqq eqq);
 	  
 }
