@@ -40,13 +40,7 @@
         		   });
         	   }else if($(v).html()=='【编辑】'){
         		   $(v).click(function(){
-        			   //ajax
-        			   $.get("oneEqq.do?qqeid="+ $(v).prop("lang")+"&x="+Math.random(),function(jsonTxt){
-        				   alert(jsonTxt);
-        				   var jsonObj = eval("("+jsonTxt+")");
-        				   $("#qqename").val(jsonObj.qqename);
-        				    $('#dwEdit').window("open");
-        			   });
+        			  location.href="oneEqq.do?qqeid="+ $(v).prop("lang")+"&x="+Math.random();
         		   });
         	   }else if($(v).html()=='【删除】'){
         		   $(v).click(function(){
@@ -122,22 +116,7 @@
 		</form>
 	</div>
 	
-	 <div id="dwEdit" class="easyui-window" title="修改企业QQ信息" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:300px;height:200px;padding:10px;display: none;">
-		<form action="updEqq.do" method="post">
-	  	 <input type="hidden" name="qqeid" value="${eqq.qqeid}"/>
-		   qq号码：<input name="qqename"   id="qqename"/><br> 
-		   QQ性别： <select  name="qqesex"  >
-		                <option  ${eqq.qqesex==0?"selected='selected'":""}    value="0">女</option>
-		                <option  ${eqq.qqesex==1?"selected='selected'":""}  value="1">男</option>
-		        </select>
-		   <br> 
-		   QQ用途：<input name="qqeuse"  value="${eqq.qqeuse}"/><br> 
-		   QQ密码：<input name="qqepwd"  value="${eqq.qqepwd}"/><br> 
-		   最近更新密码时间： <br> 
-		   QQ备注： <textarea name="qqenote" rows="3" cols="30"  value="${eqq.qqenote}"></textarea><br><br>
-		      <input type="submit" value="修改"/><br>
-		</form>
-	</div>
+	
 	
 </body>
 </html>

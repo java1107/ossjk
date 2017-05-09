@@ -29,7 +29,8 @@
     <association  property="ejob" javaType="com.jkoss.pojo.oa.EmpJobs"    fetchType="eager"
                   select="com.jkoss.dao.oa.EmpJobsMapper.selectByPrimaryKey" column="jobid" />  
                    
-    <collection property="rights" ofType="com.jkoss.pojo.sys.Sysright" select="com.jkoss.dao.sys.SysrightMapper.selectByEid" column="eid">
+    <collection property="rights" ofType="com.jkoss.pojo.sys.Sysright"
+         select="com.jkoss.dao.sys.SysrightMapper.selectByEid" column="eid">
     
     </collection>
   </resultMap>

@@ -23,6 +23,15 @@ public interface EmpsMapper {
 	@ResultMap("com.jkoss.dao.oa.EmpsMapper.BaseResultMap")
     Emps selectByLgnName(String lgnName);
  
+	@Select("select  * from t_emps  where eid = #{eid}")
+	@ResultMap("com.jkoss.dao.oa.EmpsMapper.BaseResultMap2")
+    Emps selectByID(int eid);
+	
+	@Select("select a.* from t_emps a,t_jobs b,t_department c where a.jobid=b.jobid and b.depID=c.depID and c.depID=#{dptID}")
+	@ResultMap("com.jkoss.dao.oa.EmpsMapper.BaseResultMap")
+	List<Emps> selectEmpsByDpt(int  dptID);
+	
+	
     int countByExample(EmpsExample example);
 
     /**

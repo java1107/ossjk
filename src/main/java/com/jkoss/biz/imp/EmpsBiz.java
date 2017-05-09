@@ -147,6 +147,12 @@ public class EmpsBiz implements IEmpsBiz {
 	public String deleteEmps(int eid) {
 		return edao.deleteByPrimaryKey(eid)>0?"删除成功":"删除失败";
 	}
+	
+	@Override
+	public List<Emps> listDptEmps(int did) {
+		// TODO Auto-generated method stub
+		return edao.selectEmpsByDpt(did);
+	}
 
 	@Override
 	@Transactional
@@ -187,7 +193,14 @@ public class EmpsBiz implements IEmpsBiz {
 	@Override
 	public List<Ossqq> listPageOssqqs(Page<Ossqq> page) {
 		// TODO Auto-generated method stub
-		return eqqDao.selectAtPage(page);
+		List<Ossqq> datas =  eqqDao.selectAtPage(page);
+		if(datas!=null){
+			for (Ossqq ossqq : datas) {
+				ossqq.setOwner(findEmpByID(ossqq.getEid()));
+				ossqq.setUseEmp(findEmpByID(ossqq.getT_e_eid()));
+			}
+		}
+		return datas;
 	}
 
 	@Override
@@ -216,6 +229,8 @@ public class EmpsBiz implements IEmpsBiz {
 		// TODO Auto-generated method stub
 		return eqqDao.updateByPrimaryKey(eqq)>0?"更新成功":"更新失败";
 	}
+
+
 
 ////////////////////////企业qq管理 end
  

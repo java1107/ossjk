@@ -236,11 +236,7 @@ public class EmpsAction implements Serializable {
 		 }
 		 
 		 //加载数据
-		List<Ossqq>  list =  ebiz.listPageOssqqs(page);  
-		for (Ossqq ossqq : list) {
-			System.out.println(ossqq.getEid() +"   "+ossqq.getOwner());    //关联失败
-		} 
-		page.setResults(list);
+		page.setResults( ebiz.listPageOssqqs(page));
 		 
 	    req.setAttribute("page", page);
 			
@@ -262,13 +258,23 @@ public class EmpsAction implements Serializable {
 	 }
 	
 	 //updEqq.do
-	 @RequestMapping(value="/oneEqq",produces="text/html;charset=UTF-8")
-     @ResponseBody
+	 @RequestMapping(value="/oneEqq")
 	 public String oneOssqq(int  qqeid,  HttpServletRequest req){	
 		 Ossqq j = ebiz.findOssqqByID(qqeid);
+		 j.setOwner(ebiz.findEmpByID(j.getEid()));
+		 j.setUseEmp(ebiz.findEmpByID(j.getT_e_eid()));
          j.setQqelastupp(new Date());
-		// req.setAttribute("eqq", j );
-		 return JSONObject.toJSONString(j);
+		 req.setAttribute("eqq", j );
+		 
+		 //检查application中部门信息
+		 if(req.getServletContext().getAttribute("dpts")==null){
+			 req.getServletContext().setAttribute("dpts",ebiz.listDepts());
+		 }
+		 
+		 //一个部门的所有员工
+		 req.setAttribute("dptEmps", ebiz.listDptEmps(j.getUseEmp().getEjob().getDepID()) );
+		 
+		 return "/oa/upEqq.jsp";
 	 }
 	 
 	 

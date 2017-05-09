@@ -1,19 +1,19 @@
 package com.jkoss.dao.oa;
 
-import com.jkoss.pojo.oa.Department;
-import com.jkoss.pojo.oa.Ossqq;
-import com.jkoss.pojo.oa.OssqqExample;
-import com.jkoss.tool.Page;
-
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jkoss.pojo.oa.Ossqq;
+import com.jkoss.pojo.oa.OssqqExample;
+import com.jkoss.tool.Page;
+
 public interface OssqqMapper {
 	
 	@Select("select * from t_qyqq") 
-	@RequestMapping("com.jkoss.dao.oa.OssqqMapper.BaseResultMap2")
+	@RequestMapping("com.jkoss.dao.oa.OssqqMapper.BaseResultMap")
 	List<Ossqq> selectAtPage(Page page);
 	
     int countByExample(OssqqExample example);

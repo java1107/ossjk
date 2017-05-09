@@ -13,26 +13,9 @@
     <result column="qqelastupp" property="qqelastupp" jdbcType="TIMESTAMP" />
     <result column="lastfp" property="lastfp" jdbcType="TIMESTAMP" />
     <result column="qqenote" property="qqenote" jdbcType="VARCHAR" />
+
   </resultMap>
-  
-  <resultMap id="BaseResultMap2" type="com.jkoss.pojo.oa.Ossqq" >
-    <id column="qqeid" property="qqeid" jdbcType="INTEGER" />
-    <result column="eid" property="eid" jdbcType="INTEGER" />
-    <result column="t_e_eid" property="t_e_eid" jdbcType="INTEGER" />
-    <result column="qqename" property="qqename" jdbcType="VARCHAR" />
-    <result column="qqesex" property="qqesex" jdbcType="INTEGER" />
-    <result column="qqeuse" property="qqeuse" jdbcType="VARCHAR" />
-    <result column="qqepwd" property="qqepwd" jdbcType="VARCHAR" />
-    <result column="qqelastupp" property="qqelastupp" jdbcType="TIMESTAMP" />
-    <result column="lastfp" property="lastfp" jdbcType="TIMESTAMP" />
-    <result column="qqenote" property="qqenote" jdbcType="VARCHAR" />
-   <!-- 延迟加载 --> 
-    <association  property="owner" javaType="com.jkoss.pojo.oa.Emps" fetchType="eager"    
-                  select="com.jkoss.dao.oa.EmpsMapper.selectByPrimaryKey" column="eid" />  
-    
-                  
-  </resultMap>
-  
+
   
   <sql id="Example_Where_Clause" >
     <where >

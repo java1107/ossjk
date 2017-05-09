@@ -20,6 +20,7 @@ public interface IEmpsBiz {
 	  String deleteDept(int depID);
 	  List<Department> listDepts();
 	  
+	  
 	  ///	岗位 
 	  List<EmpJobs> findJobsByDid(int did);
 	  String addJob(EmpJobs jb);
@@ -33,6 +34,7 @@ public interface IEmpsBiz {
 	  List<Emps> listPageEmps(Page<Emps> page);
 	  String updtEmp(Emps emp);
 	  String deleteEmps(int eid);
+	  List<Emps> listDptEmps(int did);
 	  
 	  //员工附件word、excel和图片
 	  String addEmpfiles(Empfiles file);
