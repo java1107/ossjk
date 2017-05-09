@@ -247,6 +247,11 @@ public class EmpsAction implements Serializable {
 	 ///
 	 @RequestMapping("/addEqq")
 	 public String addEmpQQ(Ossqq  eqq,  HttpServletRequest req){
+		 
+		 //谁录入谁就是所有人
+		 Emps emp =(Emps) req.getSession().getAttribute("lgnUsr");
+		 eqq.setEid(emp.getEid());
+		 
 		 req.setAttribute("msg",  ebiz.addOssqq(eqq) );
 		 return listOssqq(req,null,null);
 	 }
@@ -258,11 +263,13 @@ public class EmpsAction implements Serializable {
 	 }
 	
 	 //updEqq.do
-	 @RequestMapping(value="/oneEqq")
+	 @RequestMapping(value="/toUpdtEqq")
 	 public String oneOssqq(int  qqeid,  HttpServletRequest req){	
 		 Ossqq j = ebiz.findOssqqByID(qqeid);
-		 j.setOwner(ebiz.findEmpByID(j.getEid()));
-		 j.setUseEmp(ebiz.findEmpByID(j.getT_e_eid()));
+		 if(j.getEid()!=null)
+			   j.setOwner(ebiz.findEmpByID(j.getEid()));
+		 if(j.getT_e_eid()!=null)
+			   j.setUseEmp(ebiz.findEmpByID(j.getT_e_eid()));
          j.setQqelastupp(new Date());
 		 req.setAttribute("eqq", j );
 		 
@@ -275,6 +282,61 @@ public class EmpsAction implements Serializable {
 		 req.setAttribute("dptEmps", ebiz.listDptEmps(j.getUseEmp().getEjob().getDepID()) );
 		 
 		 return "/oa/upEqq.jsp";
+	 }
+	 
+	   //更换企业qq使用人
+	 @RequestMapping(value="/chgEqqUsr",produces="text/html;charset=UTF-8")
+     @ResponseBody
+	 public String  changeEqqUser(int  qqeid,int eid){
+		 //取得Eqq
+		 Ossqq eqq =   ebiz.findOssqqByID(qqeid);
+		 eqq.setT_e_eid(eid);
+		 eqq.setLastfp(new Date());   //更新的时间戳
+		 Emps emp = ebiz.findEmpByID(eid);
+		 System.out.println("{usr='"+emp.getEname()+"',msg='"+   ebiz.updtOssqq(eqq)+"'}");
+		 return  "{usr:'"+emp.getEname()+"',msg:'"+   ebiz.updtOssqq(eqq)+"'}";
+	 }
+	 
+	 
+	 @RequestMapping(value="/uptEqq")
+	 public String updateEqq(Ossqq  eqq,  HttpServletRequest req){	
+ 
+		 Ossqq tmp =  ebiz.findOssqqByID(eqq.getQqeid());
+		// tmp.setLastfp(new Date());  //更新的时间戳
+		 tmp.setQqesex(eqq.getQqesex());
+		 tmp.setQqenote(eqq.getQqenote());
+		 tmp.setQqepwd(eqq.getQqepwd());
+		 tmp.setQqeuse(eqq.getQqeuse());
+		 
+		 req.setAttribute("msg", ebiz.updtOssqq(tmp) );
+		  
+		 return listOssqq(  req,null,null);
+	 }
+	 
+
+	   //更换企业qq使用人
+	 @RequestMapping(value="/valEqq",produces="text/html;charset=UTF-8")
+     @ResponseBody
+	 public String  validateEqq(String  qqename){
+		 if(ebiz.findOssqqByName(qqename)==null){
+			 return  "ok";
+		 }
+		 return  "err";
+	 }
+	 
+	 @RequestMapping(value="/oneEqq")
+	 public String    showOneOssqq(int  qqeid,  HttpServletRequest req){	
+		 Ossqq j = ebiz.findOssqqByID(qqeid);
+		 
+		 if(j.getEid()!=null)
+		   j.setOwner(ebiz.findEmpByID(j.getEid()));
+		 if(j.getT_e_eid()!=null)
+		   j.setUseEmp(ebiz.findEmpByID(j.getT_e_eid()));
+
+		 req.setAttribute("eqq", j );
+ 
+		 
+		 return "/oa/showEqq.jsp";
 	 }
 	 
 	 

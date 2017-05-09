@@ -46,7 +46,11 @@ public interface IEmpsBiz {
 	  List<Ossqq> listPageOssqqs(Page<Ossqq> page);
 	  String addOssqq(Ossqq jb); 
 	  Ossqq findOssqqByID(int qqeid);
+	  Ossqq findOssqqByName(String qqname);
 	  String deleteOssqq(int qqeid);
 	  String updtOssqq(Ossqq eqq);
+	  
+	  
+	  
 	  
 }

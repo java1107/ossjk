@@ -11,8 +11,6 @@ public class Ossqq {
     private Integer t_e_eid;
     private Emps    useEmp;   //使用人
     
-    
-
     private String qqename;
 
     private Integer qqesex;

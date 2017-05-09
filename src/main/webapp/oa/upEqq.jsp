@@ -28,23 +28,48 @@
     				   $('#dw').window("open");
     			 });
         	   
-        	    
-           
+        	   $("#slkt_Dpt").change(function(){
+        		   //发起异步请求
+        		   $.get("empsInDpt.do?dptID="+ $(this).val()+"&x="+Math.random(),function(jsonTxt){
+        			    var arrs = eval("("+jsonTxt+")");
+        			    $("#slktEmps").html("");
+        			    $.each(arrs,function(i,v){
+        			    	 $("<option value='"+v.eid+"'>"+v.ename+"</option>").appendTo($("#slktEmps"));
+        			    });
+        		    });  
+        	   });
+        	   
+        	   //确认分配
+        	   $("#btn_conf").click(function(){
+        		   //更换企业qq使用人
+        		     $.get("chgEqqUsr.do?qqeid="+ $(this).prop("lang")+"&eid="+$("#slktEmps").val()+"&x="+Math.random(),function(jsonTxt){
+        		    	 
+        		    	 var json = eval("("+jsonTxt+")");
+        		    	 
+        		    	  if("更新成功"==json.msg){
+        		    		  $("#eqqUser").html(json.usr);
+        		    	  }
+        		    	  
+        		    	  $("#msg").html("修改使用人到"+json.usr+json.msg);
+        		    	  $('#dw').window("close");
+        		     });  
+        	   });
+        	   
         });
     </script>
 	<!-- 包含等待框 -->
-	<form action="uptJob.do" method="post">
+	<form action="uptEqq.do" method="post">
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 		<tr valign="top">
 			<td bgcolor="#FFFFFF">
 			    <table width="96%" border="0" align="center" cellpadding="4" cellspacing="1" bgcolor="#aec3de">
 					<tr align="left" bgcolor="#F2FDFF">
-						<td colspan="2" class="optiontitle">企业QQ所有人:${eqq.owner.ename},最后更新时间:[<fmt:formatDate value="${eqq.lastfp}" pattern="yyyy-MM-dd HH:mm:ss"/>]&nbsp;&nbsp;|&nbsp;&nbsp;当前分配给:${eqq.useEmp.ename}<span id="btnAll">【点击修改】</span>
+						<td colspan="2" class="optiontitle">企业QQ所有人: ${eqq.owner.ename}&nbsp;&nbsp;|&nbsp;&nbsp;当前分配给:<span id="eqqUser">${eqq.useEmp.ename}</span><span id="btnAll">【点击修改】</span>
 						<input type="hidden" name="qqeid" value="${eqq.qqeid}"/></td>
-					</tr>
+					</tr>  
 					<tr align="center">
 						<td align="center" bgcolor="#ebf0f7">QQ号码</td>
-						<td align="left" bgcolor="#FFFFFF"><input name="qqename"   value="${eqq.qqename}"/></td> 
+						<td align="left" bgcolor="#FFFFFF">${eqq.qqename}&nbsp;&nbsp;&nbsp;&nbsp;[最近分配时间:<fmt:formatDate value="${eqq.lastfp}" pattern="yyyy-MM-dd HH:mm:ss"/>]</td> 
 					</tr>
 					<tr align="center">
 						<td align="center" bgcolor="#ebf0f7">QQ性别</td>
@@ -81,19 +106,16 @@
     
 	</table>
   </form>
- 	<div id="dw" class="easyui-window" title="创建新企业qq" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:300px;height:180px;padding:10px;display: none;">
-		<form action="addEqq.do" method="post">
+ 	<div id="dw" class="easyui-window" title="分配企业QQ" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:300px;height:180px;padding:10px;display: none;">
 		 当前使用人：${eqq.useEmp.ename}<br><br>  
-		 
-		  分配给部门： <select  name="qqesex2">   <c:forEach items="${dpts}" var="dpt">
+		  分配给部门： <select  id="slkt_Dpt">   <c:forEach items="${dpts}" var="dpt">
 						       <option ${dpt.depID==eqq.useEmp.ejob.depID?"selected='selected'":""} value="${dpt.depID}">${dpt.depname}</option>
 						    </c:forEach></select>
-		   <br><br> 员工: <select  name="qqesex">
+		   <br><br> 员工: <select  id="slktEmps">
 		                <c:forEach items="${dptEmps}" var="emp">
-						       <option   value="${emp.eid}">${emp.ename}</option>
+						 <option   value="${emp.eid}">${emp.ename}</option>
 						    </c:forEach>
 		        </select>    <br><br>
-
-		      <input type="submit" value="确认"   /><br>
-		</form>
+		      <input type="button" id="btn_conf" value="确认分配"  lang="${eqq.qqeid}" /><br>
+	
 	</div>

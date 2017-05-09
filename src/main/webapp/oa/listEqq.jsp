@@ -40,7 +40,7 @@
         		   });
         	   }else if($(v).html()=='【编辑】'){
         		   $(v).click(function(){
-        			  location.href="oneEqq.do?qqeid="+ $(v).prop("lang")+"&x="+Math.random();
+        			  location.href="toUpdtEqq.do?qqeid="+ $(v).prop("lang")+"&x="+Math.random();
         		   });
         	   }else if($(v).html()=='【删除】'){
         		   $(v).click(function(){
@@ -50,6 +50,21 @@
         		   });
         	   } 
            });
+              
+           //验证qq号码是否已存在
+           $("input[name='qqename']").blur(function(){
+        	   //ajax验证
+        	   $.get("valEqq.do?qqename="+ $(this).val()+"&x="+Math.random(),function(jsonTxt){
+   			       if("err"==jsonTxt){
+   			    	   $("#btn_save").prop("disabled",true);
+   			    	   $("#errMsg").html("Q号已经存在");
+   			       }
+   		       }); 
+            }).keypress(function(){
+		    	   $("#errMsg").html("");
+		    	   $("#btn_save").prop("disabled",false);
+		    });  
+            
            
         });
     </script>
@@ -79,7 +94,7 @@
 							<td align="center">${eqq.qqeuse}</td>
 							<td align="center">${eqq.qqenote}</td>
 							<td align="center">
-							【<a href="oneDpt.do?dptID=${eqq.qqeid}">查看</a>】<c:if test="${lgnUsr.eid > 0}">
+							【<a href="oneEqq.do?qqeid=${eqq.qqeid}">查看</a>】<c:if test="${lgnUsr.eid > 0}">
 									| <span class="btnAll" lang="${eqq.qqeid}">【编辑】</span>
 								    | <span class="btnAll" lang="${eqq.qqeid}" title="${eqq.qqename}">【删除】</span>
 				                   </c:if>
@@ -102,7 +117,7 @@
   
 	<div id="dw" class="easyui-window" title="创建新企业qq" data-options="modal:true,minimizable:false,closed:true,maximizable:false,iconCls:'icon-save'" style="width:300px;height:240px;padding:10px;display: none;">
 		<form action="addEqq.do" method="post">
-		   qq号码：<input name="qqename"/><br> 
+		   qq号码：<input name="qqename"/> <span id="errMsg" style="color: red"></span>   <br> 
 		   QQ性别： <select  name="qqesex">
 		                <option value="0">女</option>
 		                <option value="1">男</option>
@@ -112,7 +127,7 @@
 		   QQ密码：<input name="qqepwd"/><br> 
 		   最近更新密码时间： <br> 
 		   QQ备注： <textarea name="qqenote" rows="3" cols="30"></textarea><br><br>
-		      <input type="submit" value="保存"/><br>
+		      <input id="btn_save" type="submit" value="保存" /><br>
 		</form>
 	</div>
 	

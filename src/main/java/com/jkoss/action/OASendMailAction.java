@@ -20,6 +20,8 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
 import com.jkoss.biz.IEmpsBiz;
 import com.jkoss.pojo.oa.EmpJobs;
 import com.jkoss.pojo.oa.Emps;
@@ -156,7 +158,12 @@ public class OASendMailAction implements Serializable{
 			return msg;
 		}
 	 
-	 
+	    //根据部门查询一个部门的所有员工
+		@RequestMapping(value="/empsInDpt",produces="text/html;charset=UTF-8")
+	    @ResponseBody
+		public String findAllEmpsByDptID(int dptID){
+			return JSONObject.toJSONString(this.ebiz.listDptEmps(dptID));
+		}
 	 
 	 
 	 

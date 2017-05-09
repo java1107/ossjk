@@ -196,8 +196,10 @@ public class EmpsBiz implements IEmpsBiz {
 		List<Ossqq> datas =  eqqDao.selectAtPage(page);
 		if(datas!=null){
 			for (Ossqq ossqq : datas) {
-				ossqq.setOwner(findEmpByID(ossqq.getEid()));
-				ossqq.setUseEmp(findEmpByID(ossqq.getT_e_eid()));
+				if(ossqq.getEid()!=null)
+				   ossqq.setOwner(findEmpByID(ossqq.getEid()));
+				if(ossqq.getT_e_eid()!=null)
+				   ossqq.setUseEmp(findEmpByID(ossqq.getT_e_eid()));
 			}
 		}
 		return datas;
@@ -228,6 +230,12 @@ public class EmpsBiz implements IEmpsBiz {
 	public String updtOssqq(Ossqq eqq) {
 		// TODO Auto-generated method stub
 		return eqqDao.updateByPrimaryKey(eqq)>0?"更新成功":"更新失败";
+	}
+
+	@Override
+	public Ossqq findOssqqByName(String qqname) {
+		// TODO Auto-generated method stub
+		return eqqDao.selectByEqename(qqname);
 	}
 
 
