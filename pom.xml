@@ -7,6 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ossjk</name>
 	<url>http://maven.apache.org</url>
+	
 	<properties>
 		<!-- spring版本号 -->
 		<spring.version>4.1.6.RELEASE</spring.version>

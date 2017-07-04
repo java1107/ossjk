@@ -74,10 +74,14 @@ body {
 								d.add(12, 1, '岗位', 'oa/lsJb.do');
 								d.add(13, 1, '员工', 'oa/lsEmp.do');
 								d.add(14, 1, '工作QQ', 'oa/lsEqq.do');
-								d.add(15, 1, '薪酬', 'team/getAllTeam.do');
-								d.add(16, 1, '考勤', 'team/getAllTeam.do');
-								d.add(17, 1, '报销', 'team/getAllTeam.do');
- 
+								d.add(15, 1, '薪酬', '');
+						
+								d.add(16, 15, '工资报表', 'oa/lsSal.do');
+								d.add(17, 15, '工资审批', 'user/getAllUser.do');
+								
+								d.add(18, 1, '考勤', 'team/getAllTeam.do');
+								d.add(19, 1, '报销', 'team/getAllTeam.do');
+								
 								d.add(2, 0, '人员管理', '');
 								d.add(21, 2, '人员列表', 'user/getAllUser.do');
 								if (role >= 1) {

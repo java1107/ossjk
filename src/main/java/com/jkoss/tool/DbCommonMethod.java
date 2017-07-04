@@ -15,6 +15,8 @@ public abstract class DbCommonMethod implements Serializable {
 	 */
 	public static SimpleDateFormat isoFormat = new SimpleDateFormat(
 			"yyyy-MM-dd");
+	
+	public static SimpleDateFormat isoFormatMth = new SimpleDateFormat("yyyy-MM");
 	/**
 	 * SimpleDateFormat("yyyyMMdd");
 	 */

@@ -105,6 +105,10 @@
 						 </select>
 			         </td>
 				</tr>
+				<tr align="center">
+					<td align="center" bgcolor="#ebf0f7">员工备注</td>
+					<td align="left" bgcolor="#FFFFFF"><textarea name="enotion" rows="3" cols="80" >${emp.enotion}</textarea></td>
+				</tr>
 			</table>
 		</td>
 	</tr>

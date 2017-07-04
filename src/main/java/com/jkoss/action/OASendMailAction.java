@@ -46,12 +46,7 @@ public class OASendMailAction implements Serializable{
 		 if(page==null){
 			 page = new Page<Emps>();
 		 }
-		 
-		 //检查application中部门信息
-		 if(req.getServletContext().getAttribute("dpts")==null){
-			 req.getServletContext().setAttribute("dpts",ebiz.listDepts());
-		 }
-		 
+ 
 		if(depID==null){
 			Emps emp =(Emps) req.getSession().getAttribute("lgnUsr");
 			depID = emp.getEjob().getDepID();
@@ -62,7 +57,7 @@ public class OASendMailAction implements Serializable{
 		page.setResults(ebiz.listPageEmps(page));
 		 
 	    req.setAttribute("page", page);
-       req.setAttribute("jobs", ebiz.findJobsByDid(depID));
+        req.setAttribute("jobs", ebiz.findJobsByDid(depID));
 	
 		return "/oa/listEmps.jsp";
 	 }
@@ -123,6 +118,7 @@ public class OASendMailAction implements Serializable{
 		 etmp.setJobid(e.getJobid());
 		 //etmp.setHireDate(e.getHireDate());
 		 etmp.setQqe(e.getQqe());
+		 etmp.setEnotion(e.getEnotion());
 		
 		 req.setAttribute("msg",  ebiz.updtEmp(etmp));
 	 

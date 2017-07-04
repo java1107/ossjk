@@ -1,5 +1,6 @@
 package com.jkoss.biz.imp;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jkoss.biz.IEmpsBiz;
 import com.jkoss.dao.oa.EmpfilesMapper;
 import com.jkoss.dao.oa.OssqqMapper;
+import com.jkoss.dao.oa.SalaryMapper;
 import com.jkoss.pojo.oa.Department;
 import com.jkoss.pojo.oa.EmpJobs;
 import com.jkoss.pojo.oa.EmpJobsExample;
@@ -16,6 +18,7 @@ import com.jkoss.pojo.oa.Empfiles;
 import com.jkoss.pojo.oa.EmpfilesExample;
 import com.jkoss.pojo.oa.Emps;
 import com.jkoss.pojo.oa.Ossqq;
+import com.jkoss.pojo.oa.Salary;
 import com.jkoss.tool.Page;
 
 @Component
@@ -31,6 +34,8 @@ public class EmpsBiz implements IEmpsBiz {
 	private  EmpfilesMapper   efdao;
 	@Autowired
 	private OssqqMapper      eqqDao;
+	@Autowired
+	private SalaryMapper      salDao;
 	
 	//登录
 	public Emps login(Emps e){
@@ -238,13 +243,50 @@ public class EmpsBiz implements IEmpsBiz {
 		return eqqDao.selectByEqename(qqname);
 	}
 
+	@Override
+	@Transactional
+	public String changeEqqUser(int qqeid, int eid) {
+		 //取得Eqq
+		 Ossqq eqq =   findOssqqByID(qqeid);
+		 eqq.setT_e_eid(eid);
+		 eqq.setLastfp(new Date());   //更新的时间戳
+		 Emps emp =  findEmpByID(eid);
+		 emp.setQqe(eqq.getQqename());
+		 updtEmp(emp);
+		 
+		 return  "{usr:'"+emp.getEname()+"',msg:'"+ updtOssqq(eqq)+"'}";
+	}
 
+	
 
 ////////////////////////企业qq管理 end
  
+	@Override
+	public List<Salary> listPageSalaries(Page<Salary> page,int dptID) {
+		// TODO Auto-generated method stub
+		return  salDao.selectAtPageByDept(page,dptID);
+	}
+
+	@Override
+	public String addSalary(Salary sal) {
+		// TODO Auto-generated method stub
+		return salDao.insert(sal)>0?"添加成功":"添加失败";
+	}
 	
+	public  Salary findSalaryByID(int sid){
+		return salDao.selectByID(sid);
+	}
 	
+	public  String deleteSalary(int sid){
+		return salDao.deleteByPrimaryKey(sid)>0?"删除成功":"删除失败";
+	}
 	
+	@Override
+	@Transactional
+	public String updtSalary(Salary sal) {
+		// TODO Auto-generated method stub
+		return salDao.updateByPrimaryKey(sal)>0?"更新成功":"更新失败";
+	}
 	
 	
 }

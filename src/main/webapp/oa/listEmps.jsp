@@ -109,7 +109,7 @@
 					<tr align="right" bgcolor="#ebf0f7">
 							<td colspan="7">
 							<jk:page totalPage="${page.totalPage}" pageNo="${page.pageNo}" totalRecord="${page.totalRecord}"
-                                url="lsD.do" />
+                                url="lsEmp.do" />
 							</td>
 					</tr>
 				</table>

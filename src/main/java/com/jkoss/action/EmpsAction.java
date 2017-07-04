@@ -2,6 +2,8 @@ package com.jkoss.action;
 
 import java.io.File;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +23,8 @@ import com.jkoss.pojo.oa.EmpJobs;
 import com.jkoss.pojo.oa.Empfiles;
 import com.jkoss.pojo.oa.Emps;
 import com.jkoss.pojo.oa.Ossqq;
+import com.jkoss.pojo.oa.Salary;
+import com.jkoss.tool.DbCommonMethod;
 import com.jkoss.tool.Page;
 
  
@@ -43,8 +47,17 @@ public class EmpsAction implements Serializable {
 			   }*/
 		   }
 		   
+			 //检查application中部门信息
+			 if(req.getServletContext().getAttribute("dpts")==null){
+				 req.getServletContext().setAttribute("dpts",ebiz.listDepts());
+			 }
+		   
 		 //  System.out.println(u.getDetail().getEaddress());
 		   if(u!=null){
+			   
+			   EmpJobs  job =  ebiz.findJobByID(u.getJobid());
+			   u.setEjob(job);
+			   
 			   req.getSession().setAttribute("lgnUsr", u);
 		   }else{
 			   modl.addAttribute("msg", "登录失败");
@@ -279,7 +292,12 @@ public class EmpsAction implements Serializable {
 		 }
 		 
 		 //一个部门的所有员工
-		 req.setAttribute("dptEmps", ebiz.listDptEmps(j.getUseEmp().getEjob().getDepID()) );
+		 if(j.getUseEmp()!=null &&j.getUseEmp().getEjob()!=null){
+			 req.setAttribute("dptEmps", ebiz.listDptEmps(j.getUseEmp().getEjob().getDepID()) ); 
+		 }else{
+			 req.setAttribute("dptEmps", ebiz.listDptEmps(1)); //默认部门
+		 }
+		
 		 
 		 return "/oa/upEqq.jsp";
 	 }
@@ -288,13 +306,7 @@ public class EmpsAction implements Serializable {
 	 @RequestMapping(value="/chgEqqUsr",produces="text/html;charset=UTF-8")
      @ResponseBody
 	 public String  changeEqqUser(int  qqeid,int eid){
-		 //取得Eqq
-		 Ossqq eqq =   ebiz.findOssqqByID(qqeid);
-		 eqq.setT_e_eid(eid);
-		 eqq.setLastfp(new Date());   //更新的时间戳
-		 Emps emp = ebiz.findEmpByID(eid);
-		 System.out.println("{usr='"+emp.getEname()+"',msg='"+   ebiz.updtOssqq(eqq)+"'}");
-		 return  "{usr:'"+emp.getEname()+"',msg:'"+   ebiz.updtOssqq(eqq)+"'}";
+		return ebiz.changeEqqUser(qqeid, eid);
 	 }
 	 
 	 
@@ -335,8 +347,94 @@ public class EmpsAction implements Serializable {
 
 		 req.setAttribute("eqq", j );
  
-		 
 		 return "/oa/showEqq.jsp";
+	 }
+	 
+	 
+	 //////////工资管理
+	 @RequestMapping("/lsSal")
+	 public String listSalary(HttpServletRequest req,Page<Salary> page){
+		 
+		 if(page==null){
+			 page = new Page<Salary>();
+		 }
+		 
+		 //自己
+		 Emps emp =(Emps) req.getSession().getAttribute("lgnUsr");
+		// System.out.println("DepID="+emp.getEjob().getDepID());
+			
+		 page.setResults( ebiz.listPageSalaries(page,  emp.getEjob().getDepID()));
+		 req.setAttribute("page", page);
+		 
+		 //部门的所有员工
+		 req.setAttribute("empsFrDept", ebiz.listDptEmps(emp.getEjob().getDepID()));
+		 
+		 //本月+往后推2个月
+		 Calendar cal = Calendar.getInstance();
+		 cal.set(Calendar.DAY_OF_MONTH, 1);
+		 String[] mthds = new  String[3];
+		 mthds[0]= DbCommonMethod.isoFormatMth.format(cal.getTime());
+		 cal.add(Calendar.MONTH, -1);
+		 mthds[1]= DbCommonMethod.isoFormatMth.format(cal.getTime());
+		 cal.add(Calendar.MONTH, -1);
+		 mthds[2]= DbCommonMethod.isoFormatMth.format(cal.getTime());
+		 req.setAttribute("mthds", mthds);
+		 
+		 return "/oa/listSalary.jsp";
+	 }
+	 
+	 @RequestMapping("/addSal")
+	 public String addSalary(Salary  sal,String mthd,  HttpServletRequest req){
+		 
+		 //谁录入谁就是所有人
+		 Emps emp =(Emps) req.getSession().getAttribute("lgnUsr");
+		 sal.setT_e_eid(emp.getEmpdid()); //做工资的人
+		 sal.setSalstate(0);    //新录入待审批是0 ，已审批是1，已发是2
+		 try {
+			sal.setSalmth(DbCommonMethod.isoFormatMth.parse(mthd));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		 req.setAttribute("msg",  ebiz.addSalary(sal));
+		 return listSalary(req,null);
+	 }
+	 
+	 
+	 @RequestMapping(value="/oneSal")
+	 public String    showOneSalary(int  salid,  HttpServletRequest req){	
+		 req.setAttribute("sal", ebiz.findSalaryByID(salid) );
+		 return "/oa/shSalary.jsp";
+	 }
+	 
+	 @RequestMapping("/delSal")
+	 public String deleteSalary(int  sid,  HttpServletRequest req){
+		 req.setAttribute("msg",  ebiz.deleteSalary(sid));
+		 return listSalary(req,null);
+	 }
+	 
+	 @RequestMapping(value="/toUpdtSal")
+	 public String oneSalary(int  sid,  HttpServletRequest req){	
+		 req.setAttribute("sal", ebiz.findSalaryByID(sid) );
+		 return "/oa/updtSalary.jsp";
+	 }
+	 
+	 @RequestMapping(value="/uptSal")
+	 public String updateSalary(Salary  salForm,  HttpServletRequest req){	
+ 
+		 Salary tmp =  ebiz.findSalaryByID(salForm.getSalid());
+		// tmp.setLastfp(new Date());  //更新的时间戳
+		 tmp.setAddsal(salForm.getAddsal());
+		 tmp.setBasicsalary(salForm.getBasicsalary());
+		 tmp.setMeritsal(salForm.getMeritsal());
+		 tmp.setAddmeritsal(salForm.getAddmeritsal());
+		 tmp.setIsbuysb(salForm.getIsbuysb());
+		 tmp.setSaldesc(salForm.getSaldesc());
+	 
+		 req.setAttribute("msg", ebiz.updtSalary(tmp) );
+		  
+		 return listSalary(req,null);
 	 }
 	 
 	 

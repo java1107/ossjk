@@ -7,6 +7,7 @@ import com.jkoss.pojo.oa.EmpJobs;
 import com.jkoss.pojo.oa.Empfiles;
 import com.jkoss.pojo.oa.Emps;
 import com.jkoss.pojo.oa.Ossqq;
+import com.jkoss.pojo.oa.Salary;
 import com.jkoss.tool.Page;
 
 public interface IEmpsBiz {
@@ -45,12 +46,18 @@ public interface IEmpsBiz {
 	  //企业QQ
 	  List<Ossqq> listPageOssqqs(Page<Ossqq> page);
 	  String addOssqq(Ossqq jb); 
-	  Ossqq findOssqqByID(int qqeid);
-	  Ossqq findOssqqByName(String qqname);
+	  Ossqq  findOssqqByID(int qqeid);
+	  Ossqq  findOssqqByName(String qqname);
 	  String deleteOssqq(int qqeid);
 	  String updtOssqq(Ossqq eqq);
+	  String changeEqqUser(int  qqeid,int eid); 
 	  
-	  
+	  //工资管理
+	  List<Salary> listPageSalaries(Page<Salary> page,int dptID);
+	  String addSalary(Salary sal);
+	  Salary findSalaryByID(int sid);
+	  String deleteSalary(int sid); 
+	  String updtSalary(Salary sal);
 	  
 	  
 }

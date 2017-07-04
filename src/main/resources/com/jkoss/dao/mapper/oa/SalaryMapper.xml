@@ -18,6 +18,24 @@
     <result column="saldesc" property="saldesc" jdbcType="VARCHAR" />
     <result column="salstate" property="salstate" jdbcType="INTEGER" />
   </resultMap>
+  
+   <resultMap id="BaseResultMap2" type="com.jkoss.pojo.oa.Salary" >
+    <id column="salid" property="salid" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="t_e_eid" property="t_e_eid" jdbcType="INTEGER" />
+    <result column="salmth" property="salmth" jdbcType="DATE" />
+    <result column="basicsalary" property="basicsalary" jdbcType="INTEGER" />
+    <result column="meritsal" property="meritsal" jdbcType="INTEGER" />
+    <result column="isbuysb" property="isbuysb" jdbcType="INTEGER" />
+    <result column="addsal" property="addsal" jdbcType="INTEGER" />
+    <result column="addmeritsal" property="addmeritsal" jdbcType="INTEGER" />
+    <result column="saldesc" property="saldesc" jdbcType="VARCHAR" />
+    <result column="salstate" property="salstate" jdbcType="INTEGER" />
+    
+    <result column="ename" property="ename" jdbcType="VARCHAR" />
+    <result column="depID" property="depID" jdbcType="INTEGER" />
+  </resultMap>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
